@@ -2,3 +2,4 @@
 
 export(browse)
 export(serve)
+export(setup)
