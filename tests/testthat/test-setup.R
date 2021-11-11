@@ -6,4 +6,6 @@ test_that("setup works", {
   expect_message(setup(t))
   expect_true(dir.exists(t))
   expect_true(length(list.files(t, pattern = "html")) == 1)
+  static = list.files(file.path(t, "static"))
+  expect_true(length(static) > 1)
 })
