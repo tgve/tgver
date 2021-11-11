@@ -19,7 +19,8 @@ Imports:
     devtools,
     goodpractice,
     plumber,
-    magrittr
+    magrittr,
+    callr
 RoxygenNote: 7.1.2
 Suggests: 
     covr,

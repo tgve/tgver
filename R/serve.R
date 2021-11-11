@@ -3,7 +3,7 @@
 #' TGVE version into a temporary directory.
 #'
 #' @param port to serve from
-#' @param file location of plumber.R file used by plumber
+#' @param dir location of TGVE dir consumed by plumber
 #' @param host host to pass to plumber default `http://127.0.0.1`
 #' to `FALSE`.
 #' @param background run the R process in the background using callr,
@@ -21,8 +21,8 @@ serve = function(port = 8000,
     dir = tempInstance()
   }
 
-  server = pr() %>%
-    pr_static("/", dir)
+  server = plumber::pr() %>%
+    plumber::pr_static("/", dir)
 
   if(background) {
     f <- function(s, p, h) {s$setDocs(FALSE); s$run(port = p, host = h)}

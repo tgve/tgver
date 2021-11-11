@@ -16,13 +16,13 @@ serve(
 \arguments{
 \item{port}{to serve from}
 
+\item{dir}{location of TGVE dir consumed by plumber}
+
 \item{host}{host to pass to plumber default `http://127.0.0.1`
 to `FALSE`.}
 
 \item{background}{run the R process in the background using callr,
 defaults to `TRUE`.}
-
-\item{file}{location of plumber.R file used by plumber}
 }
 \description{
 Launch a webserver via plumber to serve TGVE static files.
