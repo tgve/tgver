@@ -10,3 +10,11 @@
 #' Create a clean build from https://github.com/tgve/eatlas_template
 #' Copy it into the inst/tgve folder
 #' cp -R path/eatlas_template/build/. package/inst/tgve
+
+#' UPDATE VERSION/build
+#' in order to update bundled version
+unlink("./inst/tgve/*", recursive = TRUE)
+#' Then copy files back
+path = "~/code/eatlas-template/build"
+file.copy(list.files(path, full.names = TRUE),
+          "./inst/tgve/", recursive = TRUE)
