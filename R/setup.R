@@ -5,7 +5,7 @@
 #'
 #' @examples {
 #' p = file.path(tempdir(), "tgve")
-#'
+#' setup(p)
 #' }
 #' @export
 setup = function(path = NULL, create = TRUE) {
@@ -16,8 +16,8 @@ setup = function(path = NULL, create = TRUE) {
     inst.copied = file.copy(list.files(system.file("tgve", package = "tgver"),
                                        full.names = TRUE),
                             path, recursive = TRUE)
-    if(!file.exists(path))
-      stop("Error: could not create temp directory.")
+    if(!all(inst.copied))
+      stop("Error: could not create TGVE instance.")
 
     message("A TGVE instance has been created at: ", path)
   } else {

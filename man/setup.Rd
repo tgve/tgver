@@ -17,6 +17,6 @@ Helper function to setup a local directory instead of `tempInstance`.
 \examples{
 {
 p = file.path(tempdir(), "tgve")
-
+setup(p)
 }
 }
