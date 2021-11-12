@@ -26,6 +26,7 @@ build = function(path, ...) {
       if(x %in% given) {
         file_replace(fname, apis[x], args[x])
       } else {
+        # cat("replacing...", apis[x], "with", "\"\"\n")
         file_replace(fname, apis[x], "")
       }
     }

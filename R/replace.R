@@ -9,7 +9,8 @@ file_replace = function(files = NULL, pattern, replacement) {
     stop("Error: a given file path does not exist")
   for(fname in files){
     content = readLines(fname)
-    # grep("tgver.dark", content)
+    # g = grep(pattern, content)
+    # if(length(g) == 0) cat(pattern, " not found in ", fname, "\n")
     content = gsub(pattern, replacement, content)
     writeLines(content, fname)
   }

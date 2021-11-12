@@ -1,7 +1,7 @@
 #' Helper function to setup a local directory instead of `tempInstance`.
 #'
-#' @param path to copy tgve instance in
-#' @param create whether to create new directory at path, detaults to `TRUE`
+#' @param path Character URI to copy tgve instance in.
+#' @param create Boolean to create new directory at path, defaults to `TRUE`.
 #'
 #' @examples {
 #' p = file.path(tempdir(), "tgve")

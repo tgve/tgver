@@ -7,9 +7,9 @@
 setup(path = NULL, create = TRUE)
 }
 \arguments{
-\item{path}{to copy tgve instance in}
+\item{path}{Character URI to copy tgve instance in.}
 
-\item{create}{whether to create new directory at path, detaults to `TRUE`}
+\item{create}{Boolean to create new directory at path, defaults to `TRUE`.}
 }
 \description{
 Helper function to setup a local directory instead of `tempInstance`.

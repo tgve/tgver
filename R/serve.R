@@ -2,8 +2,8 @@
 #' Currently the function also copies the bundled
 #' TGVE version into a temporary directory.
 #'
-#' @param port to serve from
 #' @param dir location of TGVE dir consumed by plumber
+#' @param port to serve from
 #' @param host host to pass to plumber default `http://127.0.0.1`
 #' to `FALSE`.
 #' @param background run the R process in the background using callr,
@@ -13,13 +13,16 @@
 #' @export
 #' @examples {
 #' }
-serve = function(port = 8000,
-                 dir = Sys.getenv("TEMP_DIR_ENV"),
+serve = function(dir = Sys.getenv("TEMP_DIR_ENV"),
+                 port = 8000,
                  host = "127.0.0.1",
                  background = FALSE) {
   if(!dir.exists(dir)) {
     dir = tempInstance()
   }
+
+  # clean build
+  build(dir)
 
   server = plumber::pr() %>%
     plumber::pr_static("/", dir)

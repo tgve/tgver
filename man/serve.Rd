@@ -7,16 +7,16 @@ Currently the function also copies the bundled
 TGVE version into a temporary directory.}
 \usage{
 serve(
-  port = 8000,
   dir = Sys.getenv("TEMP_DIR_ENV"),
+  port = 8000,
   host = "127.0.0.1",
   background = FALSE
 )
 }
 \arguments{
-\item{port}{to serve from}
-
 \item{dir}{location of TGVE dir consumed by plumber}
+
+\item{port}{to serve from}
 
 \item{host}{host to pass to plumber default `http://127.0.0.1`
 to `FALSE`.}
