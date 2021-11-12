@@ -2,7 +2,7 @@
 title: "Introducing tgver"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{website}
+  %\VignetteIndexEntry{introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -29,8 +29,7 @@ devtools::install_github("tgve/tgver")
 The package comes with the latest version of TGVE and should give you the version used in the package:
 
 ```{r version}
-# TODO
-# tgver::version()
+tgver::version
 ```
 
 That means, there is no need to do anything to run a clean instance of the TGVE ready to import data to using:
