@@ -18,3 +18,8 @@ unlink("./inst/tgve/*", recursive = TRUE)
 path = "~/code/eatlas-template/build"
 file.copy(list.files(path, full.names = TRUE),
           "./inst/tgve/", recursive = TRUE)
+# get TGVE version
+version = jsonlite::parse_json(readLines("~/code/eatlas-template/package.json"))$dependencies$eatlas
+version = sub(".", "", version)
+names(version) <- "version"
+usethis::use_data(version)
