@@ -39,6 +39,10 @@ tgver::tgve()
 
 The application is served from a `plumber` instance which is pointed at the location of the TGVE instance used in the package. This also means we can embed it in this Rmd file using the local server URL whilst building the Rmd (thanks to `knitr`):
 ```{r embed}
-knitr::include_url("http://127.0.0.1:8000")
+# start a tgve instance before embedding it
+# tgver::tgve()
+# knitr::include_url("http://127.0.0.1:8000")
+# or use the public one
+knitr::include_url("https://tgve.github.io/eatlas-template/")
 ```
-The above instance pulls data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a `html_vignette`). 
+The above instance pulls data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a `html_vignette`).
