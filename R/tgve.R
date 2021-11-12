@@ -1,9 +1,12 @@
 #' Launch a webserver via plumber to serve TGVE static files.
-#' Currently the function also copies the bundled
+#'
+#' The function accepts a `dir` to get a directory containing an instance of
+#' TGVE, by default this is done via `TEMP_DIR_ENV` env variable. If neither
+#' is given then the function copies a clean copy of the bundled
 #' TGVE version into a temporary directory.
 #'
-#' @param dir location of TGVE dir consumed by plumber
-#' @param port to serve from
+#' @param dir location of TGVE dir to be served by plumber.
+#' @param port to serve from.
 #' @param host host to pass to plumber default `http://127.0.0.1`
 #' to `FALSE`.
 #' @param background run the R process in the background using callr,
@@ -13,7 +16,7 @@
 #' @export
 #' @examples {
 #' }
-serve = function(dir = Sys.getenv("TEMP_DIR_ENV"),
+tgve = function(dir = Sys.getenv("TEMP_DIR_ENV"),
                  port = 8000,
                  host = "127.0.0.1",
                  background = FALSE) {
@@ -33,5 +36,6 @@ serve = function(dir = Sys.getenv("TEMP_DIR_ENV"),
     return(ps)
   }
   openURL(host, port)
+  message("Serving TGVE instance located at ", dir)
   server$run(port = port, host = host, docs = FALSE)
 }
