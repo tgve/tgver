@@ -1,0 +1,45 @@
+---
+title: "Introducing tgver"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{website}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# What is TGVE?
+The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based, interactive visual analytics tool for geospatial data analysis, built using R & React. The visual views and interaction mechanisms designed into the tool is underpinned by empirically-informed guidelines around visualization design and techniques from Geographic Information Science (GIScience).
+
+# tgver R package
+See the README on the package's GitHub space.
+
+## Usage
+As the package is not on CRAN yet, get it from GitHub using `devtools`
+```{r install, eval=FALSE}
+devtools::install_github("tgve/tgver")
+```
+
+The package comes with the latest version of TGVE and should give you the version used in the package:
+
+```{r version}
+# TODO
+# tgver::version()
+```
+
+That means, there is no need to do anything to run a clean instance of the TGVE ready to import data to using:
+```{r tgve, eval=FALSE}
+tgver::tgve()
+```
+
+The application is served from a `plumber` instance which is pointed at the location of the TGVE instance used in the package. This also means we can embed it in this Rmd file using the local server URL whilst building the Rmd (thanks to `knitr`):
+```{r embed}
+knitr::include_url("http://127.0.0.1:8000")
+```
+The above instance pulls data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a `html_vignette`). 
