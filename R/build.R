@@ -7,16 +7,6 @@
 #'@param path to be passed to `file_replace` function
 #'@param ... any or all of the TGVE API variables to replace/add values to.
 build = function(path, ...) {
-  apis = c(tooltipColumns="tgver.tooltipColumns",
-           geographyURL="tgver.geographyURL",
-           geographyColumn="tgver.geographyColumn",
-           column="tgver.column",
-           data="tgver.data",
-           layerName="tgver.layerName",
-           dark="tgver.dark",
-           viewport="tgver.viewport",
-           hideChartGenerator="tgver.hideChartGenerator",
-           hideCharts="tgver.hideCharts")
   args = list(...)
   args.names = names(args)
   given = intersect(args.names, names(apis))

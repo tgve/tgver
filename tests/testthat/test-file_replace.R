@@ -23,3 +23,7 @@ test_that("list_api_files works", {
   file.remove(a)
   expect_error(list_api_files(p))
 })
+
+test_that("help shows messages", {
+  expect_message(help())
+})

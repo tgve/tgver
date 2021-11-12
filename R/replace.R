@@ -32,3 +32,16 @@ list_api_files = function(path = NULL) {
     stop("Error: could not find ^main* files in path.")
   files
 }
+
+
+#' Function to explore available API variables, their types and examples of
+#' using them in the TGVE
+#'
+#' @examples {
+#' help()
+#' }
+#' @export
+help = function() {
+  message("These are the available list of variables as of version: ", tgver::version)
+  print(names(apis))
+}

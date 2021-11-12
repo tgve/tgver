@@ -30,3 +30,11 @@ tempInstance = function() {
     stop("Error: could not copy TGVE instance into temp directory.")
   temp.path
 }
+
+#' Package version included as data
+#'
+#' @name version
+#' @docType data
+#' @author L Hama \email{l.hama@@leeds.ac.uk}
+#' @keywords data
+NULL
