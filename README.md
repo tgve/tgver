@@ -16,9 +16,10 @@ application deployment for production
 
 ## Example
 
-This is a Markdown (GitHub) document, if it is rendered to a HTML
-output, then using `knitr::include_url` we should see the TGVE embeded
-(see the live examples in the vignette).
+This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd)
+document, if the Rmd is rendered to a HTML output, then using
+`knitr::include_url` we should see the TGVE embeded (see the live
+examples in the vignette).
 
 ``` r
 # start a tgve instance before embedding it
