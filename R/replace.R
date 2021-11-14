@@ -8,7 +8,7 @@ file_replace = function(files = NULL, pattern, replacement) {
   if(any(!file.exists(files)))
     stop("Error: a given file path does not exist")
   for(fname in files){
-    content = readLines(fname)
+    content = readLines(fname, warn = FALSE)
     # g = grep(pattern, content)
     # if(length(g) == 0) cat(pattern, " not found in ", fname, "\n")
     content = gsub(pattern, replacement, content)

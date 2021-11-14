@@ -5,25 +5,29 @@
 \title{Launch a webserver via plumber to serve TGVE static files.}
 \usage{
 tgve(
-  dir = Sys.getenv("TEMP_DIR_ENV"),
+  path = Sys.getenv("TEMP_path_ENV"),
   port = 8000,
   host = "127.0.0.1",
-  background = FALSE
+  background = FALSE,
+  run = TRUE
 )
 }
 \arguments{
-\item{dir}{location of TGVE dir to be served by plumber.}
+\item{path}{location of TGVE path to be served by plumber.}
 
 \item{port}{to serve from.}
 
 \item{host}{host to pass to plumber default `http://127.0.0.1`
 to `FALSE`.}
 
-\item{background}{run the R process in the background using callr,
+\item{background}{run the R process in the background using `callr`,
 defaults to `TRUE`.}
+
+\item{run}{whether to start the server, defaults to `TRUE`. If
+not, then the created server will be returned.}
 }
 \description{
-The function accepts a `dir` to get a directory containing an instance of
+The function accepts a `path` to get a directory containing an instance of
 TGVE, by default this is done via `TEMP_DIR_ENV` env variable. If neither
 is given then the function copies a clean copy of the bundled
 TGVE version into a temporary directory.

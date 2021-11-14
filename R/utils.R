@@ -4,7 +4,7 @@ openURL = function(host = "127.0.0.1",
                     port = 8000,
                     browser = FALSE,
                     path = "") {
-  u = paste0("http://",host,":",port, "/", path)
+  u = paste0("http://", host,":", port, "/", path)
   viewer = getOption("viewer")
   if(identical(.Platform$GUI, "RStudio") &&
      !is.null(viewer) &&

@@ -20,7 +20,8 @@ Imports:
     goodpractice,
     plumber,
     magrittr,
-    callr
+    callr,
+    geojsonsf
 RoxygenNote: 7.1.2
 Suggests: 
     covr,

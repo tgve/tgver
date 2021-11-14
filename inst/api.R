@@ -5,6 +5,7 @@
 #'
 #' as of 1.3.4-beta.3
 apis = c(tooltipColumns="tgver.tooltipColumns",
+         defaultURL="tgver.defaultURL",
          geographyURL="tgver.geographyURL",
          geographyColumn="tgver.geographyColumn",
          column="tgver.column",
@@ -14,4 +15,4 @@ apis = c(tooltipColumns="tgver.tooltipColumns",
          viewport="tgver.viewport",
          hideChartGenerator="tgver.hideChartGenerator",
          hideCharts="tgver.hideCharts")
-usethis::use_data(apis, internal = TRUE)
+usethis::use_data(apis, internal = TRUE, overwrite = TRUE)

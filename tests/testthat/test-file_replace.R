@@ -6,11 +6,11 @@ test_that("file_replace works", {
   # dummy file
   f = file.path(p, "dummy.txt")
   writeLines("DummyText To Test.\n The End.", f)
-  t = readLines(f)
+  t = readLines(f, warn = FALSE)
   g = grepl("End.", t)
   expect_true(any(g))
   file_replace(f, "End.", "Beginning.")
-  t = readLines(f)
+  t = readLines(f, warn = FALSE)
   g = grepl("End.", t)
   expect_false(any(g))
 })
