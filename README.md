@@ -14,6 +14,31 @@ pacakge is developed to: 1. do interactive geospatial analysis and
 visuaulization fast 2. use R’s echosystem to drive (1) 3. facilitate
 application deployment for production
 
+## Example
+
+This is a Markdown (GitHub) document, if it is rendered to a HTML
+output, then using `knitr::include_url` we should see the TGVE embeded
+(see the live examples in the vignette).
+
+``` r
+# start a tgve instance before embedding it
+tgver::tgve(background = TRUE)
+knitr::include_url("http://127.0.0.1:8000")
+# or use the public one
+# knitr::include_url("https://tgve.github.io/eatlas-template/")
+```
+
+## TGVE interactive
+
+Similarly, within HTML outputs we can explore (current version) `sf`
+objects:
+
+``` r
+# using sf
+nc = sf::st_read(system.file("shape/nc.shp", package="sf"))
+tgver::explore(sf)
+```
+
 # Development plan
 
 The current plan is to do use a different approach of using the TGVE npm

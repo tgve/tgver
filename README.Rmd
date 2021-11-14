@@ -24,6 +24,25 @@ This is the R package for TGVE front end npm package `tgve`. The R pacakge is de
 2. use R's echosystem to drive (1)
 3. facilitate application deployment for production
 
+## Example
+This is a Markdown (GitHub) document, if it is rendered to a HTML output, then
+using `knitr::include_url` we should see the TGVE embeded (see the live examples in the vignette).
+```{r tgve, eval=FALSE}
+# start a tgve instance before embedding it
+tgver::tgve(background = TRUE)
+knitr::include_url("http://127.0.0.1:8000")
+# or use the public one
+# knitr::include_url("https://tgve.github.io/eatlas-template/")
+```
+
+## TGVE interactive
+Similarly, within HTML outputs we can explore (current version) `sf` objects:
+
+```{r explore, eval=FALSE}
+# using sf
+nc = sf::st_read(system.file("shape/nc.shp", package="sf"))
+tgver::explore(sf)
+```
 
 # Development plan
 The current plan is to do use a different approach of using the TGVE npm package in this R package compared to how it is used in `geoplumber`. This is done mainly by bundling latest releases of the npm package within this package. This means not relying on npm/yarn tools for JavaScript (JS) building and bundling. As the `tgve` npm package has (see the docs) API settings to explore geospatial data, we can use R to do this without relying on the underlying JS toolchains.
