@@ -15,19 +15,37 @@ openURL = function(host = "127.0.0.1",
   }
 }
 
+copy_tgve = function(path) {
+  if(!is.character(path) || length(path) != 1) {
+    stop("Error: setup takes one character variable.")
+  }
+  if(!dir.exists(path))
+    stop("Error: destination directory does not exist.")
+
+  m = "Error: could not copy TGVE bundled version."
+  inst.copied = file.copy(
+    system.file("tgve.zip", package = "tgver"),
+    path)
+  if(!inst.copied)
+    stop(m)
+  unzip(file.path(path, "tgve.zip"), exdir = path)
+  unzipped = list.files(path, pattern = "*.js|*html")
+  if(!length(unzipped) < 1)
+    stop(m)
+}
+
 #' copy the inst/tgve to a temp in an R session
 tempInstance = function() {
   temp.path = file.path(tempdir(), "tgve")
-
-  inst.copied = file.copy(system.file("tgve", package = "tgver"),
-            tempdir(), recursive = TRUE)
+  dir.create(temp.path)
   if(!file.exists(temp.path))
-    stop("Error: could not create temp directory.")
+    stop("Error: could not create temporary directory.")
+
+  copy_tgve(temp.path)
+
   # a = list(temp.path)
   # names(a) = TEMP_DIR_ENV
   # do.call(Sys.setenv, a)
-  if(!inst.copied)
-    stop("Error: could not copy TGVE instance into temp directory.")
   temp.path
 }
 

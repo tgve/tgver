@@ -8,16 +8,23 @@
 #' as special placeholders to be consumed in the R package/elsewhere.
 #'
 #' Create a clean build from https://github.com/tgve/eatlas_template
-#' Copy it into the inst/tgve folder
-#' cp -R path/eatlas_template/build/. package/inst/tgve
+#' With special `tgver.*` placeholer for all API variables
+#'
+#' yarn run build
+#'
+#' Copy the build into the inst/tgve folder
+#' From R package directory
+#'
+#' mkdir inst/tgve
+#' zip -r path/eatlas_template/build. inst/tgve.zip
 
-#' UPDATE VERSION/build
+#'######### UPDATE VERSION/build ###############
 #' in order to update bundled version
-unlink("./inst/tgve/*", recursive = TRUE)
+file.remove("./inst/tgve.zip")
 #' Then copy files back
 path = "~/code/eatlas-template/build"
-file.copy(list.files(path, full.names = TRUE),
-          "./inst/tgve/", recursive = TRUE)
+zip("inst/tgve.zip",
+    list.files(path, full.names = TRUE, recursive = TRUE))
 # get TGVE version
 version = jsonlite::parse_json(readLines("~/code/eatlas-template/package.json"))$dependencies$eatlas
 version = sub(".", "", version)
