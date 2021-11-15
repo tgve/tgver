@@ -13,6 +13,16 @@ pacakge is developed to: 1. do interactive geospatial analysis and
 visuaulization fast 2. use R’s echosystem to drive (1) 3. facilitate
 application deployment for production
 
+## Install
+
+For now whilst working towards submitting it to CRAN, please use
+devtools:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("tgve/tgver")
+```
+
 ## Example
 
 This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd)
@@ -42,6 +52,10 @@ tgver::explore(nc)
 # Development plan
 
 Please see the vignette called “dev-plan” for details.
+
+# Preview
+
+![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
 
 ## Funding
 
