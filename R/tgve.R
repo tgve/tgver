@@ -1,4 +1,4 @@
-#' Launch a webserver via plumber to serve TGVE static files.
+#' Start a TGVE instance
 #'
 #' The function accepts a `path` to get a directory containing an instance of
 #' TGVE, by default this is done via `TEMP_DIR_ENV` env variable. If neither
@@ -16,6 +16,13 @@
 #'
 #' @export
 #' @examples {
+#' # this will run the underlying `plumber` instance and block
+#' # the R process.
+#' # tgve()
+#' # This will run in the background using `callr`
+#' ps = tgve(background = TRUE)
+#' Sys.sleep(2)
+#' ps$kill()
 #' }
 tgve = function(path = Sys.getenv("TEMP_path_ENV"),
                  port = 8000,

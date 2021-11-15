@@ -2,7 +2,7 @@
 % Please edit documentation in R/tgve.R
 \name{tgve}
 \alias{tgve}
-\title{Launch a webserver via plumber to serve TGVE static files.}
+\title{Start a TGVE instance}
 \usage{
 tgve(
   path = Sys.getenv("TEMP_path_ENV"),
@@ -34,5 +34,12 @@ TGVE version into a temporary directory.
 }
 \examples{
 {
+# this will run the underlying `plumber` instance and block
+# the R process.
+# tgve()
+# This will run in the background using `callr`
+ps = tgve(background = TRUE)
+Sys.sleep(2)
+ps$kill()
 }
 }
