@@ -1,4 +1,4 @@
-#' Explore an sf R object using Turing eAtlas.
+#' Explore an sf R object using TGVE npm package.
 #'
 #'
 #' @param sf a valid sf object that can be converted to geojson
@@ -30,7 +30,7 @@ explore_sf = function(sf = NULL, background = FALSE) {
     res$body = geojson
     res
   })
-  # build with defaultURL
+  # build with `defaultURL` API variable
   build(path, defaultURL = full.url)
 
   if(background) {

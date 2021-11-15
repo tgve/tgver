@@ -2,7 +2,7 @@
 % Please edit documentation in R/explore_sf.R
 \name{explore_sf}
 \alias{explore_sf}
-\title{Explore an sf R object using Turing eAtlas.}
+\title{Explore an sf R object using TGVE npm package.}
 \usage{
 explore_sf(sf = NULL, background = FALSE)
 }
@@ -13,7 +13,7 @@ explore_sf(sf = NULL, background = FALSE)
 should run in the background}
 }
 \description{
-Explore an sf R object using Turing eAtlas.
+Explore an sf R object using TGVE npm package.
 }
 \examples{
 \dontrun{
