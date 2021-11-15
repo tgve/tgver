@@ -1,5 +1,6 @@
 test_that("file_replace works", {
   p = tempInstance()
+  print(p)
   # safety check
   expect_true(length(list.files(p, pattern = "html")) == 1)
   expect_error(replace())

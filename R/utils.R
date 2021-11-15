@@ -15,12 +15,20 @@ openURL = function(host = "127.0.0.1",
   }
 }
 
-copy_tgve = function(path) {
+copy_tgve = function(path, over.write = TRUE) {
   if(!is.character(path) || length(path) != 1) {
     stop("Error: setup takes one character variable.")
   }
   if(!dir.exists(path))
     stop("Error: destination directory does not exist.")
+
+  if(over.write) {
+    # remove existing copy or folder named tgve
+    d = file.path(path, "tgve")
+    f = file.path(path, "tgve.zip")
+    if(dir.exists(d)) unlink(d, recursive = TRUE)
+    if(file.exists(f)) file.remove(f)
+  }
 
   m = "Error: could not copy TGVE bundled version."
   inst.copied = file.copy(
@@ -29,24 +37,22 @@ copy_tgve = function(path) {
   if(!inst.copied)
     stop(m)
   unzip(file.path(path, "tgve.zip"), exdir = path)
-  unzipped = list.files(path, pattern = "*.js|*html")
-  if(!length(unzipped) < 1)
+  # there is now path/tgve
+  unzipped = list.files(file.path(path, "tgve"), pattern = "*.js|*html")
+  if(length(unzipped) < 1)
     stop(m)
 }
 
 #' copy the inst/tgve to a temp in an R session
 tempInstance = function() {
-  temp.path = file.path(tempdir(), "tgve")
-  dir.create(temp.path)
-  if(!file.exists(temp.path))
-    stop("Error: could not create temporary directory.")
-
+  temp.path = tempdir()
+  # copy_instance creates a tgve folder here
   copy_tgve(temp.path)
 
   # a = list(temp.path)
   # names(a) = TEMP_DIR_ENV
   # do.call(Sys.setenv, a)
-  temp.path
+  file.path(temp.path, "tgve")
 }
 
 #' Package version included as data

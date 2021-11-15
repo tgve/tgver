@@ -2,7 +2,7 @@
 % Please edit documentation in R/build.R
 \name{build}
 \alias{build}
-\title{Set TGVE variables.}
+\title{Set the TGVE variables.}
 \usage{
 build(path, ...)
 }
@@ -12,7 +12,12 @@ build(path, ...)
 \item{...}{any or all of the TGVE API variables to replace/add values to.}
 }
 \description{
-The placeholders in the bundled version are named with patter: "tgver.*" in
+The placeholders in the bundled version are named with pattern: "tgver.*" in
 the main component (eatlas-template). They can be replaced using the
 `file_replace()` function.
+}
+\examples{
+\dontrun{
+build(file.path(tempdir(), "tgve"))
+}
 }
