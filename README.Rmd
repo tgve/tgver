@@ -46,7 +46,7 @@ Similarly, within HTML outputs we can explore (current version) `sf` objects:
 ```{r explore, eval=FALSE}
 # using sf
 nc = sf::st_read(system.file("shape/nc.shp", package="sf"))
-tgver::explore(nc)
+tgver::explore_sf(nc)
 ```
 
 # Development plan

@@ -44,12 +44,17 @@ tgve = function(path = Sys.getenv("TEMP_path_ENV"),
   build(path)
 
   if(background) {
-    f <- function(s, p, h) {s$setDocs(FALSE); s$run(port = p, host = h)}
-    # TODO: try killing if process is running
-    ps <- callr::r_bg(f, list(s = server, p = port, h = host))
-    return(ps)
+    return(background_run(server))
   }
+
   openURL(host, port)
   message("Serving TGVE instance located at ", path)
   server$run(port = port, host = host, docs = FALSE)
+}
+
+background_run = function(server, port = 8000, host = "127.0.0.1") {
+  f <- function(s, p, h) {s$setDocs(FALSE); s$run(port = p, host = h)}
+  # TODO: try killing if process is running
+  ps <- callr::r_bg(f, list(s = server, p = port, h = host))
+  return(ps)
 }

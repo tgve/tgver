@@ -24,6 +24,7 @@ Imports:
     geojsonsf
 RoxygenNote: 7.1.2
 Suggests: 
+    sf,
     covr,
     knitr,
     rmarkdown,

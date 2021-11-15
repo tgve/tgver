@@ -46,7 +46,7 @@ objects:
 ``` r
 # using sf
 nc = sf::st_read(system.file("shape/nc.shp", package="sf"))
-tgver::explore(nc)
+tgver::explore_sf(nc)
 ```
 
 # Development plan

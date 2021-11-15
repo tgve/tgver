@@ -2,12 +2,18 @@
 #'
 #'
 #' @param sf a valid sf object that can be converted to geojson
+#' @param background Boolean to decide whether plumber
+#' should run in the background
 #'
 #' @examples \dontrun{
-#' explore()
+#' explore_sf()
 #' }
 #' @export
-explore <- function(sf = NULL) {
+explore_sf = function(sf = NULL, background = FALSE) {
+  if(is.null(sf) || !inherits(sf, "sf")) {
+    stop("Error: explore_sf requires an sf object.")
+  }
+
   path = tempInstance()
   server = tgve(path = path, run = FALSE)
 
@@ -26,6 +32,10 @@ explore <- function(sf = NULL) {
   })
   # build with defaultURL
   build(path, defaultURL = full.url)
+
+  if(background) {
+    return(background_run(server))
+  }
 
   message("Serving data from ", full.url)
   openURL()
