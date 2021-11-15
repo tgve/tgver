@@ -18,18 +18,19 @@ explore_sf = function(sf = NULL, background = FALSE) {
   server = tgve(path = path, run = FALSE)
 
   # data
-  geojson <- geojsonsf::sf_geojson(sf, factors_as_string=FALSE)
+  geojson = geojsonsf::sf_geojson(sf, factors_as_string=FALSE)
 
   # prepare back-end
   endpoint = "/explore"
   full.url = "http://127.0.0.1:8000/explore"
   # flexible variable names
   server$handle("GET", endpoint, function(res, req, ...){
-    qs <- c(...) # named vector
+    qs = c(...) # named vector
     res$headers$`Content-type` = "application/json"
     res$body = geojson
     res
   })
+
   # build with `defaultURL` API variable
   build(path, defaultURL = full.url)
 

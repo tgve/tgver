@@ -36,7 +36,7 @@ copy_tgve = function(path, over.write = TRUE) {
     path)
   if(!inst.copied)
     stop(m)
-  unzip(file.path(path, "tgve.zip"), exdir = path)
+  utils::unzip(file.path(path, "tgve.zip"), exdir = path)
   # there is now path/tgve
   unzipped = list.files(file.path(path, "tgve"), pattern = "*.js|*html")
   if(length(unzipped) < 1)
