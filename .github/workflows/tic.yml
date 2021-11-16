@@ -81,7 +81,7 @@ jobs:
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
 
-      - name: "[Stage] [Linux] Install curl"
+      - name: "[Stage] [Linux] Install curl & sfheaders & httpuv"
         if: runner.os == 'Linux'
         run: |
           sudo apt install libcurl4-openssl-dev libsodium-dev
