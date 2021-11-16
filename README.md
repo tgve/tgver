@@ -23,7 +23,7 @@ devtools:
 devtools::install_github("tgve/tgver")
 ```
 
-## Example
+## Use
 
 This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd)
 document, if the Rmd is rendered to a HTML output, then using
@@ -32,13 +32,17 @@ examples in the vignette).
 
 ``` r
 # start a tgve instance before embedding it
-tgver::tgve(background = TRUE)
+ps = tgver::tgve(background = TRUE)
+#> Attempting to serve TGVE instance from: /tmp/Rtmpevq9TT/tgve
+#> Running plumber at: http://127.0.0.1/8000
 knitr::include_url("http://127.0.0.1:8000")
+# kill the process returned from underlying `callr`
+ps$kill()
 # or use the public one
 # knitr::include_url("https://tgve.github.io/eatlas-template/")
 ```
 
-## TGVE interactive
+## Explore `sf` objects
 
 Similarly, within HTML outputs we can explore (current version) `sf`
 objects:

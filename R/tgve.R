@@ -43,12 +43,13 @@ tgve = function(path = Sys.getenv("TEMP_path_ENV"),
   # clean build if running
   build(path)
 
+  message("Attempting to serve TGVE instance from: ", path)
+
   if(background) {
     return(background_run(server))
   }
 
   openURL(host, port)
-  message("Serving TGVE instance located at ", path)
   server$run(port = port, host = host, docs = FALSE)
 }
 
@@ -56,5 +57,6 @@ background_run = function(server, port = 8000, host = "127.0.0.1") {
   f <- function(s, p, h) {s$setDocs(FALSE); s$run(port = p, host = h)}
   # TODO: try killing if process is running
   ps <- callr::r_bg(f, list(s = server, p = port, h = host))
+  message("Running plumber at: ", "http://", host, "/", port)
   return(ps)
 }
