@@ -72,9 +72,9 @@ Government Programme, Grant/Award Number: EP/T001569/1.
 
 ## Contribution
 
-Please note that the `RpackageTemplate` project is released with a
-[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
-this project, you agree to abide by its terms.
+Please note that the `tgve` package is released with a [Contributor Code
+of Conduct](CODE_OF_CONDUCT.md) copied from the template package
+`RpackageTemplate`. We will work on these docs later.
 
 ## Package Status
 
