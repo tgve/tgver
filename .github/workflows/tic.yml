@@ -87,6 +87,7 @@ jobs:
           sudo apt install libcurl4-openssl-dev libsodium-dev
           Rscript -e "install.packages('sfheaders', INSTALL_opts = '--no-lock')"
           Rscript -e "install.packages('httpuv', INSTALL_opts = '--no-lock')"
+          Rscript -e "install.packages('covr')"
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
@@ -104,10 +105,11 @@ jobs:
 
       - name: "[Stage] After Success"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
-        run: |
-          Rscript -e "tic::after_success()"
-          Rscript -e "install.packages('covr')"
-          Rscript -e "covr::codecov()"
+        run: Rscript -e "tic::after_success()"
+
+      - name: "[Stage] codecov"
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
+        run: Rscript -e "covr::codecov()"
         shell: Rscript {0}
 
       - name: "[Stage] Upload R CMD check artifacts"
