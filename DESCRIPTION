@@ -15,15 +15,13 @@ BugReports: https://github.com/tgve/tgver/issues
 Encoding: UTF-8
 LazyData: true
 Imports:
-    usethis,
     devtools,
-    goodpractice,
     plumber,
-    magrittr,
     callr,
     geojsonsf
 RoxygenNote: 7.1.2
 Suggests: 
+    usethis,
     covr,
     knitr,
     rmarkdown,

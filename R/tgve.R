@@ -33,8 +33,8 @@ tgve = function(path = Sys.getenv("TEMP_path_ENV"),
     path = tempInstance()
   }
 
-  server = plumber::pr() %>%
-    plumber::pr_static("/", path)
+  server = plumber::pr()
+  server = plumber::pr_static(server, "/", path)
 
   if(!run) {
     return(server)
