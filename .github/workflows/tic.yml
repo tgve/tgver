@@ -83,7 +83,9 @@ jobs:
 
       - name: "[Stage] [Linux] Install curl"
         if: runner.os == 'Linux'
-        run: sudo apt install libcurl4-openssl-dev libsodium-dev
+        run: |
+          sudo apt install libcurl4-openssl-dev libsodium-dev
+          Rscript -e "install.packages('sfheaders', INSTALL_opts = '--no-lock')"
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
