@@ -14,8 +14,12 @@ setup = function(path = NULL, create = TRUE) {
   }
 
   if(dir.exists(path)) {
+    d = file.path(path, "tgve")
+    if(dir.exists(d)) {
+      stop("Error: directory named `tgve` exists at given path.")
+    }
     copy_tgve(path)
-    message("A TGVE instance has been created at: ", path)
+    message("A TGVE instance has been created at: ", d)
   } else {
     pare.path = dirname(path)
     if(dir.exists(pare.path) && create) {
