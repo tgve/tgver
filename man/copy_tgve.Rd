@@ -10,6 +10,11 @@ TODO: return a value?}
 \usage{
 copy_tgve(path, over.write = TRUE)
 }
+\arguments{
+\item{path}{character path of TGVE instance}
+
+\item{over.write}{boolean whether to cleanup the instance in `path`}
+}
 \description{
 Internal helper function to:
 1. copy the bundled zip

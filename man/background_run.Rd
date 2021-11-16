@@ -7,6 +7,13 @@ host and port.}
 \usage{
 background_run(server, port = 8000, host = "127.0.0.1")
 }
+\arguments{
+\item{server}{an instance of `plumber` class}
+
+\item{port}{numeric port to pass to `server` instance}
+
+\item{host}{character host value for `server` instance}
+}
 \description{
 Internal helper function to run a `plumber` instance on specific
 host and port.

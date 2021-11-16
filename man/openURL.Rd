@@ -12,6 +12,17 @@ openURL(
   protocol = "http://"
 )
 }
+\arguments{
+\item{host}{character host to pass to plumber}
+
+\item{port}{integer port to pass to plumber}
+
+\item{browser}{Boolean whether to specifically launch a browser}
+
+\item{path}{character path to TGVE instance}
+
+\item{protocol}{character protocol, this may change}
+}
 \description{
 Internal helper function to "browse" a URL.
 }

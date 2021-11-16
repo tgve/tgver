@@ -55,6 +55,10 @@ tgve = function(path = Sys.getenv("TEMP_path_ENV"),
 
 #' Internal helper function to run a `plumber` instance on specific
 #' host and port.
+#'
+#' @param server an instance of `plumber` class
+#' @param port numeric port to pass to `server` instance
+#' @param host character host value for `server` instance
 background_run = function(server, port = 8000, host = "127.0.0.1") {
   f <- function(s, p, h) {s$setDocs(FALSE); s$run(port = p, host = h)}
   # TODO: try killing if process is running

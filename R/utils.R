@@ -1,6 +1,12 @@
 TEMP_DIR_ENV = "TEMP_DIR_ENV"
 
 #' Internal helper function to "browse" a URL.
+#'
+#' @param host character host to pass to plumber
+#' @param port integer port to pass to plumber
+#' @param browser Boolean whether to specifically launch a browser
+#' @param path character path to TGVE instance
+#' @param protocol character protocol, this may change
 openURL = function(host = "127.0.0.1",
                    port = 8000,
                    browser = FALSE,
@@ -23,6 +29,9 @@ openURL = function(host = "127.0.0.1",
 #' 2. unzip
 #' 3. cleanup as required.
 #' TODO: return a value?
+#'
+#' @param path character path of TGVE instance
+#' @param over.write boolean whether to cleanup the instance in `path`
 copy_tgve = function(path, over.write = TRUE) {
   if(!is.character(path) || length(path) != 1) {
     stop("Error: setup takes one character variable.")
