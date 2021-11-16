@@ -1,10 +1,13 @@
 TEMP_DIR_ENV = "TEMP_DIR_ENV"
 
+#' Internal helper function to "browse" a URL.
 openURL = function(host = "127.0.0.1",
-                    port = 8000,
-                    browser = FALSE,
-                    path = "") {
-  u = paste0("http://", host,":", port, "/", path)
+                   port = 8000,
+                   browser = FALSE,
+                   path = "",
+                   protocol = "http://") {
+  # TODO: there must be better ways of doing this
+  u = paste0(protocol, host,":", port, "/", path)
   viewer = getOption("viewer")
   if(identical(.Platform$GUI, "RStudio") &&
      !is.null(viewer) &&
@@ -15,6 +18,11 @@ openURL = function(host = "127.0.0.1",
   }
 }
 
+#' Internal helper function to:
+#' 1. copy the bundled zip
+#' 2. unzip
+#' 3. cleanup as required.
+#' TODO: return a value?
 copy_tgve = function(path, over.write = TRUE) {
   if(!is.character(path) || length(path) != 1) {
     stop("Error: setup takes one character variable.")
