@@ -1,4 +1,3 @@
-
 #' Set the TGVE variables.
 #'
 #' The placeholders in the bundled version are named with pattern: "tgver.*" in

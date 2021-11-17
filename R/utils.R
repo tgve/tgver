@@ -39,10 +39,11 @@ copy_tgve = function(path, over.write = TRUE) {
   if(!dir.exists(path))
     stop("Error: destination directory does not exist.")
 
+  d = file.path(path, "tgve")
+  f = file.path(path, "tgve.zip")
+
   if(over.write) {
     # remove existing copy or folder named tgve
-    d = file.path(path, "tgve")
-    f = file.path(path, "tgve.zip")
     if(dir.exists(d)) unlink(d, recursive = TRUE)
     if(file.exists(f)) file.remove(f)
   }
@@ -53,11 +54,13 @@ copy_tgve = function(path, over.write = TRUE) {
     path)
   if(!inst.copied)
     stop(m)
-  utils::unzip(file.path(path, "tgve.zip"), exdir = path)
+  utils::unzip(f, exdir = path)
   # there is now path/tgve
-  unzipped = list.files(file.path(path, "tgve"), pattern = "*.js|*html")
+  unzipped = list.files(d, pattern = "*.js|*html")
   if(length(unzipped) < 1)
     stop(m)
+  # remove tgve.zip
+  file.remove(f)
 }
 
 #' copy the inst/tgve to a temp in an R session

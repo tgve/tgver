@@ -26,7 +26,7 @@ setup = function(path = NULL, create = TRUE) {
       dir.create(path)
       setup(path, create = FALSE)
     } else {
-      stop("Error: attempting to create directory in parent failed.")
+      stop("Error: attempting to create destination parent directory failed.")
     }
   }
 }
