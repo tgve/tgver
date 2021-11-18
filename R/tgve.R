@@ -33,6 +33,9 @@ tgve = function(path = Sys.getenv("TEMP_path_ENV"),
     path = tempInstance()
   }
 
+  # clean build if running
+  build(path)
+
   server = plumber::pr()
   server = plumber::pr_static(server, "/", path)
 
@@ -40,15 +43,10 @@ tgve = function(path = Sys.getenv("TEMP_path_ENV"),
     return(server)
   }
 
-  # clean build if running
-  build(path)
-
   message("Attempting to serve TGVE instance from: ", path)
-
   if(background) {
     return(background_run(server))
   }
-
   openURL(host, port)
   server$run(port = port, host = host, docs = FALSE)
 }

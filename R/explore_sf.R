@@ -14,18 +14,29 @@ explore_sf = function(sf = NULL, background = FALSE) {
     stop("Error: explore_sf requires an sf object.")
   }
 
-  path = tempInstance()
-  server = tgve(path = path, run = FALSE)
-
   # data
   geojson = geojsonsf::sf_geojson(sf, factors_as_string=FALSE)
 
   # prepare back-end
   endpoint = "/explore"
-  full.url = "http://127.0.0.1:8000/explore"
+  explore_geojson(endpoint, geojson, background)
+}
+
+explore_geojson = function(endpoint, geojson, background) {
+  if(!is.character(endpoint) && length(endpoint) != 1L)
+    stop("Error: endoint must be one character.")
+
+  if(!is.character(geojson))
+    stop("Error: geojson must be character.")
+
+  if(!is.logical(background))
+    stop("Error: background value must be logical")
+
+  full.url = paste0("http://127.0.0.1:8000", endpoint)
+  path = tempInstance()
+  server = tgve(path = path, run = FALSE)
   # flexible variable names
-  server$handle("GET", endpoint, function(res, req, ...){
-    qs = c(...) # named vector
+  server$handle("GET", endpoint, function(res){
     res$headers$`Content-type` = "application/json"
     res$body = geojson
     res
