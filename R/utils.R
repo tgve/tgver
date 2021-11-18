@@ -87,7 +87,20 @@ tempInstance = function() {
 #' @keywords data
 NULL
 
-stopifnotonecharacter = function(c) {
-  if(!is.character(c) && length(c) != 1L)
-    stop(c, " must be one character value.")
+stopifnotonecharacter = function(c, m = NA) {
+  mm = " must be one character value."
+  if(is.character(m) && length(m) == 1L) {
+    mm = m
+  }
+  if(!is.character(c) || length(c) != 1L)
+    stop(c, m)
+}
+
+stopifnotvalidfile = function(file.uri) {
+  if(!file.exists(file.uri))
+    stop("file does not exist: ", file.uri)
+  fi = file.info(file.uri)
+  # any sensible geojson/csv file would above 100bytes
+  if(is.na(fi$size) || fi$size < 10L)
+    stop("given file is empty, is it a wrong file path?")
 }

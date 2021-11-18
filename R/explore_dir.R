@@ -1,0 +1,111 @@
+#' A function to read and serve at least one file from a directory.
+#'
+#' Current version only tries to:
+#' 1. Find two files, one geography.geojson and other data.csv and
+#' pass them to TGVE as `defaultURL` and `geographyURL` with either
+#' matching columns.
+#' 2. TODO: Find only one file, pass this to `explore_file`.
+#'
+#' @param path character of an existing directory with at least one file in
+#' @param background logical value to run instance in `callr`
+#'
+#' @export
+explore_dir = function(path, background = FALSE) {
+  dir_check(path)
+
+  # how many files in?
+  files = list.files(path, full.names = TRUE)
+  if(length(files) == 0)
+    stop("directory is empty.")
+
+  if(length(files) == 1L) {
+    message("One file found in: ", path)
+    message("Trying tgver::explore_file")
+    explore_file(files[1])
+  } else {
+    if(length(files) == 2) {
+      # is there a geography file and a data file
+      # for now a geojson & a csv file?
+      geo.file = list.files(path, pattern = "geojson", full.names = TRUE)
+      dat.file = list.files(path, pattern = "csv", full.names = TRUE)
+      if(length(geo.file) == 1L && length(dat.file) == 1) {
+        explore_data_and_geography(dat.file, geo.file, background)
+      } else {
+        stop("explore_dir meeds at least one csv and one geojson file.")
+      }
+    } else {
+      # TODO: select two files and run above
+      # for now fail
+      stop("there are more than two files in the given directory")
+    }
+  }
+}
+
+explore_data_and_geography = function(dat.file, geo.file, background) {
+  for(x in c(dat.file, geo.file)) {
+    stopifnotonecharacter(x)
+    stopifnotvalidfile(x)
+  }
+
+  if(!is.logical(background))
+    stop("background value must be logical")
+
+  # find matching column to pass to the TGVE
+  data.csv = paste(readLines(dat.file), collapse = "\n")
+  geo.json = paste(readLines(geo.file), collapse = "")
+
+  dat.cols = names(geojsonsf::geojson_sf(geo.json))
+  geo.cols = names(utils::read.csv(text = data.csv))
+  comm.col = intersect(geo.cols, dat.cols)
+
+  if(length(comm.col) == 0) {
+    # no matching columns?
+    # message("Found two files: ", geo.file, ", and ", dat.file)
+    stop("no matching columns found between the csv and geojson
+                 files in the given directory")
+  } else {
+    # more than one matching oclumns
+    message("More than one matching columns found between the two files
+                    using the first matchin column as `geographyColumn` value.")
+    comm.col = comm.col[1]
+  }
+
+  # TODO: can the rest of this be abstracted out in one function with
+  # explore_geojson
+
+  host = "http://127.0.0.1:8000"
+  geoURL = paste0(host, "/geoURL")
+  datURL = paste0(host, "/data.csv")
+
+  path = tempInstance()
+  server = tgve(path = path, run = FALSE)
+
+  # flexible variable names
+  server$handle("GET", "/geoURL", function(res){
+    res$headers$`Content-type` = "application/json"
+    res$body = geo.json # not from disk again
+    res
+  })
+
+  server$handle("GET", "/data.csv", function(res){
+    res$headers$`Content-type` = "text/csv"
+    res$body = data.csv
+    res
+  })
+
+  cat(datURL, geoURL, comm.col)
+
+  build(path,
+        defaultURL = datURL,
+        geographyURL = geoURL,
+        geographyColumn = comm.col)
+
+  if(background) {
+    return(background_run(server))
+  }
+
+  message("Serving data from ", datURL)
+  message("Serving geography from: ", geoURL)
+  openURL()
+  server$run(port = 8000, docs = FALSE)
+}

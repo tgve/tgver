@@ -8,18 +8,11 @@
 #'
 #' @export
 explore_file = function(file.uri, background = FALSE) {
-  if(!is.character(file.uri) || length(file.uri) != 1) {
-    stop("explore_file takes only one character parameter.")
-  }
+  stopifnotonecharacter(file.uri,
+                        "explore_file takes only one character parameter.")
 
-  if(!file.exists(file.uri)) {
-    stop("file does not exist.")
-  }
+  stopifnotvalidfile(file.uri)
 
-  fi = file.info(file.uri)
-  # any geojson/csv file would above 100bytes
-  if(is.na(fi$size) || fi$size < 10L)
-    stop("given file is empty, is it a wrong file path?")
   # only geojson || csv
   if(!any(grepl("json|csv", basename(file.uri)))) {
     stop("explore_file can only read .geojson and .csv files.")
@@ -28,7 +21,7 @@ explore_file = function(file.uri, background = FALSE) {
   geojson = NULL
 
   if(grepl("geojson", basename(file.uri))) {
-    geojson = readLines(file.uri)
+    geojson = paste(readLines(file.uri), collapse = "")
   } else {
     # TODO: convert csv to geojson (via sf?)
 
