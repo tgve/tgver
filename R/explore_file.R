@@ -9,20 +9,20 @@
 #' @export
 explore_file = function(file.uri, background = FALSE) {
   if(!is.character(file.uri) || length(file.uri) != 1) {
-    stop("Error: explore_file takes only one character parameter.")
+    stop("explore_file takes only one character parameter.")
   }
 
   if(!file.exists(file.uri)) {
-    stop("Error: file does not exist.")
+    stop("file does not exist.")
   }
 
   fi = file.info(file.uri)
   # any geojson/csv file would above 100bytes
   if(is.na(fi$size) || fi$size < 10L)
-    stop("Error: given file is empty, is it a wrong file path?")
+    stop("given file is empty, is it a wrong file path?")
   # only geojson || csv
   if(!any(grepl("json|csv", basename(file.uri)))) {
-    stop("Error: explore_file can only read .geojson and .csv files.")
+    stop("explore_file can only read .geojson and .csv files.")
   }
 
   geojson = NULL

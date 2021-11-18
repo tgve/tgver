@@ -6,7 +6,7 @@
 #'@param replacement the string to replace pattern with using gsub.
 file_replace = function(files = NULL, pattern, replacement) {
   if(any(!file.exists(files)))
-    stop("Error: a given file path does not exist")
+    stop("a given file path does not exist")
   for(fname in files){
     content = readLines(fname, warn = FALSE)
     # g = grep(pattern, content)
@@ -23,13 +23,13 @@ file_replace = function(files = NULL, pattern, replacement) {
 #' @param path where TGVE instance is located.
 list_api_files = function(path = NULL) {
   if(is.null(path) || !dir.exists(path))
-    stop("Error: valid tgve instance path is required.")
+    stop("valid tgve instance path is required.")
   # main.*.chunk.js*
   files = list.files(file.path(path, "static/js"),
                      pattern = "^main*",
                      full.names = TRUE)
   if(length(files) == 0)
-    stop("Error: could not find ^main* files in path.")
+    stop("could not find ^main* files in path.")
   files
 }
 

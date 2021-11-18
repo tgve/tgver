@@ -10,13 +10,13 @@
 #' @export
 setup = function(path = NULL, create = TRUE) {
   if(!is.character(path) || length(path) != 1) {
-    stop("Error: setup takes one character variable.")
+    stop("setup takes one character variable.")
   }
 
   if(dir.exists(path)) {
     d = file.path(path, "tgve")
     if(dir.exists(d)) {
-      stop("Error: directory named `tgve` exists at given path.")
+      stop("directory named `tgve` exists at given path.")
     }
     copy_tgve(path)
     message("A TGVE instance has been created at: ", d)
@@ -26,7 +26,7 @@ setup = function(path = NULL, create = TRUE) {
       dir.create(path)
       setup(path, create = FALSE)
     } else {
-      stop("Error: attempting to create destination parent directory failed.")
+      stop("attempting to create destination parent directory failed.")
     }
   }
 }

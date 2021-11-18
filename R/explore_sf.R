@@ -11,7 +11,7 @@
 #' @export
 explore_sf = function(sf = NULL, background = FALSE) {
   if(is.null(sf) || !inherits(sf, "sf")) {
-    stop("Error: explore_sf requires an sf object.")
+    stop("explore_sf requires an sf object.")
   }
 
   # data
@@ -23,14 +23,11 @@ explore_sf = function(sf = NULL, background = FALSE) {
 }
 
 explore_geojson = function(endpoint, geojson, background) {
-  if(!is.character(endpoint) && length(endpoint) != 1L)
-    stop("Error: endoint must be one character.")
-
-  if(!is.character(geojson))
-    stop("Error: geojson must be character.")
+  stopifnotonecharacter(endpoint)
+  stopifnotonecharacter(geojson)
 
   if(!is.logical(background))
-    stop("Error: background value must be logical")
+    stop("Background value must be logical")
 
   full.url = paste0("http://127.0.0.1:8000", endpoint)
   path = tempInstance()

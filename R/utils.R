@@ -33,11 +33,7 @@ openURL = function(host = "127.0.0.1",
 #' @param path character path of TGVE instance
 #' @param over.write boolean whether to cleanup the instance in `path`
 copy_tgve = function(path, over.write = TRUE) {
-  if(!is.character(path) || length(path) != 1) {
-    stop("Error: setup takes one character variable.")
-  }
-  if(!dir.exists(path))
-    stop("Error: destination directory does not exist.")
+  dir_check(path)
 
   d = file.path(path, "tgve")
   f = file.path(path, "tgve.zip")
@@ -48,7 +44,7 @@ copy_tgve = function(path, over.write = TRUE) {
     if(file.exists(f)) file.remove(f)
   }
 
-  m = "Error: could not copy TGVE bundled version."
+  m = "could not copy TGVE bundled version."
   inst.copied = file.copy(
     system.file("tgve.zip", package = "tgver"),
     path)
@@ -61,6 +57,14 @@ copy_tgve = function(path, over.write = TRUE) {
     stop(m)
   # remove tgve.zip
   file.remove(f)
+}
+
+dir_check = function(path) {
+  if(!is.character(path) || length(path) != 1) {
+    stop("setup takes one character variable.")
+  }
+  if(!dir.exists(path))
+    stop("destination directory does not exist.")
 }
 
 #' copy the inst/tgve to a temp in an R session
@@ -82,3 +86,8 @@ tempInstance = function() {
 #' @author L Hama \email{l.hama@@leeds.ac.uk}
 #' @keywords data
 NULL
+
+stopifnotonecharacter = function(c) {
+  if(!is.character(c) && length(c) != 1L)
+    stop(c, " must be one character value.")
+}
