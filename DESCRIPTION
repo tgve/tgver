@@ -15,18 +15,17 @@ BugReports: https://github.com/tgve/tgver/issues
 Encoding: UTF-8
 LazyData: true
 Imports:
-    devtools,
     plumber,
     callr,
     geojsonsf
 RoxygenNote: 7.1.2
 Suggests: 
-    usethis,
     covr,
+    curl,
+    devtools,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    curl
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Depends: 
