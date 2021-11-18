@@ -18,7 +18,7 @@ explore_sf = function(sf = NULL, background = FALSE) {
   geojson = geojsonsf::sf_geojson(sf, factors_as_string=FALSE)
 
   # prepare back-end
-  endpoint = "/explore"
+  endpoint = "/explore_sf"
   explore_geojson(endpoint, geojson, background)
 }
 

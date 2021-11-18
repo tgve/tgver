@@ -35,6 +35,6 @@ explore_file = function(file.uri, background = FALSE) {
   }
 
   # prepare back-end
-  endpoint = paste0("/", basename(file.uri))
+  endpoint = "/explore_file"
   explore_geojson(endpoint, geojson, background)
 }
