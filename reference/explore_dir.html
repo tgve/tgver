@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>copy the inst/tgve to a temp in an R session — tempInstance • tgver</title>
+<title>A function to read and serve at least one file from a directory. — explore_dir • tgver</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,12 @@
 
 
 
-<meta property="og:title" content="copy the inst/tgve to a temp in an R session — tempInstance" />
-<meta property="og:description" content="copy the inst/tgve to a temp in an R session" />
+<meta property="og:title" content="A function to read and serve at least one file from a directory. — explore_dir" />
+<meta property="og:description" content="Current version only tries to:
+1. Find two files, one geography.geojson and other data.csv and
+pass them to TGVE as `defaultURL` and `geographyURL` with either
+matching columns.
+2. TODO: Find only one file, pass this to `explore_file`." />
 
 
 
@@ -123,17 +127,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>copy the inst/tgve to a temp in an R session</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tgve/tgver/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>tempInstance.Rd</code></div>
+    <h1>A function to read and serve at least one file from a directory.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tgve/tgver/blob/master/R/explore_dir.R'><code>R/explore_dir.R</code></a></small>
+    <div class="hidden name"><code>explore_dir.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>copy the inst/tgve to a temp in an R session</p>
+    <p>Current version only tries to:
+1. Find two files, one geography.geojson and other data.csv and
+pass them to TGVE as `defaultURL` and `geographyURL` with either
+matching columns.
+2. TODO: Find only one file, pass this to `explore_file`.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tempInstance</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>explore_dir</span><span class='op'>(</span><span class='va'>path</span>, background <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>path</th>
+      <td><p>character of an existing directory with at least one file in</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>logical value to run instance in `callr`</p></td>
+    </tr>
+    </table>
 
 
   </div>
