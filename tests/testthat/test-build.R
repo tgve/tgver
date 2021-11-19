@@ -13,7 +13,12 @@ test_that("build works", {
   expect_true(any(g2))
   # build by changing tgver.dark to ""
   # easy
-  build(p, dark="")
+  index = build(p, dark="")
+  expect_true(file.exists(index))
+  expect_true(identical(
+    index,
+    list.files(p, pattern = "html", full.names = TRUE)
+  ))
   c = readLines(f[1], warn = FALSE)
   g = grepl("tgver.dark", c)
   c2 = readLines(f[2], warn = FALSE)

@@ -7,6 +7,8 @@
 #' @param path to be passed to `file_replace` function
 #' @param ... any or all of the TGVE API variables to replace/add values to.
 #'
+#' @return built instance's index.html file
+#'
 #' @examples \dontrun{
 #' build(file.path(tempdir(), "tgve"))
 #' }
@@ -26,4 +28,7 @@ build = function(path, ...) {
       }
     }
   }
+  # return the index.html file
+  index = list.files(path, pattern = "html", full.names = TRUE)
+  index[1]
 }
