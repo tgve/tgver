@@ -31,7 +31,7 @@ explore_geojson = function(endpoint, geojson, background) {
 
   full.url = paste0("http://127.0.0.1:8000", endpoint)
   path = tempInstance()
-  server = tgve(path = path, run = FALSE)
+  server = tgve_server(path = path, run = FALSE)
   # flexible variable names
   server$handle("GET", endpoint, function(res){
     res$headers$`Content-type` = "application/json"

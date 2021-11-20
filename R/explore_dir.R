@@ -78,7 +78,7 @@ explore_data_and_geography = function(dat.file, geo.file, background) {
   datURL = paste0(host, "/data.csv")
 
   path = tempInstance()
-  server = tgve(path = path, run = FALSE)
+  server = tgve_server(path = path, run = FALSE)
 
   # flexible variable names
   server$handle("GET", "/geoURL", function(res){

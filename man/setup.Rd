@@ -13,7 +13,7 @@ setup(path = NULL, create = TRUE)
 }
 \description{
 This function initializes an instance of TGVE for permanent use compared with
-what \link[tgver]{tgve} which relies on a `tempdir` based instance. It requires a path.
+what \link[tgver]{tgve_server} which relies on a `tempdir` based instance. It requires a path.
 }
 \examples{
 {

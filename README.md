@@ -34,7 +34,7 @@ examples in the
 
 ``` r
 # start a tgve instance before embedding it
-ps = tgver::tgve(background = TRUE)
+ps = tgver::tgve_server(background = TRUE)
 #> Attempting to serve TGVE instance from: /tmp/Rtmpevq9TT/tgve
 #> Running plumber at: http://127.0.0.1/8000
 knitr::include_url("http://127.0.0.1:8000")

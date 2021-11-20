@@ -34,13 +34,13 @@ tgver::version
 
 That means, there is no need to do anything to run a clean instance of the TGVE ready to import data to using:
 ```{r tgve, eval=FALSE}
-tgver::tgve()
+tgver::tgve_server()
 ```
 
 The application can be served from a `plumber` instance which is pointed at the location of the TGVE instance initialized, or directly opening the HTML file in browsers. This also means we can embed the application in an Rmd file, using either of the two methods, when building the Rmd (thanks to `knitr`):
 ```{r embed}
 # start a tgve instance before embedding it
-# tgver::tgve()
+# tgver::tgve_server()
 # knitr::include_url("http://127.0.0.1:8000")
 # or use the public one
 knitr::include_url("https://tgve.github.io/eatlas-template/")

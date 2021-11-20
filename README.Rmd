@@ -34,7 +34,7 @@ devtools::install_github("tgve/tgver")
 This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML output, then using `knitr::include_url` we should see the TGVE embeded (see the live examples in the [vignette](https://tgve.github.io/tgver/articles/tgver.html)).
 ```{r tgve, eval=FALSE}
 # start a tgve instance before embedding it
-ps = tgver::tgve(background = TRUE)
+ps = tgver::tgve_server(background = TRUE)
 #> Attempting to serve TGVE instance from: /tmp/Rtmpevq9TT/tgve
 #> Running plumber at: http://127.0.0.1/8000
 knitr::include_url("http://127.0.0.1:8000")
