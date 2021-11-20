@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal helper function to run a `plumber` instance on specific
-host and port. — background_run • tgver</title>
+<title>Start a TGVE instance server — tgve_server • tgver</title>
 
 
 <!-- jquery -->
@@ -40,10 +39,11 @@ host and port. — background_run • tgver</title>
 
 
 
-<meta property="og:title" content="Internal helper function to run a `plumber` instance on specific
-host and port. — background_run" />
-<meta property="og:description" content="Internal helper function to run a `plumber` instance on specific
-host and port." />
+<meta property="og:title" content="Start a TGVE instance server — tgve_server" />
+<meta property="og:description" content="The function accepts a `path` to get a directory containing an instance of
+TGVE, by default this is done via `TEMP_DIR_ENV` env variable. If neither
+is given then the function copies a clean copy of the bundled
+TGVE version into a temporary directory." />
 
 
 
@@ -126,37 +126,69 @@ host and port." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal helper function to run a `plumber` instance on specific
-host and port.</h1>
+    <h1>Start a TGVE instance server</h1>
     <small class="dont-index">Source: <a href='https://github.com/tgve/tgver/blob/master/R/tgve_server.R'><code>R/tgve_server.R</code></a></small>
-    <div class="hidden name"><code>background_run.Rd</code></div>
+    <div class="hidden name"><code>tgve_server.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Internal helper function to run a `plumber` instance on specific
-host and port.</p>
+    <p>The function accepts a `path` to get a directory containing an instance of
+TGVE, by default this is done via `TEMP_DIR_ENV` env variable. If neither
+is given then the function copies a clean copy of the bundled
+TGVE version into a temporary directory.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>background_run</span><span class='op'>(</span><span class='va'>server</span>, port <span class='op'>=</span> <span class='fl'>8000</span>, host <span class='op'>=</span> <span class='st'>"127.0.0.1"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>tgve_server</span><span class='op'>(</span>
+  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"TEMP_path_ENV"</span><span class='op'>)</span>,
+  port <span class='op'>=</span> <span class='fl'>8000</span>,
+  host <span class='op'>=</span> <span class='st'>"127.0.0.1"</span>,
+  background <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  run <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>server</th>
-      <td><p>an instance of `plumber` class</p></td>
+      <th>path</th>
+      <td><p>location of TGVE path to be served by plumber.</p></td>
     </tr>
     <tr>
       <th>port</th>
-      <td><p>numeric port to pass to `server` instance</p></td>
+      <td><p>to serve from.</p></td>
     </tr>
     <tr>
       <th>host</th>
-      <td><p>character host value for `server` instance</p></td>
+      <td><p>host to pass to plumber default `http://127.0.0.1`
+to `FALSE`.</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>run the R process in the background using `callr`,
+defaults to `TRUE`.</p></td>
+    </tr>
+    <tr>
+      <th>run</th>
+      <td><p>whether to start the server, defaults to `TRUE`. If
+not, then the created server will be returned.</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'><span class='op'>{</span></span>
+<span class='r-in'><span class='co'># this will run the underlying `plumber` instance and block</span></span>
+<span class='r-in'><span class='co'># the R process.</span></span>
+<span class='r-in'><span class='co'># tgve_server()</span></span>
+<span class='r-in'><span class='co'># This will run in the background using `callr`</span></span>
+<span class='r-in'><span class='va'>ps</span> <span class='op'>=</span> <span class='fu'>tgve_server</span><span class='op'>(</span>background <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Sys.sleep.html'>Sys.sleep</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ps</span><span class='op'>$</span><span class='fu'>kill</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Attempting to serve TGVE instance from: /tmp/Rtmp7Ma2VV/tgve</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Running plumber at: http://127.0.0.1/8000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
