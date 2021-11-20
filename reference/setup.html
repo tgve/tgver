@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function to setup a local directory instead of `tempInstance`. — setup • tgver</title>
+<title>Setup an instance. — setup • tgver</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Helper function to setup a local directory instead of `tempInstance`. — setup" />
-<meta property="og:description" content="Helper function to setup a local directory instead of `tempInstance`." />
+<meta property="og:title" content="Setup an instance. — setup" />
+<meta property="og:description" content="This function initializes an instance of TGVE for permanent use compared with
+what tgve which relies on a `tempdir` based instance. It requires a path." />
 
 
 
@@ -98,7 +99,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dev-plan.html">Development plan for tgver</a>
+      <a href="../articles/dev-plan.html">Development plan</a>
     </li>
   </ul>
 </li>
@@ -123,13 +124,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function to setup a local directory instead of `tempInstance`.</h1>
+    <h1>Setup an instance.</h1>
     <small class="dont-index">Source: <a href='https://github.com/tgve/tgver/blob/master/R/setup.R'><code>R/setup.R</code></a></small>
     <div class="hidden name"><code>setup.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Helper function to setup a local directory instead of `tempInstance`.</p>
+    <p>This function initializes an instance of TGVE for permanent use compared with
+what <a href='tgve.html'>tgve</a> which relies on a `tempdir` based instance. It requires a path.</p>
     </div>
 
     <pre class="usage"><span class='fu'>setup</span><span class='op'>(</span>path <span class='op'>=</span> <span class='cn'>NULL</span>, create <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
@@ -153,7 +155,7 @@
 <span class='r-in'><span class='va'>p</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"tgve"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>setup</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> A TGVE instance has been created at: /tmp/Rtmp8Ioxic/tgve/tgve</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> A TGVE instance has been created at: /tmp/RtmpgRzOpz/tgve/tgve</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

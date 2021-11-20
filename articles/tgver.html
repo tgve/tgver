@@ -57,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/dev-plan.html">Development plan for tgver</a>
+      <a href="../articles/dev-plan.html">Development plan</a>
     </li>
   </ul>
 </li>
@@ -115,7 +115,7 @@
 <p>That means, there is no need to do anything to run a clean instance of the TGVE ready to import data to using:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/tgve.html">tgve</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>The application is served from a <code>plumber</code> instance which is pointed at the location of the TGVE instance used in the package. This also means we can embed it in this Rmd file using the local server URL whilst building the Rmd (thanks to <code>knitr</code>):</p>
+<p>The application can be served from a <code>plumber</code> instance which is pointed at the location of the TGVE instance initialized, or directly opening the HTML file in browsers. This also means we can embed the application in an Rmd file, using either of the two methods, when building the Rmd (thanks to <code>knitr</code>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># start a tgve instance before embedding it</span>
 <span class="co"># tgver::tgve()</span>
@@ -125,6 +125,46 @@
 <iframe src="https://tgve.github.io/eatlas-template/" width="700" height="400px" data-external="1">
 </iframe>
 <p>The above instance pulls data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a <code>html_vignette</code>).</p>
+<p>On your local machine, and given the Rmarkdown output is set to <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html">rmarkdown::html_vignette</a></code>, then you could do:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># setup a local instance</span>
+<span class="co"># tempdir() will disappear inside an Rmd</span>
+<span class="va">p</span> <span class="op">=</span> <span class="st">"~/Downloads"</span>
+<span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
+<span class="co"># now the instance is at</span>
+<span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
+<span class="co"># we just need to pass the data/csv URL</span>
+<span class="co"># using `defaultURL` API</span>
+<span class="va">url</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/build.html">build</a></span><span class="op">(</span><span class="va">tp</span>, defaultURL <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/layik/eatlas-data/main/utlas.geojson'</span>,
+                   column <span class="op">=</span> <span class="st">"long"</span>,
+                   hideChartGenerator<span class="op">=</span><span class="st">"true"</span>,
+                   <span class="co"># In future R should assemble the json</span>
+                   viewport<span class="op">=</span><span class="st">"{zoom:5.5,pitch:0,bearing:0}"</span><span class="op">)</span>
+<span class="co"># now we have the app's main url</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
+<span class="co"># unlink(tp, recursive = TRUE)</span></code></pre></div>
+<p>If this Vignette is served either from CRAN or GitHub, the application at path in above chunk (<code>tp</code>) will <em>not</em> be available. So you must run it locally to see the application, the screenshot below was taken from such a run.</p>
+<p>Also, note that the “webview” within Rstudio Deb package version <code>1.4.1717</code> fails to load even remote URLs using <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html">knitr::include_url</a></code>, please “open in browser” to see the rendering from <code>knitr</code>. <img src="https://user-images.githubusercontent.com/408568/142702067-003e98d8-a0a0-4e23-85ad-b875434da518.png" width="100%"></p>
+</div>
+<div id="main-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#main-functions" class="anchor"></a>Main functions</h2>
+<p>The package still has “WIP” label on, so we are still finalising the main functionality of this R package. However, right now it looks like to work with the TGVE, we need:</p>
+<ol style="list-style-type: decimal">
+<li>Setup</li>
+<li>Build</li>
+<li>Run</li>
+</ol>
+<p>The package does have a function called <code>setup</code> which does what it says on the help and sets up an instance at a given directory. The <code>build</code> function is there to pass parameters to the TGVE, in other words it is a mini transpiler with bare minimum functionality (version 0.1.0).</p>
+<p>For the third type of functions and to run the application, so far, there are few functions that can be used but the main one is <code>tgve</code> which sets up and builds an empty instance at a <code>tempdir</code>. More important functions are:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code>explore_fs</code>: OGC standard Simple Features and R package <code>sf</code> is an important class object to support. Though we will do all we can to <em>not</em> import <code>sf</code> due to underlying system dependencies.</li>
+<li>
+<code>explore_fil</code>: this makes sense given the API and functionality built into the TGVE and given that data scientists would want to quickly explore single files.</li>
+<li>
+<code>explore_dir</code>: this is an ambitious function to develop. Current version tries to find two files and pass them to TGVE’s <code>defaultURL</code> and <code>geographyURL</code> as that is a use case of the TGVE.</li>
+</ol>
 </div>
 </div>
   </div>

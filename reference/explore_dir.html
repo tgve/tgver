@@ -41,10 +41,10 @@
 
 <meta property="og:title" content="A function to read and serve at least one file from a directory. — explore_dir" />
 <meta property="og:description" content="Current version only tries to:
-1. Find two files, one geography.geojson and other data.csv and
-pass them to TGVE as `defaultURL` and `geographyURL` with either
-matching columns.
-2. TODO: Find only one file, pass this to `explore_file`." />
+Find two files, one .csv and the other .geojson and
+pass them to TGVE as `defaultURL` and `geographyURL` respectively.
+It will also look at their column names and try to find matching columns.
+If there is one file, it passes it to `explore_file` function." />
 
 
 
@@ -102,7 +102,7 @@ matching columns.
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dev-plan.html">Development plan for tgver</a>
+      <a href="../articles/dev-plan.html">Development plan</a>
     </li>
   </ul>
 </li>
@@ -134,10 +134,10 @@ matching columns.
 
     <div class="ref-description">
     <p>Current version only tries to:
-1. Find two files, one geography.geojson and other data.csv and
-pass them to TGVE as `defaultURL` and `geographyURL` with either
-matching columns.
-2. TODO: Find only one file, pass this to `explore_file`.</p>
+Find two files, one .csv and the other .geojson and
+pass them to TGVE as `defaultURL` and `geographyURL` respectively.
+It will also look at their column names and try to find matching columns.
+If there is one file, it passes it to `explore_file` function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>explore_dir</span><span class='op'>(</span><span class='va'>path</span>, background <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
@@ -147,11 +147,11 @@ matching columns.
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>character of an existing directory with at least one file in</p></td>
+      <td><p>character of a data directory</p></td>
     </tr>
     <tr>
       <th>background</th>
-      <td><p>logical value to run instance in `callr`</p></td>
+      <td><p>logical value whether to run instance in `callr`</p></td>
     </tr>
     </table>
 
