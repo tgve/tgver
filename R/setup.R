@@ -1,4 +1,7 @@
-#' Helper function to setup a local directory instead of `tempInstance`.
+#' Setup an instance.
+#'
+#' This function initializes an instance of TGVE for permanent use compared with
+#' what \link[tgver]{tgve} which relies on a `tempdir` based instance. It requires a path.
 #'
 #' @param path Character URI to copy tgve instance in.
 #' @param create Boolean to create new directory at path, defaults to `TRUE`.

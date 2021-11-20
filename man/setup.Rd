@@ -2,7 +2,7 @@
 % Please edit documentation in R/setup.R
 \name{setup}
 \alias{setup}
-\title{Helper function to setup a local directory instead of `tempInstance`.}
+\title{Setup an instance.}
 \usage{
 setup(path = NULL, create = TRUE)
 }
@@ -12,7 +12,8 @@ setup(path = NULL, create = TRUE)
 \item{create}{Boolean to create new directory at path, defaults to `TRUE`.}
 }
 \description{
-Helper function to setup a local directory instead of `tempInstance`.
+This function initializes an instance of TGVE for permanent use compared with
+what \link[tgver]{tgve} which relies on a `tempdir` based instance. It requires a path.
 }
 \examples{
 {

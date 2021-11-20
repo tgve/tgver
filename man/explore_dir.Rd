@@ -7,14 +7,14 @@
 explore_dir(path, background = FALSE)
 }
 \arguments{
-\item{path}{character of an existing directory with at least one file in}
+\item{path}{character of a data directory}
 
-\item{background}{logical value to run instance in `callr`}
+\item{background}{logical value whether to run instance in `callr`}
 }
 \description{
 Current version only tries to:
-1. Find two files, one geography.geojson and other data.csv and
-pass them to TGVE as `defaultURL` and `geographyURL` with either
-matching columns.
-2. TODO: Find only one file, pass this to `explore_file`.
+Find two files, one .csv and the other .geojson and
+pass them to TGVE as `defaultURL` and `geographyURL` respectively.
+It will also look at their column names and try to find matching columns.
+If there is one file, it passes it to `explore_file` function.
 }

@@ -1,5 +1,5 @@
 ---
-title: "Development plan for tgver"
+title: "Development plan"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{dev-plan}

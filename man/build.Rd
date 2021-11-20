@@ -11,6 +11,9 @@ build(path, ...)
 
 \item{...}{any or all of the TGVE API variables to replace/add values to.}
 }
+\value{
+built instance's index.html file
+}
 \description{
 The placeholders in the bundled version are named with pattern: "tgver.*" in
 the main component (eatlas-template). They can be replaced using the

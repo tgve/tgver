@@ -21,7 +21,13 @@ build = function(path, ...) {
   for (x in names(apis)) {
     for (fname in files) {
       if(x %in% given) {
-        file_replace(fname, apis[x], args[x])
+        if(x == "viewport") {
+          file_replace(fname,
+                       paste0('"', apis[x],'"'),
+                       args[x])
+        } else {
+          file_replace(fname, apis[x], args[x])
+        }
       } else {
         # cat("replacing...", apis[x], "with", "\"\"\n")
         file_replace(fname, apis[x], "")
