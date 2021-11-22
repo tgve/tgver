@@ -48,7 +48,7 @@ tgve_server = function(path = Sys.getenv("TEMP_path_ENV"),
   if(background) {
     return(background_run(server))
   }
-  openURL(host, port)
+  openURL(host = host, port = port)
   server$run(port = port, host = host, docs = FALSE)
 }
 

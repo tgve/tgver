@@ -2,18 +2,24 @@ TEMP_DIR_ENV = "TEMP_DIR_ENV"
 
 #' Internal helper function to "browse" a URL.
 #'
+#' @param url character url, if given and valid other
+#' parameters will be ignored.
 #' @param host character host to pass to plumber
 #' @param port integer port to pass to plumber
 #' @param browser Boolean whether to specifically launch a browser
 #' @param path character path to TGVE instance
 #' @param protocol character protocol, this may change
-openURL = function(host = "127.0.0.1",
+openURL = function(url = NULL,
+                   host = "127.0.0.1",
                    port = 8000,
                    browser = FALSE,
                    path = "",
                    protocol = "http://") {
   # TODO: there must be better ways of doing this
   u = paste0(protocol, host,":", port, "/", path)
+  if(!is.null(url) && is.character(url) && length(url) == 1) {
+    u = url
+  }
   viewer = getOption("viewer")
   if(identical(.Platform$GUI, "RStudio") &&
      !is.null(viewer) &&

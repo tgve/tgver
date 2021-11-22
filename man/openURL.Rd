@@ -5,6 +5,7 @@
 \title{Internal helper function to "browse" a URL.}
 \usage{
 openURL(
+  url = NULL,
   host = "127.0.0.1",
   port = 8000,
   browser = FALSE,
@@ -13,6 +14,9 @@ openURL(
 )
 }
 \arguments{
+\item{url}{character url, if given and valid other
+parameters will be ignored.}
+
 \item{host}{character host to pass to plumber}
 
 \item{port}{integer port to pass to plumber}

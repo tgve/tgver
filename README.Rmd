@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 
 # tgver
 
-This is the R package for TGVE front end npm package `tgve`. The R pacakge is developed to:
-1. do interactive geospatial analysis and visuaulization fast
-2. use R's echosystem to drive (1)
+This is the R package for TGVE front end `npm` package `tgve`. The R package is developed to:
+1. do interactive geospatial analysis and visualization fast
+2. use R's echo-system to drive (1)
 3. facilitate application deployment for production
 
 ## Install
@@ -31,7 +31,18 @@ devtools::install_github("tgve/tgver")
 ```
 
 ## Use
-This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML output, then using `knitr::include_url` we should see the TGVE embeded (see the live examples in the [vignette](https://tgve.github.io/tgver/articles/tgver.html)).
+This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML output, then using `knitr::include_url` we should see the TGVE embedded (see the live examples in the [vignette](https://tgve.github.io/tgver/articles/tgver.html)).
+
+```{r static, eval=FALSE}
+# this is the most basic use
+# tgver::tgve()
+# to embed in a html rendered Rmd
+html.file = tgver::tgve(browse = FALSE)
+knitr::include_url(html.file)
+```
+
+The similar function, with the backend as a `plumber` API and serving the same instance, would be like:
+
 ```{r tgve, eval=FALSE}
 # start a tgve instance before embedding it
 ps = tgver::tgve_server(background = TRUE)
@@ -45,7 +56,7 @@ ps$kill()
 ```
 
 ## Explore `sf` objects
-Similarly, within HTML outputs we can explore (current version) `sf` objects:
+For these purposes, the package relies on the `plumber` API to serve data. So, again within HTML outputs we can explore `sf` objects like so:
 
 ```{r explore, eval=FALSE}
 # using sf
@@ -54,7 +65,7 @@ tgver::explore_sf(nc)
 ```
 
 # Development plan
-Please see the vignette called "dev-plan" for details.
+Please see the vignette called ["dev-plan"](https://tgve.github.io/tgver/articles/dev-plan.html) for details.
 
 # Preview
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
