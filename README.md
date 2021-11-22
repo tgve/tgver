@@ -9,9 +9,9 @@ developed.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repos
 
 # tgver
 
-This is the R package for TGVE front end npm package `tgve`. The R
-pacakge is developed to: 1. do interactive geospatial analysis and
-visuaulization fast 2. use R’s echosystem to drive (1) 3. facilitate
+This is the R package for TGVE front end `npm` package `tgve`. The R
+package is developed to: 1. do interactive geospatial analysis and
+visualization fast 2. use R’s echo-system to drive (1) 3. facilitate
 application deployment for production
 
 ## Install
@@ -28,9 +28,20 @@ devtools::install_github("tgve/tgver")
 
 This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd)
 document, if the Rmd is rendered to a HTML output, then using
-`knitr::include_url` we should see the TGVE embeded (see the live
+`knitr::include_url` we should see the TGVE embedded (see the live
 examples in the
 [vignette](https://tgve.github.io/tgver/articles/tgver.html)).
+
+``` r
+# this is the most basic use
+# tgver::tgve()
+# to embed in a html rendered Rmd
+html.file = tgver::tgve(browse = FALSE)
+knitr::include_url(html.file)
+```
+
+The similar function, with the backend as a `plumber` API and serving
+the same instance, would be like:
 
 ``` r
 # start a tgve instance before embedding it
@@ -46,8 +57,8 @@ ps$kill()
 
 ## Explore `sf` objects
 
-Similarly, within HTML outputs we can explore (current version) `sf`
-objects:
+For these purposes, the package relies on the `plumber` API to serve
+data. So, again within HTML outputs we can explore `sf` objects like so:
 
 ``` r
 # using sf
@@ -57,7 +68,9 @@ tgver::explore_sf(nc)
 
 # Development plan
 
-Please see the vignette called “dev-plan” for details.
+Please see the vignette called
+[“dev-plan”](https://tgve.github.io/tgver/articles/dev-plan.html) for
+details.
 
 # Preview
 
