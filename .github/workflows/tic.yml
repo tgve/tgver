@@ -2,6 +2,10 @@
 ## revision date: 2020-06-14
 on:
   push:
+    paths-ignore:
+      - '**/README.*md'
+      - '**/.gitignore'
+      - '**/.github/'
   pull_request:
     branches:
       - master
@@ -11,10 +15,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 4 * * *"
-  paths-ignore:
-      - '**/README.*md'
-      - '**/.gitignore'
-      - '**/.github/'
+
 name: tic
 
 jobs:
