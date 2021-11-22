@@ -20,7 +20,7 @@
 #' }
 #'
 #' @export
-tgve = function(path = Sys.getenv("TEMP_path_ENV"), brwose = TRUE) {
+tgve = function(path = Sys.getenv("TEMP_path_ENV"), browse = TRUE) {
   new.path = path
   if(!dir.exists(path)) {
     new.path = tempInstance()
@@ -34,5 +34,6 @@ tgve = function(path = Sys.getenv("TEMP_path_ENV"), brwose = TRUE) {
     return(new.path)
   }
 
+  message("attemping to browse: ", new.path)
   openURL(new.path)
 }
