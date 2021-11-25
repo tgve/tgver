@@ -26,6 +26,7 @@ Following is adapted from [here](https://github.com/schochastics/edgebundle).
 library(igraph)
 library(edgebundle)
 library(ggplot2)
+library(ggraph)
 
 g = us_flights
 xy = cbind(V(g)$longitude, V(g)$latitude)
