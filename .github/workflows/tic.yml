@@ -81,19 +81,14 @@ jobs:
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
 
-      - name: "[Stage] [Linux] Install curl & sfheaders & httpuv"
+      - name: "[Stage] [Linux] Install system deps"
         if: runner.os == 'Linux'
         run: |
           sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
           sudo apt-get update
           sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
           sudo apt install libcurl4-openssl-dev libsodium-dev libgit2-dev
-          Rscript -e "install.packages('git2r', INSTALL_opts = '--no-lock')"
-          Rscript -e "install.packages('usethis', INSTALL_opts = '--no-lock')"
-          Rscript -e "install.packages('sf', INSTALL_opts = '--no-lock')"
-          Rscript -e "install.packages('sfheaders', INSTALL_opts = '--no-lock')"
-          Rscript -e "install.packages('httpuv', INSTALL_opts = '--no-lock')"
-          Rscript -e "install.packages('covr')"
+          Rscript -e "options('install.lock'=FALSE)"
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
