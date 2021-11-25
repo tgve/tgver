@@ -88,6 +88,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
           sudo apt install libcurl4-openssl-dev libsodium-dev
+          Rscript -e "install.packages('sf', INSTALL_opts = '--no-lock')"
           Rscript -e "install.packages('sfheaders', INSTALL_opts = '--no-lock')"
           Rscript -e "install.packages('httpuv', INSTALL_opts = '--no-lock')"
           Rscript -e "install.packages('covr')"
