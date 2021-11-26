@@ -59,6 +59,9 @@
 <li>
       <a href="articles/dev-plan.html">Development plan</a>
     </li>
+    <li>
+      <a href="articles/r-and-js.html">The power of R + JS</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -123,7 +126,7 @@
 <p>For these purposes, the package relies on the <code>plumber</code> API to serve data. So, again within HTML outputs we can explore <code>sf</code> objects like so:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># using sf</span>
-<span class="va">nc</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu">st_read</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">nc</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">nc</span><span class="op">)</span></code></pre></div>
 </div>
 </div>

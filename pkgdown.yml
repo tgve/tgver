@@ -3,6 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   dev-plan: dev-plan.html
+  r-and-js: r-and-js.html
   tgver: tgver.html
-last_built: 2021-11-22T11:34Z
+last_built: 2021-11-26T09:23Z
 
