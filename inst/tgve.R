@@ -29,4 +29,4 @@ zip("inst/tgve.zip",
 version = jsonlite::parse_json(readLines("~/code/eatlas-template/package.json"))$dependencies$eatlas
 version = sub(".", "", version)
 names(version) <- "version"
-usethis::use_data(version)
+usethis::use_data(version, overwrite = TRUE)

@@ -20,12 +20,18 @@ Imports:
     geojsonsf
 RoxygenNote: 7.1.2
 Suggests: 
+    igraph,
     covr,
     curl,
     devtools,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
+    edgebundle,
+    ggplot2,
+    maps,
+    sf,
+    ggraph
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Depends: 

@@ -24,7 +24,9 @@ explore_sf = function(sf = NULL, background = FALSE) {
 
 explore_geojson = function(endpoint, geojson, background) {
   stopifnotonecharacter(endpoint)
-  stopifnotonecharacter(geojson)
+  if(!is.character(geojson) || !is.atomic(geojson)) {
+    stop("explore_geojsoin requires geoson object.")
+  }
 
   if(!is.logical(background))
     stop("Error: background value must be logical")
