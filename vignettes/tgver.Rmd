@@ -39,13 +39,16 @@ tgver::tgve_server()
 
 The application can be served from a `plumber` instance which is pointed at the location of the TGVE instance initialized, or directly opening the HTML file in browsers. This also means we can embed the application in an Rmd file, using either of the two methods, when building the Rmd (thanks to `knitr`):
 ```{r embed}
-# start a tgve instance before embedding it
+# open a static tgve
+# tgver::tgve()
+# 
+# or start a tgve instance before embedding it
 # tgver::tgve_server()
 # knitr::include_url("http://127.0.0.1:8000")
 # or use the public one
 knitr::include_url("https://tgve.github.io/eatlas-template/")
 ```
-The above instance pulls data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a `html_vignette`).
+The above instance pulls the instance and the data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a `html_vignette`).
 
 On your local machine, and given the Rmarkdown output is set to `rmarkdown::html_vignette`, then you could do:
 
@@ -68,24 +71,26 @@ knitr::include_url(url)
 # unlink(tp, recursive = TRUE)
 ```
 
-If this Vignette is served either from CRAN or GitHub, the application at path in above chunk (`tp`) will *not* be available. So you must run it locally to see the application, the screenshot below was taken from such a run. 
+If this Vignette is served either from CRAN or GitHub, the application at path in above chunk (`tp`) will *not* be available. So you must run it locally to see the application, the screenshot below was taken from such a run. Embedding the full instance in a HTML file is an open issue on the repository and we welcome your contributions if you can.
 
-Also, note that the "webview" within Rstudio Deb package version `1.4.1717` fails to load even remote URLs using `knitr::include_url`, please "open in browser" to see the rendering from `knitr`. 
+Also, please note that the "webview" within Rstudio Deb package version `1.4.1717` fails to load even remote URLs using `knitr::include_url`, please click the "open in browser" to see the rendering from `knitr`. 
 <img src='https://user-images.githubusercontent.com/408568/142702067-003e98d8-a0a0-4e23-85ad-b875434da518.png' width='100%'>
 
 ## Main functions
-The package still has "WIP" label on, so we are still finalising the main functionality of this R package. However, right now it looks like to work with the TGVE, we need:
+The package still has "WIP" label on, so we are still finalizing the main functionality of the package. However, as of (November 2021) it looks like to work with the TGVE, we need:
 
-1. Setup
-2. Build
-3. Run
+1. Setup function(s)
+2. Build function(s)
+3. Run function(s)
 
-The package does have a function called `setup` which does what it says on the help and sets up an instance at a given directory. The `build` function is there to pass parameters to the TGVE, in other words it is a mini transpiler with bare minimum functionality (version 0.1.0). 
+The package does have a function called `setup` which does what it says on the help; it sets up an instance at a given directory. The `build` function is there to pass parameters to the TGVE front-end, in other words it is a mini transpiler with bare minimum functionality (version 0.1.0).
 
-For the third type of functions and to run the application, so far, there are few functions that can be used but the main one is `tgve` which sets up and builds an empty instance at a `tempdir`. More important functions are:
+For the third type of functions and to run the application, so far, there are few functions that can be used but the main one is `tgve` which sets up and builds a static and "empty" instance at a `tempdir`. The similar function called `tgve_server` does exactly the same but serves the instance from a local server using `plumber` APIs.
+
+More important functions are:
 
 1. `explore_fs`: OGC standard Simple Features and R package `sf` is an important class object to support. Though we will do all we can to *not* import `sf` due to underlying system dependencies.
 3. `explore_fil`: this makes sense given the API and functionality built into the TGVE and given that data scientists would want to quickly explore single files.
 3. `explore_dir`: this is an ambitious function to develop. Current version tries to find two files and pass them to TGVE's `defaultURL` and `geographyURL` as that is a use case of the TGVE.
 
-
+This vignette is under active development.
