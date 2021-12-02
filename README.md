@@ -10,9 +10,9 @@ developed.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repos
 # tgver
 
 This is the R package for TGVE front end `npm` package `tgve`. The R
-package is developed to: 1. do interactive geospatial analysis and
-visualization fast 2. use R’s echo-system to drive (1) 3. facilitate
-application deployment for production
+package is developed to: (1) do interactive geospatial analysis and
+visualization fast. (2) use R’s echo-system to drive (1) and (3)
+facilitate web application deployment for production.
 
 ## Install
 
@@ -26,11 +26,13 @@ devtools::install_github("tgve/tgver")
 
 ## Use
 
-This is a Markdown (GitHub) document generatd using an Rmarkdown (Rmd)
+This is a Markdown (GitHub) document generated using an Rmarkdown (Rmd)
 document, if the Rmd is rendered to a HTML output, then using
-`knitr::include_url` we should see the TGVE embedded (see the live
-examples in the
-[vignette](https://tgve.github.io/tgver/articles/tgver.html)).
+`knitr::include_url` we should see the TGVE embedded. Please see the
+live examples in the
+[vignette](https://tgve.github.io/tgver/articles/tgver.html).
+
+The embedded front-end within the R package can be used like:
 
 ``` r
 # this is the most basic use
@@ -40,7 +42,7 @@ html.file = tgver::tgve(browse = FALSE)
 knitr::include_url(html.file)
 ```
 
-The similar function, with the backend as a `plumber` API and serving
+The similar function, with the back-end as a `plumber` API and serving
 the same instance, would be like:
 
 ``` r
@@ -54,6 +56,21 @@ ps$kill()
 # or use the public one
 # knitr::include_url("https://tgve.github.io/eatlas-template/")
 ```
+
+The simplest way to use the TGVE is using an instance running at a
+local/remote server. As of version `1.3.5-beta.0` of the TGVE (eatlas)
+npm package, it takes URL “query parameter” based API variables
+provided. Therefore, we can simply run an instance such as the
+`eatlas-template` instance as follows without doing anything else (again
+not in this Markdown doc):
+
+``` r
+knitr::include_url("https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson")
+```
+
+What is happening there? We grab the instance, but instead of its
+internal values, the URL parameters takes precedence. That means the
+value given as `defaultURL` is parsed by the TGVE.
 
 ## Explore `sf` objects
 
