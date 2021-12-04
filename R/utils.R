@@ -110,3 +110,31 @@ stopifnotvalidfile = function(file.uri) {
   if(is.na(fi$size) || fi$size < 10L)
     stop("given file is empty, is it a wrong file path?")
 }
+
+#' Good eneough regex to sanitize URLs
+#'
+#' The task of checking a URL is "hard", see this by J. Hester:
+#' https://cran.r-project.org/web/packages/rex/vignettes/url_parsing.html
+#' To avoid having a dependency for now, let us not use "rex"  R package.
+#' To try and understand the regex please see this gist which includes
+#' a breakdown of the regex:
+#' https://gist.github.com/dperini/729294
+#'
+#'
+#' @param string must be valid vector of URLs
+is_valid_url = function(string) {
+  regex = paste0("^(?:(?:http(?:s)?|ftp)://)(?:\\S+(?::(?:\\S)*)?@)?(?:(?:",
+                 "[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)",
+                 "(?:\\.(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-",
+                 "\uffff])+)*(?:\\.(?:[a-z0-9\u00a1-\uffff]){2,})(?::(?:\\d)",
+                 "{2,5})?(?:/(?:\\S)*)?$")
+  # quick localhost or loop ip4
+  local = grepl("(^(?:http:)?\\/\\/localhost:?(?::\\d{2,5})?)|127\\.0\\.0\\.1",
+                string)
+  other = grepl(regex, string[-which(local)])
+  if(length(-which(local)) == 0 ) {
+    other = grepl(regex, string)
+    return(other)
+  }
+  c(local[which(local)], other)
+}
