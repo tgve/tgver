@@ -22,11 +22,16 @@ To show how the TGVE brings the two (R and JavaScript) together, let us do some 
 
 Following is adapted from [here](https://github.com/schochastics/edgebundle).
 
-```{r data-prep, eval=FALSE}
+```{r data-prep}
 library(igraph)
 library(edgebundle)
 library(ggplot2)
 library(ggraph)
+
+# this environment variable would return true if run on 
+# github actions therefore, we can stop running TGVE if so.
+# See GitHub docs: https://docs.github.com/en/actions/learn-github-actions/environment-variables
+is.actions = Sys.getenv("GITHUB_ACTIONS") != ""
 
 g = us_flights
 xy = cbind(V(g)$longitude, V(g)$latitude)
@@ -58,12 +63,12 @@ sfc = st_sfc(sfc, crs = 4326)
 
 
 First, let us have a look at the lines without bundling the edges using `plot`:
-```{r plot-no-bundling, out.width='90%', eval=FALSE}
+```{r plot-no-bundling, out.width='90%'}
 plot(sfc)
 ```
 
 Using the `edgebundle::edge_bundle_path` function, please see the `edgebundle` package for details of the algorithm, and using `ggplot` let us plot the bundled paths:
-```{r ggplot-no-bundle, out.width='90%',eval=FALSE}
+```{r ggplot-no-bundle, out.width='90%'}
 ggplot() +
   geom_path(data = pbundle, aes(x, y, group = group),
             col = "orange", size = 0.05) +
@@ -77,9 +82,11 @@ ggplot() +
 
 ## Interactive
 
-Using the TGVE (no bundling), we can build an instance naming the `layerName` which is optional as the TGVE will try to detect the geometry and choses the appropriate layer:
+Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of `knitr` package for details of embedding HTML. 
 
-```{r tgve1, out.width='100%', eval=FALSE}
+Let us first view the raw data (no bundling), we can build an instance of the TGVE using `tgver::setup`,  and `tgver::build` functions. The `build` function takes API variables including providing the visualization `layerName` parameter which is optional as the TGVE will try to detect the geometry and chooses the appropriate layer:
+
+```{r tgve1, out.width='100%'}
 library(tgver)
 p = "~/Downloads"
 tp = file.path(p, "tgve")
@@ -95,12 +102,25 @@ run_tgve = function(layerName="line") {
              layerName=layerName)
   knitr::include_url(ip)
 }
-run_tgve()
+
+img_or_warning = function(img.url) {
+  if(!curl::has_internet()) {
+  warning("Rmd was rendered with no connection!")
+} else {
+  knitr::include_graphics(img.url)
+}
+}
+if(!is.actions) {
+  run_tgve()
+} else {
+  img_or_warning("https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png")
+}
 ```
+Notice, that as the package is hosted on `GitHub` and rely on actions to run the package checks, we have the clause `if(!is.actions)` to decide whether this Rmd renders the TGVE instance on your local machine or not. If you are reading this Rmd on GitHub, chances are you cannot see the TGVE instance. You may have to open the output of the rendered Rmd on a browser tab to see the TGVE instances.
 
 Let us see how the bundled data looks on the TGVE, we need to use the `path` layer for now, as the TGVE can still do with more advanced layer detection in future:
 
-```{r tgve2, out.width='100%', eval=FALSE}
+```{r tgve2, out.width='100%'}
 # convert the pbundle into sf
 sfc = lapply(1:length(unique(pbundle$group)), function(x) st_linestring(matrix(unlist(pbundle[pbundle$group == x, 1:2]), ncol = 2)))
 sfc = st_sfc(sfc, crs = 4326)
@@ -108,11 +128,16 @@ sfc = st_sfc(sfc, crs = 4326)
 p = file.path(p, "edge-tgve")
 tp = file.path(p, "tgve")
 unlink(tp, recursive = TRUE)
-run_tgve(layerName = "path")
+
+if(!is.actions) {
+  run_tgve(layerName = "path")
+} else {
+  img_or_warning("https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png")
+}
 ```
 
+Notice again, if you are reading this vignette on GitHub, you will not see the final result. The package can overcome this when the prepared data can be accessed by runners like GitHb actions. Check the following instance being customised with data served from another GitHub repository:
 
-and another
 ```{r}
 knitr::include_url("https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
 ```
