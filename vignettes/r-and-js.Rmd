@@ -136,9 +136,25 @@ if(!is.actions) {
 }
 ```
 
-Notice again, if you are reading this vignette on GitHub, you will not see the final result. The package can overcome this when the prepared data can be accessed by runners like GitHb actions. Check the following instance being customised with data served from another GitHub repository:
+Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHb actions. Check the following instance being customised with data served from another GitHub repository:
 
 ```{r, out.width='100%'}
-knitr::include_url("https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
+knitr::include_url(
+  paste0("https://tgve.github.io/eatlas-template?",
+         "defaultURL=https://raw.githubusercontent.com", 
+         "/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
+)
+```
+We can, of course, pass the data (bundled or not) as a json (geojson) using the `data` variable of the TGVE. This is how you could do this in this code sample:
+
+```{r, eval=FALSE}
+# same URL as the instance above
+knitr::include_url(
+  paste0(
+    # use the 1data1 parameter
+    "https://tgve.github.io/eatlas-template?data=",
+    gj # see above
+  )
+)
 ```
 
