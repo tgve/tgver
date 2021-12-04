@@ -9,6 +9,9 @@
 #' @param path character directory of a current instance to browse. Defaults to
 #' `TEMP_PATH_ENV` environment variable.
 #' @param browse boolean to decide whether to browse the instance or not.
+#' @param remote boolean whether to run a remote instance of TGVE. If TRUE
+#' the above `path` and `browse` parameters will be ignored. Defaults to `FALSE`
+#' @param url if
 #'
 #' @return directory of the new instance if `path` is not provided.
 #'
@@ -20,20 +23,26 @@
 #' }
 #'
 #' @export
-tgve = function(path = Sys.getenv("TEMP_path_ENV"), browse = TRUE) {
-  new.path = path
-  if(!dir.exists(path)) {
-    new.path = tempInstance()
+tgve = function(path = Sys.getenv("TEMP_path_ENV"), browse = TRUE, remote = FALSE, url = NULL) {
+  if(remote && !is.null(url)) {
+    if(!is_valid_url(url)) stop("Invalid URL")
+    message("attemping to browse: ", url)
+    openURL(url)
+  } else {
+    new.path = path
+    if(!dir.exists(path)) {
+      new.path = tempInstance()
+    }
+
+    build(new.path)
+
+    new.path = file.path(new.path, "index.html")
+
+    if(!browse) {
+      return(new.path)
+    }
+
+    message("attemping to browse: ", new.path)
+    openURL(new.path)
   }
-
-  build(new.path)
-
-  new.path = file.path(new.path, "index.html")
-
-  if(!browse) {
-    return(new.path)
-  }
-
-  message("attemping to browse: ", new.path)
-  openURL(new.path)
 }

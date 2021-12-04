@@ -6,4 +6,8 @@ test_that("static tgve works", {
   # try again
   unlink(file.path(p, "tgve"), recursive = TRUE)
   expect_message(tgve())
+  expect_error(tgve(remote = TRUE,
+                    url = "notvalidurl"))
+  expect_message(tgve(remote = TRUE,
+                      url = "https://tgve.github.io/eatlas-template"))
 })

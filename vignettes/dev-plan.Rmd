@@ -2,7 +2,7 @@
 title: "Development plan"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{dev-plan}
+  %\VignetteIndexEntry{Development plan}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

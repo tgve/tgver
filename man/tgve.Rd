@@ -4,13 +4,23 @@
 \alias{tgve}
 \title{Open static TGVE instance}
 \usage{
-tgve(path = Sys.getenv("TEMP_path_ENV"), browse = TRUE)
+tgve(
+  path = Sys.getenv("TEMP_path_ENV"),
+  browse = TRUE,
+  remote = FALSE,
+  url = NULL
+)
 }
 \arguments{
 \item{path}{character directory of a current instance to browse. Defaults to
 `TEMP_PATH_ENV` environment variable.}
 
 \item{browse}{boolean to decide whether to browse the instance or not.}
+
+\item{remote}{boolean whether to run a remote instance of TGVE. If TRUE
+the above `path` and `browse` parameters will be ignored. Defaults to `FALSE`}
+
+\item{url}{if}
 }
 \value{
 directory of the new instance if `path` is not provided.
