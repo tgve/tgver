@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tgver</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/tgver.html">Get started</a>
 </li>
@@ -67,7 +63,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tgve/tgver/">
+  <a href="https://github.com/tgve/tgver/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -88,28 +84,28 @@
       <h1 data-toc-skip>Introducing tgver</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tgve/tgver/blob/master/vignettes/tgver.Rmd"><code>vignettes/tgver.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tgve/tgver/blob/HEAD/vignettes/tgver.Rmd" class="external-link"><code>vignettes/tgver.Rmd</code></a></small>
       <div class="hidden name"><code>tgver.Rmd</code></div>
 
     </div>
 
     
     
-<div id="what-is-tgve" class="section level1">
-<h1 class="hasAnchor">
-<a href="#what-is-tgve" class="anchor"></a>What is TGVE?</h1>
+<div class="section level1">
+<h1 id="what-is-tgve">What is TGVE?<a class="anchor" aria-label="anchor" href="#what-is-tgve"></a>
+</h1>
 <p>The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based, interactive visual analytics tool for geospatial data analysis, built using R &amp; React. The visual views and interaction mechanisms designed into the tool is underpinned by empirically-informed guidelines around visualization design and techniques from Geographic Information Science (GIScience).</p>
 </div>
-<div id="tgver-r-package" class="section level1">
-<h1 class="hasAnchor">
-<a href="#tgver-r-package" class="anchor"></a>tgver R package</h1>
-<p>See the README on the package’s GitHub space.</p>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level1">
+<h1 id="tgver-r-package">tgver R package<a class="anchor" aria-label="anchor" href="#tgver-r-package"></a>
+</h1>
+<p>The package’s main aims are outlined in the README on the package’s GitHub space. As the package grows, these aims may also grow and expand as we research better ways of interactive geospatial data analysis and visualization.</p>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>As the package is not on CRAN yet, get it from GitHub using <code>devtools</code></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"tgve/tgver"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tgve/tgver"</span><span class="op">)</span></code></pre></div>
 <p>The package comes with the latest version of TGVE and should give you the version used in the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tgver</span><span class="fu">::</span><span class="va"><a href="../reference/version.html">version</a></span>
@@ -127,18 +123,18 @@
 <span class="co"># tgver::tgve_server()</span>
 <span class="co"># knitr::include_url("http://127.0.0.1:8000")</span>
 <span class="co"># or use the public one</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template/"</span><span class="op">)</span></code></pre></div>
-<iframe src="https://tgve.github.io/eatlas-template/" width="700" height="400px" data-external="1">
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template/"</span><span class="op">)</span></code></pre></div>
+<iframe src="https://tgve.github.io/eatlas-template/" width="100%" height="400px" data-external="1">
 </iframe>
-<p>The above instance pulls the instance and the data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a <code>html_vignette</code>).</p>
-<p>On your local machine, and given the Rmarkdown output is set to <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html">rmarkdown::html_vignette</a></code>, then you could do:</p>
+<p>The above instance pulls the instance and the data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a <code>html_vignette</code>). Thanks to the <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code> function, it is safe to build within R packages offline, with the downside of the standard browser no connection error displayed. A good cause for embedding an instance of the TGVE in this R package would be the case of being offline/mobile.</p>
+<p>On your local machine, and given the Rmarkdown output is set to <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html" class="external-link">rmarkdown::html_vignette</a></code>, then you could do:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># setup a local instance</span>
 <span class="co"># tempdir() will disappear inside an Rmd</span>
 <span class="va">p</span> <span class="op">=</span> <span class="st">"~/Downloads"</span>
 <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
 <span class="co"># now the instance is at</span>
-<span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
+<span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
 <span class="co"># we just need to pass the data/csv URL</span>
 <span class="co"># using `defaultURL` API</span>
 <span class="va">url</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/build.html">build</a></span><span class="op">(</span><span class="va">tp</span>, defaultURL <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/layik/eatlas-data/main/utlas.geojson'</span>,
@@ -147,14 +143,15 @@
                    <span class="co"># In future R should assemble the json</span>
                    viewport<span class="op">=</span><span class="st">"{zoom:5.5,pitch:0,bearing:0}"</span><span class="op">)</span>
 <span class="co"># now we have the app's main url</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
 <span class="co"># unlink(tp, recursive = TRUE)</span></code></pre></div>
 <p>If this Vignette is served either from CRAN or GitHub, the application at path in above chunk (<code>tp</code>) will <em>not</em> be available. So you must run it locally to see the application, the screenshot below was taken from such a run. Embedding the full instance in a HTML file is an open issue on the repository and we welcome your contributions if you can.</p>
-<p>Also, please note that the “webview” within Rstudio Deb package version <code>1.4.1717</code> fails to load even remote URLs using <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html">knitr::include_url</a></code>, please click the “open in browser” to see the rendering from <code>knitr</code>. <img src="https://user-images.githubusercontent.com/408568/142702067-003e98d8-a0a0-4e23-85ad-b875434da518.png" width="100%"></p>
+<p>Also, please note that the “webview” within Rstudio Deb package version <code>1.4.1717</code> fails to load even remote URLs using <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code>, please click the “open in browser” to see the rendering from <code>knitr</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/408568/142702067-003e98d8-a0a0-4e23-85ad-b875434da518.png" width="100%"></p>
 </div>
-<div id="main-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#main-functions" class="anchor"></a>Main functions</h2>
+<div class="section level2">
+<h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
+</h2>
 <p>The package still has “WIP” label on, so we are still finalizing the main functionality of the package. However, as of (November 2021) it looks like to work with the TGVE, we need:</p>
 <ol style="list-style-type: decimal">
 <li>Setup function(s)</li>
@@ -188,11 +185,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Layik Hama.</p>
+  <p></p>
+<p>Developed by Layik Hama.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -200,6 +199,8 @@
 
   
 
+
+  
 
   </body>
 </html>
