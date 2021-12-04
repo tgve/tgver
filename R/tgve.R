@@ -23,7 +23,10 @@
 #' }
 #'
 #' @export
-tgve = function(path = Sys.getenv("TEMP_path_ENV"), browse = TRUE, remote = FALSE, url = NULL) {
+tgve = function(path = Sys.getenv("TEMP_path_ENV"),
+                browse = TRUE,
+                remote = FALSE,
+                url = NULL) {
   if(remote && !is.null(url)) {
     if(!is_valid_url(url)) stop("Invalid URL")
     message("attemping to browse: ", url)

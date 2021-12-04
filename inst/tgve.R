@@ -26,7 +26,8 @@ path = "~/code/eatlas-template/build"
 zip("inst/tgve.zip",
     list.files(path, full.names = TRUE, recursive = TRUE))
 # get TGVE version
-version = jsonlite::parse_json(readLines("~/code/eatlas-template/package.json"))$dependencies$eatlas
+version = jsonlite::parse_json(
+  readLines("~/code/eatlas-template/package.json"))$dependencies$eatlas
 version = sub(".", "", version)
 names(version) <- "version"
 usethis::use_data(version, overwrite = TRUE)

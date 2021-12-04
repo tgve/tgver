@@ -10,7 +10,8 @@ test_that("explore_dir works", {
   skip_on_cran()
 
   # download saferactive files
-  gURL = "https://raw.githubusercontent.com/saferactive/tgve/main/pf-only-name.geojson"
+  gURL = paste0("https://raw.githubusercontent.com/saferactive/",
+                "tgve/main/pf-only-name.geojson")
   dURL = "https://raw.githubusercontent.com/saferactive/tgve/main/ksi-pf.csv"
   download.file(gURL, destfile = file.path(p, "pf.geojson"))
   download.file(dURL, destfile = file.path(p, "data.csv"))

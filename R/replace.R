@@ -42,6 +42,7 @@ list_api_files = function(path = NULL) {
 #' }
 #' @export
 help = function() {
-  message("These are the available list of variables as of version: ", tgver::version)
+  message("These are the available list of variables as of version: ",
+          tgver::version)
   print(names(apis))
 }
