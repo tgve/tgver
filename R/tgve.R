@@ -15,7 +15,7 @@
 #'
 #' @return directory of the new instance if `path` is not provided.
 #'
-#' @examples \dontrun {
+#' @examples \dontrun{
 #' tgve()
 #' # just get the path of the HTML
 #' p = tgve(browse = FALSE)
