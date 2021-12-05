@@ -6,6 +6,7 @@ on:
       - '**/README.*md'
       - '**/.gitignore'
       - '**/.github/'
+      - '**/NEWS.md'
   pull_request:
     branches:
       - master
