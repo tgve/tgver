@@ -143,4 +143,5 @@ jobs:
         run: Rscript -e "tic::deploy()"
 
       - name: "[Stage] After Deploy"
+        if: github.ref == 'refs/heads/master'
         run: Rscript -e "tic::after_deploy()"
