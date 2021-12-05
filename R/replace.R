@@ -1,9 +1,8 @@
-#' Helper function to replace particular pattern in
-#' vector of files. Checks vector for any
+#' Function to replace patterns in given files.
 #'
 #'@param files where pattern to be replaced.
-#'@param pattern the pattern to replace using gsub.
-#'@param replacement the string to replace pattern with using gsub.
+#'@param pattern the pattern to replace using `gsub`.
+#'@param replacement the string to replace pattern with using `gsub`.
 file_replace = function(files = NULL, pattern, replacement) {
   if(any(!file.exists(files)))
     stop("a given file path does not exist")

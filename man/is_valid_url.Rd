@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{is_valid_url}
 \alias{is_valid_url}
-\title{Good eneough regex to sanitize URLs}
+\title{Good enough regex to sanitize URLs}
 \usage{
 is_valid_url(string)
 }

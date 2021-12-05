@@ -111,7 +111,7 @@ stopifnotvalidfile = function(file.uri) {
     stop("given file is empty, is it a wrong file path?")
 }
 
-#' Good eneough regex to sanitize URLs
+#' Good enough regex to sanitize URLs
 #'
 #' The task of checking a URL is "hard", see this by J. Hester:
 #' https://cran.r-project.org/web/packages/rex/vignettes/url_parsing.html
