@@ -4,7 +4,11 @@ Title: TGVE R package
 Version: 0.1.1
 Authors@R: c(
     person("Layik", "Hama", email = "l.hama@leeds.ac.uk", role = c("aut", "cre"), 
-      comment = c(ORCID = "0000-0003-1912-4890"))
+      comment = c(ORCID = "0000-0003-1912-4890")),
+    person("Roger", "Beecham", email = "r.j.beecham@leeds.ac.uk", role = c("aut"), 
+      comment = c(ORCID = "0000-0001-8563-7251")),
+    person("Nik", "Lomax", email = "n.m.lomax@leeds.ac.uk", role = c("aut"), 
+      comment = c(ORCID = "0000-0001-9504-7570"))
     )
 Maintainer: L Hama <l.hama@leeds.ac.uk>
 Description: TGVE R package for geospatial visualization and analysis.
