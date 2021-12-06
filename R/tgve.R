@@ -11,7 +11,9 @@
 #' @param browse boolean to decide whether to browse the instance or not.
 #' @param remote boolean whether to run a remote instance of TGVE. If TRUE
 #' the above `path` and `browse` parameters will be ignored. Defaults to `FALSE`
-#' @param url if
+#' @param url if `remote` is true, then this will be used as the parameter
+#' to pass to internal function `openURL`. It defaults, for convenience,
+#' to `https://tgve.github.io/eatlas-template/` instance.
 #'
 #' @return directory of the new instance if `path` is not provided.
 #'
@@ -26,7 +28,7 @@
 tgve = function(path = Sys.getenv("TEMP_path_ENV"),
                 browse = TRUE,
                 remote = FALSE,
-                url = NULL) {
+                url = 'https://tgve.github.io/eatlas-template/') {
   if(remote && !is.null(url)) {
     if(!is_valid_url(url)) stop("Invalid URL")
     message("attemping to browse: ", url)
