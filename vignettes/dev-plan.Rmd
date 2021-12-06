@@ -36,6 +36,6 @@ The third use case would be to see how bundled/downloaded native apps (see the d
 Subject to the REG discussions going on these avenues are open for discussion:
 
 * Spatial/VIS AI integration/functions
-* Automate updating the bundle? Somehow?
-* Advanced vis algorithsm or at least vignettes to showcase the spatial R power
+* Automate updating the bundled instance in some way.
+* Advanced visualization algorithms or at least vignettes to showcase the spatial R power
 * DBMS/SQL/NoSQL connections?

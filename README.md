@@ -5,7 +5,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://codecov.io/gh/tgve/tgver)
+[![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://app.codecov.io/gh/tgve/tgver)
 
 # tgver
 
@@ -65,6 +65,11 @@ provided. Therefore, we can simply run an instance such as the
 not in this Markdown doc):
 
 ``` r
+# tgve = "https://tgve.github.io/eatlas-template?"
+# defaultURL = "https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson"
+# url = paste0(tgve, "defaultURL=", defaultURL)
+# knitr::include_url(url)
+# or simply
 knitr::include_url("https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson")
 ```
 

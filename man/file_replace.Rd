@@ -2,19 +2,17 @@
 % Please edit documentation in R/replace.R
 \name{file_replace}
 \alias{file_replace}
-\title{Helper function to replace particular pattern in
-vector of files. Checks vector for any}
+\title{Function to replace patterns in given files.}
 \usage{
 file_replace(files = NULL, pattern, replacement)
 }
 \arguments{
 \item{files}{where pattern to be replaced.}
 
-\item{pattern}{the pattern to replace using gsub.}
+\item{pattern}{the pattern to replace using `gsub`.}
 
-\item{replacement}{the string to replace pattern with using gsub.}
+\item{replacement}{the string to replace pattern with using `gsub`.}
 }
 \description{
-Helper function to replace particular pattern in
-vector of files. Checks vector for any
+Function to replace patterns in given files.
 }
