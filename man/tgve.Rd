@@ -8,7 +8,7 @@ tgve(
   path = Sys.getenv("TEMP_path_ENV"),
   browse = TRUE,
   remote = FALSE,
-  url = NULL
+  url = "https://tgve.github.io/eatlas-template/"
 )
 }
 \arguments{
@@ -20,7 +20,9 @@ tgve(
 \item{remote}{boolean whether to run a remote instance of TGVE. If TRUE
 the above `path` and `browse` parameters will be ignored. Defaults to `FALSE`}
 
-\item{url}{if}
+\item{url}{if `remote` is true, then this will be used as the parameter
+to pass to internal function `openURL`. It defaults, for convenience,
+to `https://tgve.github.io/eatlas-template/` instance.}
 }
 \value{
 directory of the new instance if `path` is not provided.
