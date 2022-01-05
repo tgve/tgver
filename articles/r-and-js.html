@@ -98,13 +98,12 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>One limitation of browsers, also running JavaScript’s rich libraries is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers.</p>
+<p>One limitation of browsers is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers. Rust can be compiled to WebAssembly <span class="citation">(MDN 2022)</span> and that means C/C++ and possibly R could also be compiled to WebAssembly. It is still true that Python and R run outside browsers including when driving Jupyter and Rmarkdown documents. The increasing power of browsers and number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) or in R/Python on operating systems.</p>
 </div>
 <div class="section level2">
 <h2 id="the-data">The data<a class="anchor" aria-label="anchor" href="#the-data"></a>
 </h2>
-<p>To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: <code>edgebundle</code>, <code>igraph</code> and <code>ggplot2</code> first.</p>
-<p>Following is adapted from <a href="https://github.com/schochastics/edgebundle" class="external-link">here</a>.</p>
+<p>To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: <code>edgebundle</code>, <code>igraph</code> and <code>ggplot2</code> first. The following is adapted from <a href="https://github.com/schochastics/edgebundle" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -153,7 +152,7 @@
 <span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">sfc</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="static">Static<a class="anchor" aria-label="anchor" href="#static"></a>
+<h2 id="static-visualization">Static visualization<a class="anchor" aria-label="anchor" href="#static-visualization"></a>
 </h2>
 <p>First, let us have a look at the lines without bundling the edges using <code>plot</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -172,7 +171,7 @@
 <p><img src="r-and-js_files/figure-html/ggplot-no-bundle-1.png" width="90%"></p>
 </div>
 <div class="section level2">
-<h2 id="interactive">Interactive<a class="anchor" aria-label="anchor" href="#interactive"></a>
+<h2 id="interactive-visualization">Interactive visualization<a class="anchor" aria-label="anchor" href="#interactive-visualization"></a>
 </h2>
 <p>Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of <code>knitr</code> package for details of embedding HTML.</p>
 <p>Let us first view the raw data (no bundling), we can build an instance of the TGVE using <code><a href="../reference/setup.html">tgver::setup</a></code>, and <code><a href="../reference/build.html">tgver::build</a></code> functions. The <code>build</code> function takes API variables including providing the visualization <code>layerName</code> parameter which is optional as the TGVE will try to detect the geometry and chooses the appropriate layer:</p>
@@ -213,7 +212,9 @@
 <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
   <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png"</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p><img src="https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png" width="100%"> Notice, that as the package is hosted on <code>GitHub</code> and rely on actions to run the package checks, we have the clause <code>if(!is.actions)</code> to decide whether this Rmd renders the TGVE instance on your local machine or not. If you are reading this Rmd on GitHub, chances are you cannot see the TGVE instance. You may have to open the output of the rendered Rmd on a browser tab to see the TGVE instances.</p>
+<p><img src="https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png" width="100%"> As of version <code>1.3.5</code> release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a <code>line</code> layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering “features” such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.</p>
+<p><img src="https://user-images.githubusercontent.com/408568/148212057-b67b08a4-9342-42bb-95c2-557505d92b77.png" alt="filtered bundled flights" width="100%"> The TGVE basic “click to filter” of lines from an origin-destination data.</p>
+<p>Notice, that as the package is hosted on <code>GitHub</code> and rely on actions to run the package checks, we have checks to decide whether this Rmd renders the TGVE instance on your local machine or not. If you are reading this Rmd on GitHub, chances are you cannot see the TGVE instance. You may have to open the output of the rendered Rmd on a browser tab to see the TGVE instances.</p>
 <p>Let us see how the bundled data looks on the TGVE, we need to use the <code>path</code> layer for now, as the TGVE can still do with more advanced layer detection in future:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># convert the pbundle into sf</span>
@@ -230,7 +231,13 @@
   <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png"</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p><img src="https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png" width="100%"></p>
-<p>Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions. Check the following instance being customised with data served from another GitHub repository:</p>
+<p>Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions.</p>
+</div>
+<div class="section level2">
+<h2 id="remote-tgve-instance">Remote TGVE instance<a class="anchor" aria-label="anchor" href="#remote-tgve-instance"></a>
+</h2>
+<p>The TGVE version <code>1.3.5</code> and above accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.</p>
+<p>Check the following instance being customized with data served from a GitHub repository:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template?"</span>,
@@ -239,10 +246,6 @@
 <span class="op">)</span></code></pre></div>
 <iframe src="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
-</div>
-<div class="section level2">
-<h2 id="remote-tgve-instance">Remote TGVE instance<a class="anchor" aria-label="anchor" href="#remote-tgve-instance"></a>
-</h2>
 <p>We can, of course, pass the data (bundled or not) as a json (geojson) using the <code>data</code> variable of the TGVE. This is how you could do this in this code sample:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># same URL as the instance above</span>
@@ -253,6 +256,20 @@
     <span class="va">gj</span> <span class="co"># see above</span>
   <span class="op">)</span>
 <span class="op">)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
+</h2>
+<p>The TGVE is built with a vision that R should do what R does best and so should JS/browser. Their power lies in what they do best and in their own environments. At this early releases of the front-end (npm package) the TGVE can be used embedded in the <code>tgver</code> package or as a remote instance. The aim is to bring R + JS together using their latest releases and libraries to carry out scalable geospatial data processing and visualization.</p>
+</div>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div id="refs" class="references">
+<div id="ref-mozillarust">
+<p>MDN. 2022. “Compiling from Rust to Webassembly.” <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm" class="external-link">https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm</a>.</p>
+</div>
+</div>
 </div>
   </div>
 
