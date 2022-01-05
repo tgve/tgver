@@ -16,7 +16,11 @@ knitr::opts_chunk$set(
 
 <!-- R users are aware of the RStudio approach to bringing R and JavaScript together in ShinyJS. They are also aware how useful RMarkdown documents (such as this one) are. In this vignette we will outline the approach TGVE has taken to bring together a front-end application such as the TGVE and R. -->
 
+## Introduction
+
 One limitation of browsers, also running JavaScript's rich libraries is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers.
+
+## The data 
 
 To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: `edgebundle`, `igraph` and `ggplot2` first.
 
@@ -61,6 +65,7 @@ sfc = lapply(1:nrow(m), function(x) st_linestring(matrix(unlist(m[x,]), ncol = 2
 sfc = st_sfc(sfc, crs = 4326)
 ```
 
+## Static
 
 First, let us have a look at the lines without bundling the edges using `plot`:
 ```{r plot-no-bundling, out.width='90%'}
@@ -145,6 +150,8 @@ knitr::include_url(
          "/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
 )
 ```
+
+## Remote TGVE instance
 We can, of course, pass the data (bundled or not) as a json (geojson) using the `data` variable of the TGVE. This is how you could do this in this code sample:
 
 ```{r, eval=FALSE}
