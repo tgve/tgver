@@ -7,12 +7,23 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://app.codecov.io/gh/tgve/tgver)
 
+# What is TGVE?
+
+The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based,
+interactive visual analytics tool for geospatial data analysis, built
+using R & React. The visual views and interaction mechanisms designed
+into the tool is underpinned by empirically-informed guidelines around
+visualization design and techniques from Geographic Information Science
+(GIScience).
+
 # tgver
 
-This is the R package for TGVE front end `npm` package `tgve`. The R
-package is developed to: (1) do interactive geospatial analysis and
-visualization fast. (2) use R’s echo-system to drive (1) and (3)
-facilitate web application deployment for production.
+This is the R package for TGVE front end `npm` package
+[`tgve`](https://www.npmjs.com/package/eatlas). The R package is
+developed to fascilitate interactive geospatial analysis and
+visualization in R, use R’s echo-system to drive advanced data
+processing, and facilitate deployment of geospatial web applications in
+production.
 
 ## Install
 
@@ -26,13 +37,17 @@ devtools::install_github("tgve/tgver")
 
 ## Use
 
-This is a Markdown (GitHub) document generated using an Rmarkdown (Rmd)
-document, if the Rmd is rendered to a HTML output, then using
-`knitr::include_url` we should see the TGVE embedded. Please see the
-live examples in the
-[vignette](https://tgve.github.io/tgver/articles/tgver.html).
+Overall, as of this pre-CRAN release, the package takes advantage of how
+TGVE can be used (see this Wiki) and provides options to R users.
 
-The embedded front-end within the R package can be used like:
+For instance, this document is a Markdown (GitHub) document generated
+using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML
+output, then using `knitr::include_url` we should see an instance of the
+TGVE embedded in the document. Please see the live examples in the
+[vignette](https://tgve.github.io/tgver/articles/tgver.html) which is
+rendered to HTML.
+
+To do this we can go:
 
 ``` r
 # this is the most basic use
@@ -42,8 +57,15 @@ html.file = tgver::tgve(browse = FALSE)
 knitr::include_url(html.file)
 ```
 
-The similar function, with the back-end as a `plumber` API and serving
-the same instance, would be like:
+The first function `tgver::tgve(browse=FALSE)` prepares an instance of
+the TGVE but does not run/open it, it returns its path (a `tempdir()`
+path). The second line is `knitr` function to embed the first line’s
+output.
+
+That was the simplest way of running an instance of TGVE on the local
+machine. The more advanced but similar function of this package, with
+the back-end as a `plumber` API and serving the same instance, would be
+like:
 
 ``` r
 # start a tgve instance before embedding it
@@ -56,6 +78,8 @@ ps$kill()
 # or use the public one
 # knitr::include_url("https://tgve.github.io/eatlas-template/")
 ```
+
+## Remote instance
 
 The simplest way to use the TGVE is using an instance running at a
 local/remote server. As of version `1.3.5-beta.0` of the TGVE (eatlas)
@@ -97,6 +121,16 @@ details.
 # Preview
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
+
+``` r
+knitr::include_url(
+  paste0("https://tgve.github.io/eatlas-template?",
+         "defaultURL=https://raw.githubusercontent.com", 
+         "/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
+)
+```
+
+<a href="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap" target="_blank"><img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" /></a>
 
 ## Funding
 
