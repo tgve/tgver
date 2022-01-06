@@ -184,8 +184,8 @@
 <span class="co"># url = paste0(tgve, "defaultURL=", defaultURL)</span>
 <span class="co"># knitr::include_url(url)</span>
 <span class="co"># or simply</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson"</span><span class="op">)</span></code></pre></div>
-<iframe src="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson" width="700" height="400px" data-external="1">
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span></code></pre></div>
+<iframe src="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We grab the remote instance, but instead of its internal values, the URL parameters takes precedence. That means the value given as <code>defaultURL</code> is parsed by the TGVE. We can as easily use this in R’s built in “view” or “browse” commands, too.</p>
 </div>
