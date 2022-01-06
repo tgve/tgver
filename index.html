@@ -86,9 +86,14 @@
 
 
 <div class="section level1">
-<div class="page-header"><h1 id="tgver">tgver<a class="anchor" aria-label="anchor" href="#tgver"></a>
+<div class="page-header"><h1 id="what-is-tgve">What is TGVE?<a class="anchor" aria-label="anchor" href="#what-is-tgve"></a>
 </h1></div>
-<p>This is the R package for TGVE front end <code>npm</code> package <code>tgve</code>. The R package is developed to: (1) do interactive geospatial analysis and visualization fast. (2) use R’s echo-system to drive (1) and (3) facilitate web application deployment for production.</p>
+<p>The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based, interactive visual analytics tool for geospatial data analysis, built using R &amp; React. The visual views and interaction mechanisms designed into the tool is underpinned by empirically-informed guidelines around visualization design and techniques from Geographic Information Science (GIScience).</p>
+</div>
+<div class="section level1">
+<h1 id="tgver">tgver<a class="anchor" aria-label="anchor" href="#tgver"></a>
+</h1>
+<p>This is the R package for TGVE front end <code>npm</code> package <a href="https://www.npmjs.com/package/eatlas" class="external-link"><code>tgve</code></a>. The R package is developed to facilitate interactive geospatial analysis and visualization in R, use R’s echo-system to drive advanced data processing, and facilitate deployment of geospatial web applications in production.</p>
 <div class="section level2">
 <h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
 </h2>
@@ -100,15 +105,17 @@
 <div class="section level2">
 <h2 id="use">Use<a class="anchor" aria-label="anchor" href="#use"></a>
 </h2>
-<p>This is a Markdown (GitHub) document generated using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML output, then using <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code> we should see the TGVE embedded. Please see the live examples in the <a href="https://tgve.github.io/tgver/articles/tgver.html" class="external-link">vignette</a>.</p>
-<p>The embedded front-end within the R package can be used like:</p>
+<p>Overall, as of this pre-CRAN release, the package takes advantage of how TGVE can be used (see this <a href="https://github.com/tgve/eAtlas/wiki/Using-TGVE" class="external-link">Wiki</a> entry) and provides options to R users.</p>
+<p>For instance, this document is a Markdown (GitHub) document generated using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML output, then using <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code> we should see an instance of the TGVE embedded in the document. Please see the live examples in the <a href="https://tgve.github.io/tgver/articles/tgver.html" class="external-link">vignette</a> which is rendered to HTML.</p>
+<p>To do this we can go:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># this is the most basic use</span>
 <span class="co"># tgver::tgve()</span>
 <span class="co"># to embed in a html rendered Rmd</span>
 <span class="va">html.file</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="reference/tgve.html">tgve</a></span><span class="op">(</span>browse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">html.file</span><span class="op">)</span></code></pre></div>
-<p>The similar function, with the back-end as a <code>plumber</code> API and serving the same instance, would be like:</p>
+<p>The first function <code>tgver::tgve(browse=FALSE)</code> prepares an instance of the TGVE but does not run/open it, it returns its path (a <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> path). The second line is <code>knitr</code> function to embed the first line’s output.</p>
+<p>That was the simplest way of running an instance of TGVE on the local machine. The more advanced but similar function of this package, with the back-end as a <code>plumber</code> API and serving the same instance, would be like:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># start a tgve instance before embedding it</span>
 <span class="va">ps</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="reference/tgve_server.html">tgve_server</a></span><span class="op">(</span>background <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -119,6 +126,10 @@
 <span class="va">ps</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span>
 <span class="co"># or use the public one</span>
 <span class="co"># knitr::include_url("https://tgve.github.io/eatlas-template/")</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="remote-instance">Remote instance<a class="anchor" aria-label="anchor" href="#remote-instance"></a>
+</h2>
 <p>The simplest way to use the TGVE is using an instance running at a local/remote server. As of version <code>1.3.5-beta.0</code> of the TGVE (eatlas) npm package, it takes URL “query parameter” based API variables provided. Therefore, we can simply run an instance such as the <code>eatlas-template</code> instance as follows without doing anything else (again not in this Markdown doc):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tgve = "https://tgve.github.io/eatlas-template?"</span>
@@ -150,6 +161,13 @@
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png" alt=""><p class="caption">tgve-vignette</p>
 </div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template?"</span>,
+         <span class="st">"defaultURL=https://raw.githubusercontent.com"</span>, 
+         <span class="st">"/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<p><a href="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap" target="_blank" class="external-link"><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></a></p>
 <div class="section level2">
 <h2 id="funding">Funding<a class="anchor" aria-label="anchor" href="#funding"></a>
 </h2>
