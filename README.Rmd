@@ -20,7 +20,7 @@ The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based, interactive 
 
 # tgver
 
-This is the R package for TGVE front end `npm` package [`tgve`](https://www.npmjs.com/package/eatlas). The R package is developed to fascilitate interactive geospatial analysis and visualization in R, use R's echo-system to drive advanced data processing, and facilitate deployment of geospatial web applications in production.
+This is the R package for TGVE front end `npm` package [`tgve`](https://www.npmjs.com/package/eatlas). The R package is developed to facilitate interactive geospatial analysis and visualization in R, use R's echo-system to drive advanced data processing, and facilitate deployment of geospatial web applications in production.
 
 ## Install
 For now whilst working towards submitting it to CRAN, please use devtools:
@@ -31,7 +31,7 @@ devtools::install_github("tgve/tgver")
 ```
 
 ## Use
-Overall, as of this pre-CRAN release, the package takes advantage of how TGVE can be used (see this Wiki) and provides options to R users.
+Overall, as of this pre-CRAN release, the package takes advantage of how TGVE can be used (see this [Wiki](https://github.com/tgve/eAtlas/wiki/Using-TGVE) entry) and provides options to R users.
 
 For instance, this document is a Markdown (GitHub) document generated using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML output, then using `knitr::include_url` we should see an instance of the TGVE embedded in the document. Please see the live examples in the [vignette](https://tgve.github.io/tgver/articles/tgver.html) which is rendered to HTML.
 

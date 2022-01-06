@@ -20,7 +20,7 @@ visualization design and techniques from Geographic Information Science
 
 This is the R package for TGVE front end `npm` package
 [`tgve`](https://www.npmjs.com/package/eatlas). The R package is
-developed to fascilitate interactive geospatial analysis and
+developed to facilitate interactive geospatial analysis and
 visualization in R, use R’s echo-system to drive advanced data
 processing, and facilitate deployment of geospatial web applications in
 production.
@@ -38,7 +38,9 @@ devtools::install_github("tgve/tgver")
 ## Use
 
 Overall, as of this pre-CRAN release, the package takes advantage of how
-TGVE can be used (see this Wiki) and provides options to R users.
+TGVE can be used (see this
+[Wiki](https://github.com/tgve/eAtlas/wiki/Using-TGVE) entry) and
+provides options to R users.
 
 For instance, this document is a Markdown (GitHub) document generated
 using an Rmarkdown (Rmd) document, if the Rmd is rendered to a HTML
