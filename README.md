@@ -124,6 +124,16 @@ details.
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
 
+``` r
+knitr::include_url(
+  paste0("https://tgve.github.io/eatlas-template?",
+         "defaultURL=https://raw.githubusercontent.com", 
+         "/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
+)
+```
+
+<a href="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap" target="_blank"><img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" /></a>
+
 ## Funding
 
 The project is led by Dr [Nik
