@@ -128,26 +128,14 @@
 <span class="co"># knitr::include_url("https://tgve.github.io/eatlas-template/")</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="remote-instance">Remote instance<a class="anchor" aria-label="anchor" href="#remote-instance"></a>
-</h2>
-<p>The simplest way to use the TGVE is using an instance running at a local/remote server. As of version <code>1.3.5-beta.0</code> of the TGVE (eatlas) npm package, it takes URL “query parameter” based API variables provided. Therefore, we can simply run an instance such as the <code>eatlas-template</code> instance as follows without doing anything else (again not in this Markdown doc):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># tgve = "https://tgve.github.io/eatlas-template?"</span>
-<span class="co"># defaultURL = "https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson"</span>
-<span class="co"># url = paste0(tgve, "defaultURL=", defaultURL)</span>
-<span class="co"># knitr::include_url(url)</span>
-<span class="co"># or simply</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson"</span><span class="op">)</span></code></pre></div>
-<p>What is happening there? We grab the instance, but instead of its internal values, the URL parameters takes precedence. That means the value given as <code>defaultURL</code> is parsed by the TGVE.</p>
-</div>
-<div class="section level2">
 <h2 id="explore-sf-objects">Explore <code>sf</code> objects<a class="anchor" aria-label="anchor" href="#explore-sf-objects"></a>
 </h2>
 <p>For these purposes, the package relies on the <code>plumber</code> API to serve data. So, again within HTML outputs we can explore <code>sf</code> objects like so:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># using sf</span>
 <span class="va">nc</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">nc</span><span class="op">)</span></code></pre></div>
+<p>For more see the <a href="https://tgve.github.io/tgver/articles/tgver.html" class="external-link">vignette</a>.</p>
 </div>
 </div>
 <div class="section level1">
