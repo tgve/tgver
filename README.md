@@ -81,28 +81,6 @@ ps$kill()
 # knitr::include_url("https://tgve.github.io/eatlas-template/")
 ```
 
-## Remote instance
-
-The simplest way to use the TGVE is using an instance running at a
-local/remote server. As of version `1.3.5-beta.0` of the TGVE (eatlas)
-npm package, it takes URL “query parameter” based API variables
-provided. Therefore, we can simply run an instance such as the
-`eatlas-template` instance as follows without doing anything else (again
-not in this Markdown doc):
-
-``` r
-# tgve = "https://tgve.github.io/eatlas-template?"
-# defaultURL = "https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson"
-# url = paste0(tgve, "defaultURL=", defaultURL)
-# knitr::include_url(url)
-# or simply
-knitr::include_url("https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson")
-```
-
-What is happening there? We grab the instance, but instead of its
-internal values, the URL parameters takes precedence. That means the
-value given as `defaultURL` is parsed by the TGVE.
-
 ## Explore `sf` objects
 
 For these purposes, the package relies on the `plumber` API to serve
@@ -114,6 +92,9 @@ nc = sf::st_read(system.file("shape/nc.shp", package="sf"))
 tgver::explore_sf(nc)
 ```
 
+For more see the
+[vignette](https://tgve.github.io/tgver/articles/tgver.html).
+
 # Development plan
 
 Please see the vignette called
@@ -123,16 +104,6 @@ details.
 # Preview
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
-
-``` r
-knitr::include_url(
-  paste0("https://tgve.github.io/eatlas-template?",
-         "defaultURL=https://raw.githubusercontent.com", 
-         "/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
-)
-```
-
-<a href="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap" target="_blank"><img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" /></a>
 
 ## Funding
 

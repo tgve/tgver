@@ -101,3 +101,17 @@ More important functions are:
 3. `explore_dir`: this is an ambitious function to develop. Current version tries to find two files and pass them to TGVE's `defaultURL` and `geographyURL` as that is a use case of the TGVE.
 
 This vignette is under active development.
+
+## Remote instance
+The simplest way to use the TGVE is using an instance running at a local/remote server. As of version `1.3.5-beta.0` of the TGVE (eatlas) npm package, it takes URL "query parameter" based API variables provided. Therefore, we can simply run an instance such as the [`eatlas-template`](https://tgve.github.io/eatlas-template) instance as follows without doing anything else:
+
+```{r}
+# tgve = "https://tgve.github.io/eatlas-template?"
+# defaultURL = "https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson"
+# url = paste0(tgve, "defaultURL=", defaultURL)
+# knitr::include_url(url)
+# or simply
+knitr::include_url("https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson")
+```
+
+We grab the remote instance, but instead of its internal values, the URL parameters takes precedence. That means the value given as `defaultURL` is parsed by the TGVE. We can as easily use this in R's built in "view" or "browse" commands, too.
