@@ -101,7 +101,7 @@
 <p>One limitation of browsers is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers. Rust can be compiled to WebAssembly <span class="citation">(MDN 2022)</span> and that means C/C++ and possibly R could also be compiled to WebAssembly. It is still true that Python and R run outside browsers including when driving Jupyter and Rmarkdown documents. The increasing power of browsers and number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) or in R/Python on operating systems.</p>
 </div>
 <div class="section level2">
-<h2 id="the-data">The data<a class="anchor" aria-label="anchor" href="#the-data"></a>
+<h2 id="dataset-one">Dataset one<a class="anchor" aria-label="anchor" href="#dataset-one"></a>
 </h2>
 <p>To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: <code>edgebundle</code>, <code>igraph</code> and <code>ggplot2</code> first. The following is adapted from <a href="https://github.com/schochastics/edgebundle" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -150,10 +150,9 @@
 <span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span>
 <span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">x</span>,<span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">sfc</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="static-visualization">Static visualization<a class="anchor" aria-label="anchor" href="#static-visualization"></a>
-</h2>
+<div class="section level3">
+<h3 id="static-visualization">Static visualization<a class="anchor" aria-label="anchor" href="#static-visualization"></a>
+</h3>
 <p>First, let us have a look at the lines without bundling the edges using <code>plot</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span></code></pre></div>
@@ -170,9 +169,9 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="r-and-js_files/figure-html/ggplot-no-bundle-1.png" width="90%"></p>
 </div>
-<div class="section level2">
-<h2 id="interactive-visualization">Interactive visualization<a class="anchor" aria-label="anchor" href="#interactive-visualization"></a>
-</h2>
+<div class="section level3">
+<h3 id="interactive-visualization">Interactive visualization<a class="anchor" aria-label="anchor" href="#interactive-visualization"></a>
+</h3>
 <p>Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of <code>knitr</code> package for details of embedding HTML.</p>
 <p>Let us first view the raw data (no bundling), we can build an instance of the TGVE using <code><a href="../reference/setup.html">tgver::setup</a></code>, and <code><a href="../reference/build.html">tgver::build</a></code> functions. The <code>build</code> function takes API variables including providing the visualization <code>layerName</code> parameter which is optional as the TGVE will try to detect the geometry and chooses the appropriate layer:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -233,12 +232,51 @@
 <p><img src="https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png" width="100%"></p>
 <p>Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="dataset-two">Dataset two<a class="anchor" aria-label="anchor" href="#dataset-two"></a>
+</h2>
+<p>The CDRC (Consumer Data Research Centre) provides “unique insight in to a diverse range of societal and economic challenges in collaboration with a wide range of consumer data providers”<span class="citation">(CDRC 2021)</span>. On the website researchers can find consumer datasets. One of these is IMD historical data for UK’s Lower Super Output Areas (LSOA). The LSOA geography is a “large” boundary data and you can find out more about it and download different datasets here or elsewhere.</p>
+<p>A typical scenario for a researcher, including senior data scientists to learn about how geographic data is processed in data science languages such as R and Python. Let us imagine our researcher is an R expert but has not been exposed to geographic data. They need to first learn about OGC standards such as Simple Features. They will then need to learn about packages like <code>sf</code> and underlying system requirements without mentioning examples.</p>
+<p>What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can do the rest.</p>
+<p>How? Our researcher needs to download an IMD dataset such as this one. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dir</span> <span class="op">=</span> <span class="st">"~/Downloads/cdrc"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span>
+
+<span class="co"># download the csv data which is behind authorization from cdrc</span>
+<span class="co"># https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv</span>
+<span class="co"># via https://data.cdrc.ac.uk/dataset/index-multiple-deprivation-imd</span>
+<span class="co"># named data.csv</span>
+<span class="va">csv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"data.csv"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># download the geography (a .geojson file for our purposes using sf)</span>
+<span class="co"># from here https://github.com/gausie/LSOA-2011-GeoJSON</span>
+<span class="co"># named lsoa.geojson</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
+<span class="va">geo</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gausie/LSOA-2011-GeoJSON/master/lsoa.geojson"</span><span class="op">)</span>
+
+<span class="co"># filter it to those in the CSV file</span>
+<span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">csv</span><span class="op">$</span><span class="va">ls11cd</span>, <span class="va">geo</span><span class="op">$</span><span class="va">LSOA11CD</span><span class="op">)</span>
+<span class="co"># notice the different column names for the same geography codes</span>
+<span class="va">geo</span> <span class="op">=</span> <span class="va">geo</span><span class="op">[</span><span class="va">m</span>, <span class="op">]</span>
+<span class="co"># rename column as TGVE package is young</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="st">"ls11cd"</span> <span class="co"># same as column one in CSV</span>
+
+<span class="co"># make sure both files are in the ~/Downloads/cdrc directory</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html" class="external-link">st_write</a></span><span class="op">(</span><span class="va">geo</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"geo.geojson"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Finally, let TGVE serve it!</span>
+<span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/explore_dir.html">explore_dir</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span></code></pre></div>
+<p>Now, the current release of the TGVE has a function called <code>explore_dir</code> which looks at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the <code>plumber</code> package behind the scenes and serves them to the front TGVE which puts them together.</p>
+<p>The result will be like the following image. <img src="https://user-images.githubusercontent.com/408568/148931326-4adad852-5bb6-466c-bf0a-0221da586376.png" alt="cdrc dataset imd" width="100%"></p>
+</div>
 <div class="section level2">
 <h2 id="remote-tgve-instance">Remote TGVE instance<a class="anchor" aria-label="anchor" href="#remote-tgve-instance"></a>
 </h2>
 <p>The TGVE version <code>1.3.5</code> and above accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.</p>
 <p>Check the following instance being customized with data served from a GitHub repository:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template?"</span>,
          <span class="st">"defaultURL=https://raw.githubusercontent.com"</span>, 
@@ -247,7 +285,7 @@
 <iframe src="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We can, of course, pass the data (bundled or not) as a json (geojson) using the <code>data</code> variable of the TGVE. This is how you could do this in this code sample:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># same URL as the instance above</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>
@@ -266,6 +304,9 @@
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references">
+<div id="ref-cdrc">
+<p>CDRC. 2021. “Consumer Data Research Center.” <a href="https://cdrc.ac.uk/" class="external-link">https://cdrc.ac.uk/</a>.</p>
+</div>
 <div id="ref-mozillarust">
 <p>MDN. 2022. “Compiling from Rust to Webassembly.” <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm" class="external-link">https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm</a>.</p>
 </div>
