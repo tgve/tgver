@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 One limitation of browsers is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers. Rust can be compiled to WebAssembly [@mozillarust] and that means C/C++ and possibly R could also be compiled to WebAssembly. It is still true that Python and R run outside browsers including when driving Jupyter and Rmarkdown documents. The increasing power of browsers and number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) or in R/Python on operating systems.
 
-## The data 
+## Dataset one 
 
 To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: `edgebundle`, `igraph` and `ggplot2` first. The following is adapted from [here](https://github.com/schochastics/edgebundle).
 
@@ -64,7 +64,7 @@ sfc = lapply(1:nrow(m), function(x) st_linestring(matrix(unlist(m[x,]), ncol = 2
 sfc = st_sfc(sfc, crs = 4326)
 ```
 
-## Static visualization
+### Static visualization
 
 First, let us have a look at the lines without bundling the edges using `plot`:
 ```{r plot-no-bundling, out.width='90%'}
@@ -84,7 +84,7 @@ ggplot() +
 
 ```
 
-## Interactive visualization
+### Interactive visualization
 
 Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of `knitr` package for details of embedding HTML. 
 
@@ -147,6 +147,50 @@ if(!is.actions) {
 
 Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions. 
 
+## Dataset two
+The CDRC (Consumer Data Research Centre) provides "unique insight in to a diverse range of societal and economic challenges in collaboration with a wide range of consumer data providers"[@cdrc]. On the website researchers can find consumer datasets. One of these is IMD historical data for UK's Lower Super Output Areas (LSOA). The LSOA geography is a "large" boundary data and you can find out more about it and download different datasets here or elsewhere.
+
+A typical scenario for a researcher, including senior data scientists to learn about how geographic data is processed in data science languages such as R and Python. Let us imagine our researcher is an R expert but has not been exposed to geographic data. They need to first learn about OGC standards such as Simple Features. They will then need to learn about packages like `sf` and underlying system requirements without mentioning examples. 
+
+What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can do the rest.
+
+How? Our researcher needs to download an IMD dataset such as this one. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:
+
+```{r, data-prep2, eval=FALSE}
+dir = "~/Downloads/cdrc"
+dir.create(dir)
+
+# download the csv data which is behind authorization from cdrc
+# https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv
+# via https://data.cdrc.ac.uk/dataset/index-multiple-deprivation-imd
+# named data.csv
+csv = read.csv(file.path(dir, "data.csv"))
+
+# download the geography (a .geojson file for our purposes using sf)
+# from here https://github.com/gausie/LSOA-2011-GeoJSON
+# named lsoa.geojson
+library(sf)
+geo = st_read("https://raw.githubusercontent.com/gausie/LSOA-2011-GeoJSON/master/lsoa.geojson")
+
+# filter it to those in the CSV file
+m = match(csv$ls11cd, geo$LSOA11CD)
+# notice the different column names for the same geography codes
+geo = geo[m, ]
+# rename column as TGVE package is young
+colnames(geo)[1] = "ls11cd" # same as column one in CSV
+
+# make sure both files are in the ~/Downloads/cdrc directory
+st_write(geo, file.path(dir, "geo.geojson"))
+
+# Finally, let TGVE serve it!
+tgver::explore_dir(dir)
+
+```
+
+Now, the current release of the TGVE has a function called `explore_dir` which looks at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the `plumber` package behind the scenes and serves them to the front TGVE which puts them together.
+
+The result will be like the following image.
+<img src="https://user-images.githubusercontent.com/408568/148931326-4adad852-5bb6-466c-bf0a-0221da586376.png" alt="cdrc dataset imd" width="100%" />
 
 ## Remote TGVE instance
 
