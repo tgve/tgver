@@ -163,12 +163,11 @@ dir.create(dir)
 # download the csv data which is behind authorization from cdrc
 # https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv
 # via https://data.cdrc.ac.uk/dataset/index-multiple-deprivation-imd
-# named data.csv
+# renamed data.csv
 csv = read.csv(file.path(dir, "data.csv"))
 
 # download the geography (a .geojson file for our purposes using sf)
 # from here https://github.com/gausie/LSOA-2011-GeoJSON
-# named lsoa.geojson
 library(sf)
 geo = st_read("https://raw.githubusercontent.com/gausie/LSOA-2011-GeoJSON/master/lsoa.geojson")
 
@@ -180,14 +179,15 @@ geo = geo[m, ]
 colnames(geo)[1] = "ls11cd" # same as column one in CSV
 
 # make sure both files are in the ~/Downloads/cdrc directory
-st_write(geo, file.path(dir, "geo.geojson"))
+# named lsoa.geojson
+st_write(geo, file.path(dir, "lsoa.geojson"))
 
 # Finally, let TGVE serve it!
 tgver::explore_dir(dir)
 
 ```
 
-Now, the current release of the TGVE has a function called `explore_dir` which looks at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the `plumber` package behind the scenes and serves them to the front TGVE which puts them together.
+Now, this early release of this package (`tgver`) has a function called `explore_dir` which searches through at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the `plumber` package behind the scenes and serves them to the front TGVE which puts them together. A future version could as easily take a dictionary of the two column names and pass it to the front-end.
 
 The result will be like the following image.
 <img src="https://user-images.githubusercontent.com/408568/148931326-4adad852-5bb6-466c-bf0a-0221da586376.png" alt="cdrc dataset imd" width="100%" />
