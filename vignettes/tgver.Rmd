@@ -84,7 +84,7 @@ if(!curl::has_internet()) {
 ```
 
 ## Main functions
-The package still has "WIP" label on, so we are still finalizing the main functionality of the package. However, as of (November 2021) it looks like to work with the TGVE, we need:
+The package still has "WIP" label on, so we are still finalizing the main functionality of the package. However, as of (January 2022) it looks like to work with the TGVE, we need:
 
 1. Setup function(s)
 2. Build function(s)
@@ -97,7 +97,7 @@ For the third type of functions and to run the application, so far, there are fe
 More important functions are:
 
 1. `explore_fs`: OGC standard Simple Features and R package `sf` is an important class object to support. Though we will do all we can to *not* import `sf` due to underlying system dependencies.
-3. `explore_fil`: this makes sense given the API and functionality built into the TGVE and given that data scientists would want to quickly explore single files.
+3. `explore_file`: this makes sense given the API and functionality built into the TGVE and given that data scientists would want to quickly explore single files.
 3. `explore_dir`: this is an ambitious function to develop. Current version tries to find two files and pass them to TGVE's `defaultURL` and `geographyURL` as that is a use case of the TGVE.
 
 This vignette is under active development.
