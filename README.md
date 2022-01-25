@@ -83,12 +83,6 @@ For more see the
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
 
-## Package Status
-
-This package is part of ongoing research at the University of Leeds, it
-is provided “as is” and is likely to be updated and changed without
-warning to meet the research needs of the University.
-
 ## Other notes
 
 The application is a fully decoupled R + JavaScript two tier application
