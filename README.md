@@ -1,22 +1,6 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 [![tic](https://github.com/tgve/tgver/actions/workflows/tic.yml/badge.svg)](https://github.com/tgve/tgver/actions/workflows/tic.yml)
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://app.codecov.io/gh/tgve/tgver)
-
-# What is TGVE?
-
-The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based,
-interactive visual analytics tool for geospatial data analysis, built
-using R & React. The visual views and interaction mechanisms designed
-into the tool is underpinned by empirically-informed guidelines around
-visualization design and techniques from Geographic Information Science
-(GIScience).
-
-# tgver
 
 This is the R package for TGVE front end `npm` package
 [`tgve`](https://www.npmjs.com/package/eatlas). The R package is
@@ -78,7 +62,7 @@ knitr::include_url("http://127.0.0.1:8000")
 # kill the process returned from underlying `callr`
 ps$kill()
 # or use the public one
-# knitr::include_url("https://tgve.github.io/eatlas-template/")
+# knitr::include_url("https://tgve.github.io/app/")
 ```
 
 ## Explore `sf` objects
@@ -95,33 +79,8 @@ tgver::explore_sf(nc)
 For more see the
 [vignette](https://tgve.github.io/tgver/articles/tgver.html).
 
-# Development plan
-
-Please see the vignette called
-[“dev-plan”](https://tgve.github.io/tgver/articles/dev-plan.html) for
-details.
-
 # Preview
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
 
-## Funding
 
-The project is led by Dr [Nik
-Lomax](https://environment.leeds.ac.uk/geography/staff/1064/dr-nik-lomax)
-and Dr [Roger
-Beecham](https://environment.leeds.ac.uk/geography/staff/1003/dr-roger-beecham)
-and funded by the EPSRC via the Alan Turing Institute AI for Science and
-Government Programme, Grant/Award Number: EP/T001569/1.
-
-## Contribution
-
-Please note that the `tgve` package is released with a [Contributor Code
-of Conduct](CODE_OF_CONDUCT.md) copied from the template package
-`RpackageTemplate`. We will work on these docs later.
-
-## Package Status
-
-This package is part of ongoing research at the University of Leeds, it
-is provided “as is” and is likely to be updated and changed without
-warning to meet the research needs of the University.
