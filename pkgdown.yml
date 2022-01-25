@@ -1,9 +1,9 @@
 pandoc: 2.7.3
-pkgdown: 2.0.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   dev-plan: dev-plan.html
   r-and-js: r-and-js.html
   tgver: tgver.html
-last_built: 2022-01-11T13:38Z
+last_built: 2022-01-25T08:07Z
 

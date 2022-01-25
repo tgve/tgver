@@ -94,27 +94,27 @@
 
     
     
-<div class="section level1">
-<h1 id="immediate">Immediate<a class="anchor" aria-label="anchor" href="#immediate"></a>
-</h1>
 <div class="section level2">
-<h2 id="december-2021">December 2021<a class="anchor" aria-label="anchor" href="#december-2021"></a>
+<h2 id="immediate">Immediate<a class="anchor" aria-label="anchor" href="#immediate"></a>
 </h2>
+<div class="section level3">
+<h3 id="december-2021">December 2021<a class="anchor" aria-label="anchor" href="#december-2021"></a>
+</h3>
 <p>As of 3rd Dec 2021, the package seems to be doing much of the below except anything to do with native apps. The next step should be to submit it as it is t CRAN. The rationale for this is that although we cannot generate a single file TGVE yet, the R package can be used to drive visualization using up to date API variables of the front-end.</p>
 <p>Current <a href="https://tgve.github.io/tgver/reference/index.html" class="external-link">functions</a> are enough to be called an MVP and get the package on CRAN and publish a JOSS entry.</p>
 </div>
-<div class="section level2">
-<h2 id="november-2021">November 2021<a class="anchor" aria-label="anchor" href="#november-2021"></a>
-</h2>
+<div class="section level3">
+<h3 id="november-2021">November 2021<a class="anchor" aria-label="anchor" href="#november-2021"></a>
+</h3>
 <p>[Done]The current plan is to do use a different approach of using the TGVE npm package in this R package compared to how it is used in <code>geoplumber</code>. This is done mainly by bundling latest releases of the npm package within this package. This means not relying on npm/yarn tools for JavaScript (JS) building and bundling. As the <code>tgve</code> npm package has (see the docs) API settings to explore geospatial data, we can use R to do this without relying on the underlying JS toolchains.</p>
 <p>[Done - mvp] We can then look at the required functions to enable workflows. For instance, a typical case would be for the package to look at a data directory and understand the data format and serve it to the front end to consume without JS builds.</p>
 <p>[Done - mvp]Another use case would be to enable embedding <code>tgve</code> within Rmarkdowns and indeed Jupyter notebooks (both with challenges). At the moment this looks like it needs changes to be made to the npm package so that not only API and environement variables are accepted but also URL (query) variables are also accepted. If this can be achieved, then we can theoretically embed the HTML bunlded in this package within Rmarkdowns and any other browser based data science workflows.</p>
 <p>The third use case would be to see how bundled/downloaded native apps (see the docs) generated using Rust based Tauri apps can also be driven from R or the platform (operating system) as this is not possible from browsers (of course this is possible within NodeJS).</p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="long-term">Long term<a class="anchor" aria-label="anchor" href="#long-term"></a>
-</h1>
+<div class="section level2">
+<h2 id="long-term">Long term<a class="anchor" aria-label="anchor" href="#long-term"></a>
+</h2>
 <p>Subject to the REG discussions going on these avenues are open for discussion:</p>
 <ul>
 <li>Spatial/VIS AI integration/functions</li>
@@ -142,7 +142,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
