@@ -83,12 +83,6 @@ For more see the
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
 
-## Contribution
-
-Please note that the `tgve` package is released with a [Contributor Code
-of Conduct](CODE_OF_CONDUCT.md) copied from the template package
-`RpackageTemplate`. We will work on these docs later.
-
 ## Package Status
 
 This package is part of ongoing research at the University of Leeds, it
