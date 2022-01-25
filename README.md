@@ -11,7 +11,7 @@ production.
 
 ## Install
 
-For now whilst working towards submitting it to CRAN, please use
+TGVE is not yet available on CRAN. For now please use
 devtools:
 
 ``` r
@@ -79,11 +79,11 @@ tgver::explore_sf(nc)
 For more see the
 [vignette](https://tgve.github.io/tgver/articles/tgver.html).
 
-# Preview
+## Preview
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
 
-### Clone the repo
+## Other instructions
 
 You can clone the “master” branch or any other branch you want to run (except the npm branch).
 
