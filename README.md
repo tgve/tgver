@@ -1,7 +1,5 @@
-![tic](https://github.com/tgve/tgver/actions/workflows/tic.yml/badge.svg)](https://github.com/tgve/tgver/actions/workflows/tic.yml)
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![tic](https://github.com/tgve/tgver/actions/workflows/tic.yml/badge.svg)](https://github.com/tgve/tgver/actions/workflows/tic.yml)
+[![Project Status](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://app.codecov.io/gh/tgve/tgver)
 
 This is the R package for TGVE front end `npm` package
@@ -80,12 +78,6 @@ tgver::explore_sf(nc)
 
 For more see the
 [vignette](https://tgve.github.io/tgver/articles/tgver.html).
-
-# Development plan
-
-Please see the vignette called
-[“dev-plan”](https://tgve.github.io/tgver/articles/dev-plan.html) for
-details.
 
 # Preview
 
