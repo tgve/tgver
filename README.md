@@ -1,22 +1,8 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-[![tic](https://github.com/tgve/tgver/actions/workflows/tic.yml/badge.svg)](https://github.com/tgve/tgver/actions/workflows/tic.yml)
+![tic](https://github.com/tgve/tgver/actions/workflows/tic.yml/badge.svg)](https://github.com/tgve/tgver/actions/workflows/tic.yml)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://app.codecov.io/gh/tgve/tgver)
-
-# What is TGVE?
-
-The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based,
-interactive visual analytics tool for geospatial data analysis, built
-using R & React. The visual views and interaction mechanisms designed
-into the tool is underpinned by empirically-informed guidelines around
-visualization design and techniques from Geographic Information Science
-(GIScience).
-
-# tgver
 
 This is the R package for TGVE front end `npm` package
 [`tgve`](https://www.npmjs.com/package/eatlas). The R package is
@@ -105,15 +91,6 @@ details.
 
 ![tgve-vignette](https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png)
 
-## Funding
-
-The project is led by Dr [Nik
-Lomax](https://environment.leeds.ac.uk/geography/staff/1064/dr-nik-lomax)
-and Dr [Roger
-Beecham](https://environment.leeds.ac.uk/geography/staff/1003/dr-roger-beecham)
-and funded by the EPSRC via the Alan Turing Institute AI for Science and
-Government Programme, Grant/Award Number: EP/T001569/1.
-
 ## Contribution
 
 Please note that the `tgve` package is released with a [Contributor Code
@@ -125,3 +102,57 @@ of Conduct](CODE_OF_CONDUCT.md) copied from the template package
 This package is part of ongoing research at the University of Leeds, it
 is provided “as is” and is likely to be updated and changed without
 warning to meet the research needs of the University.
+
+## Other notes
+
+The application is a fully decoupled R + JavaScript two tier application
+which is built on top RStudio’s plumber APIs using an R package called
+[geoplumber](https://github.com/ATFutures/geoplumber), which is not yet on CRAN. That means it is an R powered backend API (think Flask in Python) and a ReactJS front end. In future the R backend may be replaced with other choices of backend such as
+Python or NodeJS.
+
+Once the dependencies of `geoplumber` and particularly the NodeJS system
+dependencies are all in place. An example of visualizing R’s `sf` object
+format in `geoplumber` using eAtlas is as simple as following lines:
+
+``` r
+# installing the R package from github requires 
+# R package devtools
+devtools::install_github("ATFutures/geoplumber")
+# load the libray
+library(geoplumber)
+# create new project at temporary directory called `reprex`
+p = file.path(tempdir(),"reprex")
+gp_create(p)
+# making it the working directory
+setwd(p)
+# build the application (front-end)
+gp_build()
+# gp_explore uses eAtlas by default
+gp_explore()
+```
+
+In RStudio you should now be able to see something like following
+screenshot:
+<img width="100%" alt="RStuio viewer showing eAtlas" src="https://user-images.githubusercontent.com/408568/81685038-9452c100-944f-11ea-946c-795ef70791b3.png">
+
+You can also use the "full-template" repository to run on your local/production environment:
+https://github.com/tgve/full-template.
+
+Here are some additional R instructions that for running the app using `geoplumber`; not sure how they relate to the above:
+
+  - (optional) will be looking for a Mapbox API key, having obtained a
+    Mapbox API key in `.env.local` file using variable name:
+    `REACT_APP_MAPBOX_ACCESS_TOKEN = 'API_KEY'`
+
+  - change the `PRD_URL` in the `Constants.js` file to `localhost:8000`.
+    Default value is `https://layik.github.io/eAtlas` for this repo to
+    publish on GitHub pages.
+
+Then you can run
+
+``` r
+library(geoplumber)
+gp_plumb()
+```
+
+visit `localhost:8000`
