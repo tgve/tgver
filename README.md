@@ -62,7 +62,7 @@ knitr::include_url("http://127.0.0.1:8000")
 # kill the process returned from underlying `callr`
 ps$kill()
 # or use the public one
-# knitr::include_url("https://tgve.github.io/eatlas-template/")
+# knitr::include_url("https://tgve.github.io/app/")
 ```
 
 ## Explore `sf` objects
