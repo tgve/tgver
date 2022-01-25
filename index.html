@@ -135,39 +135,6 @@
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/408568/141796882-2cf68f6b-a6e4-4836-9efa-bf1973f5cab9.png" alt=""><p class="caption">tgve-vignette</p>
 </div>
-<div class="section level2">
-<h2 id="other-notes">Other notes<a class="anchor" aria-label="anchor" href="#other-notes"></a>
-</h2>
-<p>The application is a fully decoupled R + JavaScript two tier application which is built on top RStudio’s plumber APIs using an R package called <a href="https://github.com/ATFutures/geoplumber" class="external-link">geoplumber</a>, which is not yet on CRAN. That means it is an R powered backend API (think Flask in Python) and a ReactJS front end. In future the R backend may be replaced with other choices of backend such as Python or NodeJS.</p>
-<p>Once the dependencies of <code>geoplumber</code> and particularly the NodeJS system dependencies are all in place. An example of visualizing R’s <code>sf</code> object format in <code>geoplumber</code> using eAtlas is as simple as following lines:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># installing the R package from github requires </span>
-<span class="co"># R package devtools</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ATFutures/geoplumber"</span><span class="op">)</span>
-<span class="co"># load the libray</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">geoplumber</span><span class="op">)</span>
-<span class="co"># create new project at temporary directory called `reprex`</span>
-<span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"reprex"</span><span class="op">)</span>
-<span class="fu">gp_create</span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
-<span class="co"># making it the working directory</span>
-<span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
-<span class="co"># build the application (front-end)</span>
-<span class="fu">gp_build</span><span class="op">(</span><span class="op">)</span>
-<span class="co"># gp_explore uses eAtlas by default</span>
-<span class="fu">gp_explore</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>In RStudio you should now be able to see something like following screenshot: <img width="100%" alt="RStuio viewer showing eAtlas" src="https://user-images.githubusercontent.com/408568/81685038-9452c100-944f-11ea-946c-795ef70791b3.png"></p>
-<p>You can also use the “full-template” repository to run on your local/production environment: <a href="https://github.com/tgve/full-template" class="external-link uri">https://github.com/tgve/full-template</a>.</p>
-<p>Here are some additional R instructions that for running the app using <code>geoplumber</code>; not sure how they relate to the above:</p>
-<ul>
-<li><p>(optional) will be looking for a Mapbox API key, having obtained a Mapbox API key in <code>.env.local</code> file using variable name: <code>REACT_APP_MAPBOX_ACCESS_TOKEN = 'API_KEY'</code></p></li>
-<li><p>change the <code>PRD_URL</code> in the <code>Constants.js</code> file to <code>localhost:8000</code>. Default value is <code>https://layik.github.io/eAtlas</code> for this repo to publish on GitHub pages.</p></li>
-</ul>
-<p>Then you can run</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">geoplumber</span><span class="op">)</span>
-<span class="fu">gp_plumb</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>visit <code>localhost:8000</code></p>
-</div>
 </div>
 
   </div>
