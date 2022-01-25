@@ -21,13 +21,22 @@
 #'######### UPDATE VERSION/build ###############
 #' in order to update bundled version
 file.remove("./inst/tgve.zip")
+build.dir = "~/code/eatlas-template"
 #' Then copy files back
-path = "~/code/eatlas-template/build"
-zip("inst/tgve.zip",
-    list.files(path, full.names = TRUE, recursive = TRUE))
+#' rename CRA build to tgve
+file.rename(file.path(build.dir, "build"),
+            file.path(build.dir, "tgve"))
+#' if you do not cd into the directory
+#' zip command will preserve parent dir structure back to / (root)
+#' therefore need to cd into build location and out after zip
+ow = setwd(build.dir)
+zip("~/code/TGVE/tgver/inst/tgve.zip",
+    list.files("tgve", full.names = TRUE, recursive = TRUE))
+setwd(ow)
 # get TGVE version
+# checkout package for local/build
 version = jsonlite::parse_json(
-  readLines("~/code/eatlas-template/package.json"))$dependencies$eatlas
-version = sub(".", "", version)
+  readLines(file.path(build.dir, "package.json")))$dependencies$eatlas
+# version = sub(".", "", version)
 names(version) <- "version"
 usethis::use_data(version, overwrite = TRUE)
