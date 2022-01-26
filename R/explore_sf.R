@@ -50,6 +50,7 @@ explore_geojson = function(endpoint, geojson, background) {
   }
 
   message("Serving data from ", endpoint.url)
+  message("Browsing ", nav.url)
   openURL(url = nav.url)
   server$run(port = 8000, docs = FALSE)
 }
