@@ -31,7 +31,8 @@ explore_geojson = function(endpoint, geojson, background) {
   if(!is.logical(background))
     stop("Error: background value must be logical")
 
-  full.url = paste0("http://127.0.0.1:8000", endpoint)
+  base = "http://127.0.0.1:8000"
+  endpoint.url = paste0(base, endpoint)
   path = tempInstance()
   server = tgve_server(path = path, run = FALSE)
   # flexible variable names
@@ -41,14 +42,14 @@ explore_geojson = function(endpoint, geojson, background) {
     res
   })
 
-  # build with `defaultURL` API variable
-  build(path, defaultURL = full.url)
+  # url with `defaultURL` API variable
+  nav.url = get_url(base, defaultURL = endpoint.url)
 
   if(background) {
     return(background_run(server))
   }
 
-  message("Serving data from ", full.url)
-  openURL()
+  message("Serving data from ", endpoint.url)
+  openURL(url = nav.url)
   server$run(port = 8000, docs = FALSE)
 }

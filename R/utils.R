@@ -138,3 +138,39 @@ is_valid_url = function(string) {
   }
   c(local[which(local)], other)
 }
+
+#' Helper function to generate URLs
+#'
+#' The function can generate a URL based on a base URL and as many as TGVE API
+#' variables provided to the function.
+#'
+#' @param base character URL defaults to `http://127.0.0.1:8000`
+#' @param ... any or all of the TGVE API variables to replace/add values to.
+#'
+#' @return character URL
+#'
+#' @examples {
+#' url = get_url(dark="false")
+#' url == "http://127.0.0.1:8000?dark=false"
+#' url = get_url()
+#' url == "http://127.0.0.1:8000"
+#' }
+#'
+#' @export
+get_url = function(base = "http://127.0.0.1:8000", ...) {
+  args = list(...)
+  if(length(args) == 0L) return(base)
+  args.names = names(args)
+  given = intersect(args.names, names(apis))
+  new.url = ifelse(endsWith(base, "?"), base, paste0(base, "?"))
+  for (x in names(apis)) {
+    if(x %in% given) {
+      if(endsWith(new.url, "?")) {
+        new.url = paste0(new.url, x, "=", args[x])
+      } else {
+        new.url = paste0(new.url, "&", x, "=", args[x])
+      }
+    }
+  }
+  new.url
+}
