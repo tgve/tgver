@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 # What is TGVE?
-The Turing Geovisualisation Engine (TGVE or eAtlas) is a web-based, interactive visual analytics tool for geospatial data analysis, built using R & React. The visual views and interaction mechanisms designed into the tool is underpinned by empirically-informed guidelines around visualization design and techniques from Geographic Information Science (GIScience).
+The Turing Geovisualisation Engine (TGVE) is a web-based, interactive visual analytics tool for geospatial data analysis, built using R & React. The visual views and interaction mechanisms designed into the tool is underpinned by empirically-informed guidelines around visualization design and techniques from Geographic Information Science (GIScience).
 
 # tgver R package
 The package's main aims are outlined in the README on the package's GitHub space. As the package grows, these aims may also grow and expand as we research better ways of interactive geospatial data analysis and visualization.
@@ -61,7 +61,7 @@ tgver::setup(p)
 tp = file.path(p, "tgve")
 # we just need to pass the data/csv URL
 # using `defaultURL` API
-url = tgver::build(tp, defaultURL = 'https://raw.githubusercontent.com/tgve/eatlas-data/main/utlas.geojson',
+url = tgver::get_url(file.path(tp, "index.html"), defaultURL = 'https://raw.githubusercontent.com/tgve/eatlas-data/main/utlas.geojson',
                    column = "long",
                    hideChartGenerator="true",
                    # In future R should assemble the json
