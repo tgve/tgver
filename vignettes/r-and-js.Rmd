@@ -88,7 +88,7 @@ ggplot() +
 
 Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of `knitr` package for details of embedding HTML. 
 
-Let us first view the raw data (no bundling), we can build an instance of the TGVE using `tgver::setup`,  and `tgver::build` functions. The `build` function takes API variables including providing the visualization `layerName` parameter which is optional as the TGVE will try to detect the geometry and chooses the appropriate layer:
+Let us first view the raw data (no bundling), we can build an instance of the TGVE using `tgver::setup`. The package relies on passing API variables using a URL to the TGVE instance:
 
 ```{r tgve1, out.width='100%'}
 library(tgver)
@@ -99,12 +99,16 @@ unlink(tp, recursive = TRUE)
 # df = data.frame(lw=runif(length(sfc), min=1, max=5))
 run_tgve = function(layerName="line") {
   setup(p)
-  gj = geojsonsf::sf_geojson(st_as_sf(sfc), simplify = FALSE)
-  ip = build(tp, data = gj,
+  sf = st_as_sf(sfc)
+  ps = explore_sf(sf, background = TRUE)
+  # data is at "http://127.0.0.1:8000/explore_sf"
+  base.url = "http://127.0.0.1:8000"
+  url = get_url(base.url, defaultURL = "http://127.0.0.1:8000/explore_sf",
              hideChartGenerator="true",
              viewport="{zoom:3,pitch:0,bearing:0}",
              layerName=layerName)
-  knitr::include_url(ip)
+  knitr::include_url(url)
+  ps$kill()
 }
 
 img_or_warning = function(img.url) {
@@ -200,9 +204,9 @@ Check the following instance being customized with data served from a GitHub rep
 
 ```{r, out.width='100%'}
 knitr::include_url(
-  paste0("https://tgve.github.io/eatlas-template?",
+  paste0("https://tgve.github.io/app?",
          "defaultURL=https://raw.githubusercontent.com", 
-         "/layik/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
+         "/tgve/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
 )
 ```
 
@@ -213,7 +217,7 @@ We can, of course, pass the data (bundled or not) as a json (geojson) using the 
 knitr::include_url(
   paste0(
     # use the 1data1 parameter
-    "https://tgve.github.io/eatlas-template?data=",
+    "https://tgve.github.io/app?data=",
     gj # see above
   )
 )
