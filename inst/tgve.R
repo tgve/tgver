@@ -37,6 +37,6 @@ setwd(ow)
 # checkout package for local/build
 version = jsonlite::parse_json(
   readLines(file.path(build.dir, "package.json")))$dependencies$eatlas
-# version = sub(".", "", version)
+version = sub(".", "", version)
 names(version) <- "version"
 usethis::use_data(version, overwrite = TRUE)

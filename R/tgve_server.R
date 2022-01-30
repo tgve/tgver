@@ -40,10 +40,6 @@ tgve_server = function(path = Sys.getenv("TEMP_path_ENV"),
     return(server)
   }
 
-  # do not move above if(!run) as it will build
-  # clean build if running
-  build(path)
-
   message("Attempting to serve TGVE instance from: ", path)
   if(background) {
     return(background_run(server))

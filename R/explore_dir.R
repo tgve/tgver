@@ -73,9 +73,9 @@ explore_data_and_geography = function(dat.file, geo.file, background) {
   # TODO: can the rest of this be abstracted out in one function with
   # explore_geojson
 
-  host = "http://127.0.0.1:8000"
-  geoURL = paste0(host, "/geoURL")
-  datURL = paste0(host, "/data.csv")
+  base.url = "http://127.0.0.1:8000"
+  geoURL = paste0(base.url, "/geoURL")
+  datURL = paste0(base.url, "/data.csv")
 
   path = tempInstance()
   server = tgve_server(path = path, run = FALSE)
@@ -95,7 +95,7 @@ explore_data_and_geography = function(dat.file, geo.file, background) {
 
   cat(datURL, geoURL, comm.col)
 
-  build(path,
+  nav.url = get_url(base.url,
         defaultURL = datURL,
         geographyURL = geoURL,
         geographyColumn = comm.col)
@@ -106,6 +106,7 @@ explore_data_and_geography = function(dat.file, geo.file, background) {
 
   message("Serving data from ", datURL)
   message("Serving geography from: ", geoURL)
-  openURL()
+  message("Browsing ", nav.url)
+  openURL(nav.url)
   server$run(port = 8000, docs = FALSE)
 }
