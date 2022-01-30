@@ -175,7 +175,7 @@
 <h3 id="interactive-visualization">Interactive visualization<a class="anchor" aria-label="anchor" href="#interactive-visualization"></a>
 </h3>
 <p>Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of <code>knitr</code> package for details of embedding HTML.</p>
-<p>Let us first view the raw data (no bundling), we can build an instance of the TGVE using <code><a href="../reference/setup.html">tgver::setup</a></code>, and <code><a href="../reference/build.html">tgver::build</a></code> functions. The <code>build</code> function takes API variables including providing the visualization <code>layerName</code> parameter which is optional as the TGVE will try to detect the geometry and chooses the appropriate layer:</p>
+<p>Let us first view the raw data (no bundling), we can build an instance of the TGVE using <code><a href="../reference/setup.html">tgver::setup</a></code>. The package relies on passing API variables using a URL to the TGVE instance:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tgve/tgver" class="external-link">tgver</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -193,12 +193,16 @@
 <span class="co"># df = data.frame(lw=runif(length(sfc), min=1, max=5))</span>
 <span class="va">run_tgve</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">layerName</span><span class="op">=</span><span class="st">"line"</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
-  <span class="va">gj</span> <span class="op">=</span> <span class="fu">geojsonsf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geojsonsf/man/sf_geojson.html" class="external-link">sf_geojson</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-  <span class="va">ip</span> <span class="op">=</span> <span class="fu"><a href="../reference/build.html">build</a></span><span class="op">(</span><span class="va">tp</span>, data <span class="op">=</span> <span class="va">gj</span>,
+  <span class="va">sf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span>
+  <span class="va">ps</span> <span class="op">=</span> <span class="fu"><a href="../reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">sf</span>, background <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="co"># data is at "http://127.0.0.1:8000/explore_sf"</span>
+  <span class="va">base.url</span> <span class="op">=</span> <span class="st">"http://127.0.0.1:8000"</span>
+  <span class="va">url</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_url.html">get_url</a></span><span class="op">(</span><span class="va">base.url</span>, defaultURL <span class="op">=</span> <span class="st">"http://127.0.0.1:8000/explore_sf"</span>,
              hideChartGenerator<span class="op">=</span><span class="st">"true"</span>,
              viewport<span class="op">=</span><span class="st">"{zoom:3,pitch:0,bearing:0}"</span>,
              layerName<span class="op">=</span><span class="va">layerName</span><span class="op">)</span>
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
+  <span class="va">ps</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">img_or_warning</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img.url</span><span class="op">)</span> <span class="op">{</span>
@@ -280,11 +284,11 @@
 <p>Check the following instance being customized with data served from a GitHub repository:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/eatlas-template?"</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app?"</span>,
          <span class="st">"defaultURL=https://raw.githubusercontent.com"</span>, 
-         <span class="st">"/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span>
+         <span class="st">"/tgve/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<iframe src="https://tgve.github.io/eatlas-template?defaultURL=https://raw.githubusercontent.com/layik/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
+<iframe src="https://tgve.github.io/app?defaultURL=https://raw.githubusercontent.com/tgve/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We can, of course, pass the data (bundled or not) as a json (geojson) using the <code>data</code> variable of the TGVE. This is how you could do this in this code sample:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -292,7 +296,7 @@
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>
     <span class="co"># use the 1data1 parameter</span>
-    <span class="st">"https://tgve.github.io/eatlas-template?data="</span>,
+    <span class="st">"https://tgve.github.io/app?data="</span>,
     <span class="va">gj</span> <span class="co"># see above</span>
   <span class="op">)</span>
 <span class="op">)</span></code></pre></div>

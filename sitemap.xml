@@ -34,9 +34,6 @@
     <loc>/reference/background_run.html</loc>
   </url>
   <url>
-    <loc>/reference/build.html</loc>
-  </url>
-  <url>
     <loc>/reference/copy_tgve.html</loc>
   </url>
   <url>
@@ -50,6 +47,9 @@
   </url>
   <url>
     <loc>/reference/file_replace.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_url.html</loc>
   </url>
   <url>
     <loc>/reference/help.html</loc>
