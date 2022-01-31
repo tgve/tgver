@@ -41,7 +41,7 @@ The application can be served from a `plumber` instance which is pointed at the 
 ```{r embed, out.width="100%"}
 # open a static tgve
 # tgver::tgve()
-# 
+#
 # or start a tgve instance before embedding it
 # tgver::tgve_server()
 # knitr::include_url("http://127.0.0.1:8000")
@@ -73,7 +73,7 @@ knitr::include_url(url)
 
 If this Vignette is served either from CRAN or GitHub, the application at path in above chunk (`tp`) will *not* be available. So you must run it locally to see the application, the screenshot below was taken from such a run. Embedding the full instance in a HTML file is an open issue on the repository and we welcome your contributions if you can.
 
-Also, please note that the "webview" within Rstudio Deb package version `1.4.1717` could fail to load even remote URLs using `knitr::include_url`, please click the "open in browser" to see the rendering from `knitr`. 
+Also, please note that the "webview" within Rstudio Deb package version `1.4.1717` could fail to load even remote URLs using `knitr::include_url`, please click the "open in browser" to see the rendering from `knitr`.
 
 ```{r buildoffline, echo=FALSE, out.width="100%"}
 if(!curl::has_internet()) {
@@ -97,7 +97,7 @@ Current important functions are:
 This vignette is under active development.
 
 ## Remote instance
-The simplest way to use the TGVE is using an instance running at a local/remote server. As of version `1.3.5-beta.0` of the TGVE (eatlas) npm package, it takes URL "query parameter" based API variables provided. Therefore, we can simply run an instance such as the [`eatlas-template`](https://tgve.github.io/eatlas-template) instance as follows without doing anything else:
+The simplest way to use the TGVE is using an instance running at a local/remote server, using the URL "query parameter" based API variables provided. Therefore, we can simply run an instance such as the [`app`](https://tgve.github.io/app) instance as follows without doing anything else:
 
 ```{r, out.width="100%"}
 # tgve = "https://tgve.github.io/app?"
