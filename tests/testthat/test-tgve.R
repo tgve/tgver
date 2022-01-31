@@ -9,6 +9,6 @@ test_that("static tgve works", {
   expect_error(tgve(remote = TRUE,
                     url = "notvalidurl"))
   expect_message(tgve(remote = TRUE,
-                      # evevn just tgve(remmote = TRUE)
+                      # even just tgve(remote = TRUE)
                       url = "https://tgve.github.io/eatlas-template"))
 })
