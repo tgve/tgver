@@ -94,8 +94,6 @@ Current important functions are:
 3. `explore_file`: this makes sense given the API and functionality built into the TGVE and given that data scientists would want to quickly explore single files.
 3. `explore_dir`: this is an ambitious function to develop. Current version tries to find two files and pass them to TGVE's `defaultURL` and `geographyURL` as that is a use case of the TGVE.
 
-This vignette is under active development.
-
 ## Remote instance
 The simplest way to use the TGVE is using an instance running at a local/remote server, using the URL "query parameter" based API variables provided. Therefore, we can simply run an instance such as the [`app`](https://tgve.github.io/app) instance as follows without doing anything else:
 
