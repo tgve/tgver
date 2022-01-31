@@ -10,7 +10,7 @@ production.
 
 ## Install
 
-TGVE is not yet available on CRAN. For now please use
+`tgver` is not yet available on CRAN. For now please use
 devtools:
 
 ``` r
