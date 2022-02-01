@@ -21,8 +21,8 @@ devtools::install_github("tgve/tgver")
 ## Use
 
 Overall, as of this pre-CRAN release, the package takes advantage of how
-TGVE can be used (see this
-[Wiki](https://github.com/tgve/eAtlas/wiki/Using-TGVE) entry) and
+TGVE can be used (see
+[npm package](https://github.com/tgve/tgvejs) for documentation) and
 provides options to R users.
 
 For instance, this document is a Markdown (GitHub) document generated

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 One limitation of browsers is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers. Rust can be compiled to WebAssembly [@mozillarust] and that means C/C++ and possibly R could also be compiled to WebAssembly. It is still true that Python and R run outside browsers including when driving Jupyter and Rmarkdown documents. The increasing power of browsers and number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) or in R/Python on operating systems.
 
-## Dataset one 
+## Dataset one
 
 To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: `edgebundle`, `igraph` and `ggplot2` first. The following is adapted from [here](https://github.com/schochastics/edgebundle).
 
@@ -31,7 +31,7 @@ library(edgebundle)
 library(ggplot2)
 library(ggraph)
 
-# this environment variable would return true if run on 
+# this environment variable would return true if run on
 # github actions therefore, we can stop running TGVE if so.
 # See GitHub docs: https://docs.github.com/en/actions/learn-github-actions/environment-variables
 is.actions = Sys.getenv("GITHUB_ACTIONS") != ""
@@ -86,7 +86,7 @@ ggplot() +
 
 ### Interactive visualization
 
-Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of `knitr` package for details of embedding HTML. 
+Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of `knitr` package for details of embedding HTML.
 
 Let us first view the raw data (no bundling), we can build an instance of the TGVE using `tgver::setup`. The package relies on passing API variables using a URL to the TGVE instance:
 
@@ -124,7 +124,7 @@ if(!is.actions) {
   img_or_warning("https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png")
 }
 ```
-As of version `1.3.5` release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a `line` layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering "features" such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated. 
+As of version `1.3.5` release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a `line` layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering "features" such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.
 
 <img src="https://user-images.githubusercontent.com/408568/148212057-b67b08a4-9342-42bb-95c2-557505d92b77.png" alt="filtered bundled flights" width="100%"/>
 The TGVE basic "click to filter" of lines from an origin-destination data.
@@ -149,12 +149,12 @@ if(!is.actions) {
 }
 ```
 
-Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions. 
+Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions.
 
 ## Dataset two
 The CDRC (Consumer Data Research Centre) provides "unique insight in to a diverse range of societal and economic challenges in collaboration with a wide range of consumer data providers"[@cdrc]. On the website researchers can find consumer datasets. One of these is IMD historical data for UK's Lower Super Output Areas (LSOA). The LSOA geography is a "large" boundary data and you can find out more about it and download different datasets here or elsewhere.
 
-A typical scenario for a researcher, including senior data scientists to learn about how geographic data is processed in data science languages such as R and Python. Let us imagine our researcher is an R expert but has not been exposed to geographic data. They need to first learn about OGC standards such as Simple Features. They will then need to learn about packages like `sf` and underlying system requirements without mentioning examples. 
+A typical scenario for a researcher, including senior data scientists to learn about how geographic data is processed in data science languages such as R and Python. Let us imagine our researcher is an R expert but has not been exposed to geographic data. They need to first learn about OGC standards such as Simple Features. They will then need to learn about packages like `sf` and underlying system requirements without mentioning examples.
 
 What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can do the rest.
 
@@ -191,7 +191,7 @@ tgver::explore_dir(dir)
 
 ```
 
-Now, this early release of this package (`tgver`) has a function called `explore_dir` which searches through at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the `plumber` package behind the scenes and serves them to the front TGVE which puts them together. A future version could as easily take a dictionary of the two column names and pass it to the front-end.
+Now, the package (`tgver`) has a function called `explore_dir` which searches through at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the `plumber` package behind the scenes and serves them to the front TGVE which puts them together. A future version could as easily take a dictionary of the two column names and pass it to the front-end.
 
 The result will be like the following image.
 <img src="https://user-images.githubusercontent.com/408568/148931326-4adad852-5bb6-466c-bf0a-0221da586376.png" alt="cdrc dataset imd" width="100%" />
@@ -205,7 +205,7 @@ Check the following instance being customized with data served from a GitHub rep
 ```{r, out.width='100%'}
 knitr::include_url(
   paste0("https://tgve.github.io/app?",
-         "defaultURL=https://raw.githubusercontent.com", 
+         "defaultURL=https://raw.githubusercontent.com",
          "/tgve/eatlas-data/main/casualties_100.geojson&layerName=heatmap")
 )
 ```
