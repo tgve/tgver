@@ -5,6 +5,7 @@ test_that("static tgve works", {
   expect_true(identical(ip, r))
   # try again
   unlink(file.path(p, "tgve"), recursive = TRUE)
+  skip_on_cran()
   expect_message(tgve())
   expect_error(tgve(remote = TRUE,
                     url = "notvalidurl"))
