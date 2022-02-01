@@ -121,7 +121,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># open a static tgve</span>
 <span class="co"># tgver::tgve()</span>
-<span class="co"># </span>
+<span class="co">#</span>
 <span class="co"># or start a tgve instance before embedding it</span>
 <span class="co"># tgver::tgve_server()</span>
 <span class="co"># knitr::include_url("http://127.0.0.1:8000")</span>
@@ -166,12 +166,11 @@
 <li>
 <code>explore_dir</code>: this is an ambitious function to develop. Current version tries to find two files and pass them to TGVE’s <code>defaultURL</code> and <code>geographyURL</code> as that is a use case of the TGVE.</li>
 </ol>
-<p>This vignette is under active development.</p>
 </div>
 <div class="section level3">
 <h3 id="remote-instance">Remote instance<a class="anchor" aria-label="anchor" href="#remote-instance"></a>
 </h3>
-<p>The simplest way to use the TGVE is using an instance running at a local/remote server. As of version <code>1.3.5-beta.0</code> of the TGVE (eatlas) npm package, it takes URL “query parameter” based API variables provided. Therefore, we can simply run an instance such as the <a href="https://tgve.github.io/eatlas-template" class="external-link"><code>eatlas-template</code></a> instance as follows without doing anything else:</p>
+<p>The simplest way to use the TGVE is using an instance running at a local/remote server, using the URL “query parameter” based API variables provided. Therefore, we can simply run an instance such as the <a href="https://tgve.github.io/app" class="external-link"><code>app</code></a> instance as follows without doing anything else:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tgve = "https://tgve.github.io/app?"</span>
 <span class="co"># defaultURL = "https://raw.githubusercontent.com/tgve/eatlas-data/main/casualties_100.geojson"</span>
