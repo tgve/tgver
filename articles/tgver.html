@@ -140,7 +140,7 @@
 <span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
 <span class="co"># we just need to pass the data/csv URL</span>
 <span class="co"># using `defaultURL` API</span>
-<span class="va">url</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/get_url.html">get_url</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tp</span>, <span class="st">"index.html"</span><span class="op">)</span>, defaultURL <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/tgve/eatlas-data/main/utlas.geojson'</span>,
+<span class="va">url</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/get_url.html">get_url</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tp</span>, <span class="st">"index.html"</span><span class="op">)</span>, defaultURL <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/tgve/example-data/main/utlas.geojson'</span>,
                    column <span class="op">=</span> <span class="st">"long"</span>,
                    hideChartGenerator<span class="op">=</span><span class="st">"true"</span>,
                    <span class="co"># In future R should assemble the json</span>
@@ -173,12 +173,12 @@
 <p>The simplest way to use the TGVE is using an instance running at a local/remote server, using the URL “query parameter” based API variables provided. Therefore, we can simply run an instance such as the <a href="https://tgve.github.io/app" class="external-link"><code>app</code></a> instance as follows without doing anything else:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tgve = "https://tgve.github.io/app?"</span>
-<span class="co"># defaultURL = "https://raw.githubusercontent.com/tgve/eatlas-data/main/casualties_100.geojson"</span>
+<span class="co"># defaultURL = "https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson"</span>
 <span class="co"># url = paste0(tgve, "defaultURL=", defaultURL)</span>
 <span class="co"># knitr::include_url(url)</span>
 <span class="co"># or simply</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app?defaultURL=https://raw.githubusercontent.com/tgve/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span></code></pre></div>
-<iframe src="https://tgve.github.io/app?defaultURL=https://raw.githubusercontent.com/tgve/eatlas-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span></code></pre></div>
+<iframe src="https://tgve.github.io/app?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We grab the remote instance, but instead of its internal values, the URL parameters takes precedence. That means the value given as <code>defaultURL</code> is parsed by the TGVE. We can as easily use this in R’s built in “view” or “browse” commands, too.</p>
 </div>
