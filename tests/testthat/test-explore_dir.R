@@ -19,4 +19,5 @@ test_that("explore_dir works", {
   ps = explore_dir(p, background = TRUE)
   expect_true(inherits(ps, "r_process"))
   ps$kill()
+  unlink(p, recursive = TRUE)
 })

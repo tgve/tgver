@@ -13,4 +13,5 @@ test_that("setup works", {
   expect_true(length(static) > 1)
   # now try
   expect_error(setup(t))
+  unlink(t, recursive = TRUE)
 })
