@@ -10,7 +10,8 @@ Authors@R: c(
     person("Nik", "Lomax", email = "n.m.lomax@leeds.ac.uk", role = c("aut"), 
       comment = c(ORCID = "0000-0001-9504-7570"))
     )
-Description: TGVE R package for geospatial visualization and analysis.
+Maintainer: Layik Hama <l.hama@leeds.ac.uk>
+Description: Turing Geovisualization Engine R package for geospatial visualization and analysis.
 Language: EN-GB
 License: file LICENSE
 URL: https://github.com/tgve/tgver
