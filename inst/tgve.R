@@ -21,7 +21,7 @@
 #'######### UPDATE VERSION/build ###############
 #' in order to update bundled version
 file.remove("./inst/tgve.zip")
-build.dir = "~/code/eatlas-template"
+build.dir = "~/code/tgve/app"
 #' Then copy files back
 #' rename CRA build to tgve
 file.rename(file.path(build.dir, "build"),
@@ -30,7 +30,7 @@ file.rename(file.path(build.dir, "build"),
 #' zip command will preserve parent dir structure back to / (root)
 #' therefore need to cd into build location and out after zip
 ow = setwd(build.dir)
-zip("~/code/TGVE/tgver/inst/tgve.zip",
+zip("~/code/tgve/tgver/inst/tgve.zip",
     list.files("tgve", full.names = TRUE, recursive = TRUE))
 setwd(ow)
 # get TGVE version
