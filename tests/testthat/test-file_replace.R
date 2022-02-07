@@ -19,7 +19,7 @@ test_that("list_api_files works", {
   p = tempInstance()
   expect_error(list_api_files())
   a = list_api_files(p)
-  expect_true(length(a) > 1)
+  expect_true(length(a) == 1)
   # mess it up
   file.remove(a)
   expect_error(list_api_files(p))

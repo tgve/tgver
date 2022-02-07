@@ -115,7 +115,7 @@ img_or_warning = function(img.url) {
   if(!curl::has_internet()) {
   warning("Rmd was rendered with no connection!")
 } else {
-  knitr::include_graphics(img.url)
+  knitr::include_graphics(img.url, error = FALSE)
 }
 }
 if(!is.actions) {

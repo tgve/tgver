@@ -1,6 +1,6 @@
 Package: tgver
 Type: Package
-Title: TGVE R package
+Title: Turing Geovisualization Engine R package
 Version: 0.2.0
 Authors@R: c(
     person("Layik", "Hama", email = "l.hama@leeds.ac.uk", role = c("aut", "cre"), 
@@ -11,7 +11,7 @@ Authors@R: c(
       comment = c(ORCID = "0000-0001-9504-7570"))
     )
 Maintainer: Layik Hama <l.hama@leeds.ac.uk>
-Description: TGVE R package for geospatial visualization and analysis.
+Description: Turing Geovisualization Engine R package for geospatial visualization and analysis.
 Language: EN-GB
 License: file LICENSE
 URL: https://github.com/tgve/tgver
