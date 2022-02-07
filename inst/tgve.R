@@ -32,11 +32,14 @@ file.rename(file.path(build.dir, "build"),
 ow = setwd(build.dir)
 zip("~/code/tgve/tgver/inst/tgve.zip",
     list.files("tgve", full.names = TRUE, recursive = TRUE))
+# undo
+file.rename(file.path(build.dir, "tgve"),
+            file.path(build.dir, "build"))
 setwd(ow)
 # get TGVE version
 # checkout package for local/build
 version = jsonlite::parse_json(
-  readLines(file.path(build.dir, "package.json")))$dependencies$eatlas
+  readLines(file.path(build.dir, "package.json")))$dependencies['@tgve/tgvejs'][[1]]
 version = sub(".", "", version)
 names(version) <- "version"
 usethis::use_data(version, overwrite = TRUE)
