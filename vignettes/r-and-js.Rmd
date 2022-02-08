@@ -126,7 +126,7 @@ if(!is.actions) {
   img_or_warning("https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png")
 }
 ```
-As of version `1.3.5` release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a `line` layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering "features" such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.
+As of version `1.4.0` release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a `line` layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering "features" such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.
 
 <img src="https://user-images.githubusercontent.com/408568/148212057-b67b08a4-9342-42bb-95c2-557505d92b77.png" alt="filtered bundled flights" width="100%"/>
 The TGVE basic "click to filter" of lines from an origin-destination data.
@@ -200,7 +200,7 @@ The result will be like the following image.
 
 ## Remote TGVE instance
 
-The TGVE version `1.3.5` and above accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.
+The TGVE accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.
 
 Check the following instance being customized with data served from a GitHub repository:
 
