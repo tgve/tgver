@@ -1,5 +1,5 @@
 ---
-title: "The power of R + JS"
+title: "Interactive geospatial processing and visualization with TGVE"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{The power of R + JS}
@@ -21,9 +21,11 @@ knitr::opts_chunk$set(
 
 One limitation of browsers is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers. Rust can be compiled to WebAssembly [@mozillarust] and that means C/C++ and possibly R could also be compiled to WebAssembly. It is still true that Python and R run outside browsers including when driving Jupyter and Rmarkdown documents. The increasing power of browsers and number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) or in R/Python on operating systems.
 
+The aim of this vignette is to show the way TGVE has been developed and showcase the difference between this approach and other approaches where R is used to generate HTML, CSS and even JS to generate mainly visualizations in browsers.
+
 ## Dataset one
 
-To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: `edgebundle`, `igraph` and `ggplot2` first. The following is adapted from [here](https://github.com/schochastics/edgebundle).
+Let us do some processing in R and then view the result in the TGVE. For this purpose we will use these R packages: `edgebundle`, `igraph` and `ggplot2` first. The following is adapted from [here](https://github.com/schochastics/edgebundle).
 
 ```{r data-prep}
 library(igraph)
