@@ -19,9 +19,9 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-One limitation of browsers is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers. Rust can be compiled to WebAssembly [@mozillarust] and that means C/C++ and possibly R could also be compiled to WebAssembly. It is still true that Python and R run outside browsers including when driving Jupyter and Rmarkdown documents. The increasing power of browsers and number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) or in R/Python on operating systems.
+One of the limitations of web browsers is inability to execute general purpose languages like R and Python. On the other hand, the limitation of Python and R (data science languages) is that they need a medium for generating graphics. The increasing number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) and other tasks in R/Python on operating systems, given a client-server architecture [@berson1996client].
 
-The aim of this vignette is to show the way TGVE has been developed and showcase the difference between this approach and other approaches where R is used to generate HTML, CSS and even JS to generate mainly visualizations in browsers.
+The aim of this vignette is to show the way TGVE has been developed and showcase the difference between this approach and other approaches where R is used to generate HTML, CSS and/or JavaScript (JS) code to generate visualizations to run browsers. Although the front-end application is written in ReactJS, the `tgver` package bundles a production build of a web application that uses the `@tgve/tgvejs` npm package.
 
 ## Dataset one
 
@@ -65,15 +65,16 @@ library(sf)
 sfc = lapply(1:nrow(m), function(x) st_linestring(matrix(unlist(m[x,]), ncol = 2, byrow = TRUE)))
 sfc = st_sfc(sfc, crs = 4326)
 ```
+So far, we have done some pre-processing of an `igraph` object, created some lines, processed the lines using `edgebundle::edge_bundle_path` (please see the `edgebundle` package for details of the algorithm), and created an `sfc`object. 
 
 ### Static visualization
 
-First, let us have a look at the lines without bundling the edges using `plot`:
+First, let us have a look at the lines in our `sfc` object as they are using `plot` function:
 ```{r plot-no-bundling, out.width='90%'}
 plot(sfc)
 ```
 
-Using the `edgebundle::edge_bundle_path` function, please see the `edgebundle` package for details of the algorithm, and using `ggplot` let us plot the bundled paths:
+Secondly, let us have a look at the bundled paths using `ggplot`:
 ```{r ggplot-no-bundle, out.width='90%'}
 ggplot() +
   geom_path(data = pbundle, aes(x, y, group = group),
