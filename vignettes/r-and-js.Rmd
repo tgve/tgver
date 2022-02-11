@@ -1,8 +1,8 @@
 ---
-title: "Interactive geospatial processing and visualization with TGVE"
+title: "Interactive geospatial processing and visualization gwith TGVE"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The power of R + JS}
+  %\VignetteIndexEntry{Interactive geospatial processing and visualization gwith TGVE}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: refs.bib
@@ -94,7 +94,7 @@ Let us first view the raw data (no bundling), we can build an instance of the TG
 
 ```{r tgve1, out.width='100%'}
 library(tgver)
-p = "~/Downloads"
+p = tempdir()
 tp = file.path(p, "tgve")
 unlink(tp, recursive = TRUE)
 # some random line width
@@ -110,7 +110,7 @@ run_tgve = function(layerName="line") {
              viewport="{zoom:3,pitch:0,bearing:0}",
              layerName=layerName)
   knitr::include_url(url)
-  ps$kill()
+  # ps$kill()
 }
 
 img_or_warning = function(img.url) {
@@ -163,7 +163,7 @@ What the TGVE does for our researcher in question is, whilst they are learning a
 How? Our researcher needs to download an IMD dataset such as this one. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:
 
 ```{r, data-prep2, eval=FALSE}
-dir = "~/Downloads/cdrc"
+dir = file.path(tempdir(), "cdrc")
 dir.create(dir)
 
 # download the csv data which is behind authorization from cdrc
