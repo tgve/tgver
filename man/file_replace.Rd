@@ -7,11 +7,11 @@
 file_replace(files = NULL, pattern, replacement)
 }
 \arguments{
-\item{files}{where pattern to be replaced.}
+\item{files}{character vector of full paths where pattern to be replaced.}
 
-\item{pattern}{the pattern to replace using `gsub`.}
+\item{pattern}{character pattern to replace using `gsub`.}
 
-\item{replacement}{the string to replace pattern with using `gsub`.}
+\item{replacement}{character to replace pattern with using `gsub`.}
 }
 \description{
 Function to replace patterns in given files.

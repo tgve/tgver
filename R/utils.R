@@ -174,3 +174,7 @@ get_url = function(base = "http://127.0.0.1:8000", ...) {
   }
   new.url
 }
+
+isSingleString = function(input) {
+  is.character(input) & length(input) == 1
+}
