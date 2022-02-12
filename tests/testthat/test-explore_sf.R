@@ -26,6 +26,13 @@ test_that("explore_sf works", {
   expect_true(inherits(ps, "r_process"))
   ps$kill()
 
+  # static
+  p = explore_sf(sf = sf, static = TRUE)
+  g = grepl("LineString", readLines(file.path(p, "index.html")))
+  expect_true(g)
+  g = grepl("FeatureCollection", readLines(file.path(p, "index.html")))
+  expect_true(g)
+
   # explore_geojson
   expect_error(explore_geojson())
   expect_error(explore_geojson("/endpoint"))

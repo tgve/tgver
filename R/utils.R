@@ -15,6 +15,7 @@ openURL = function(url = NULL,
                    browser = FALSE,
                    path = "",
                    protocol = "http://") {
+  if(!interactive()) return()
   # TODO: there must be better ways of doing this
   u = paste0(protocol, host,":", port, "/", path)
   if(!is.null(url) && is.character(url) && length(url) == 1) {
@@ -57,6 +58,8 @@ copy_tgve = function(path, over.write = TRUE) {
   if(!inst.copied)
     stop(m)
   utils::unzip(f, exdir = path)
+  # keep copy of original index.html
+  file.copy(file.path(d, "index.html"), file.path(d, "index.original"))
   # there is now path/tgve
   unzipped = list.files(d, pattern = "*.js|*html")
   if(length(unzipped) < 1)

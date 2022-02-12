@@ -2,18 +2,21 @@
 % Please edit documentation in R/explore_sf.R
 \name{explore_sf}
 \alias{explore_sf}
-\title{Explore an sf R object using TGVE npm package.}
+\title{Explore an sf R object using TGVE.}
 \usage{
-explore_sf(sf = NULL, background = FALSE)
+explore_sf(sf = NULL, background = FALSE, static = FALSE)
 }
 \arguments{
 \item{sf}{a valid sf object that can be converted to geojson}
 
-\item{background}{Boolean to decide whether plumber
-should run in the background}
+\item{background}{boolean to decide whether plumber should run in the
+background}
+
+\item{static}{boolean to decide whether data is written to disk and self
+contained application is built}
 }
 \description{
-Explore an sf R object using TGVE npm package.
+Explore an sf R object using TGVE.
 }
 \examples{
 \dontrun{

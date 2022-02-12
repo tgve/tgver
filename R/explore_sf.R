@@ -1,15 +1,18 @@
-#' Explore an sf R object using TGVE npm package.
+#' Explore an sf R object using TGVE.
+#'
 #'
 #'
 #' @param sf a valid sf object that can be converted to geojson
-#' @param background Boolean to decide whether plumber
-#' should run in the background
+#' @param background boolean to decide whether plumber should run in the
+#' background
+#' @param static boolean to decide whether data is written to disk and self
+#' contained application is built
 #'
 #' @examples \dontrun{
 #' explore_sf()
 #' }
 #' @export
-explore_sf = function(sf = NULL, background = FALSE) {
+explore_sf = function(sf = NULL, background = FALSE, static = FALSE) {
   if(is.null(sf) || !inherits(sf, "sf")) {
     stop("Error: explore_sf requires an sf object.")
   }
@@ -17,9 +20,25 @@ explore_sf = function(sf = NULL, background = FALSE) {
   # data
   geojson = geojsonsf::sf_geojson(sf, simplify = FALSE, factors_as_string=FALSE)
 
-  # prepare back-end
-  endpoint = "/explore_sf"
-  explore_geojson(endpoint, geojson, background)
+  # if writing data to index.html
+  if(static) {
+    path = tempInstance()
+    html = file.path(path, "index.html")
+    # clean copy
+    file.copy(file.path(path, "index.original"), html, overwrite = TRUE)
+    # write data
+    file_replace(html, "</head>", paste0(
+      "<script id='tgve-data' type='application/json'>",
+      geojson, "</script></head>"
+    ))
+    message("Attempting to browse TGVE from: ", path)
+    openURL(html)
+    return(path)
+  } else {
+    # prepare back-end
+    endpoint = "/explore_sf"
+    explore_geojson(endpoint, geojson, background)
+  }
 }
 
 explore_geojson = function(endpoint, geojson, background) {
