@@ -4,7 +4,12 @@
 \alias{explore_sf}
 \title{Explore an sf R object using TGVE.}
 \usage{
-explore_sf(sf = NULL, background = FALSE, static = FALSE)
+explore_sf(
+  sf = NULL,
+  background = FALSE,
+  static = FALSE,
+  path = tempInstance()
+)
 }
 \arguments{
 \item{sf}{a valid sf object that can be converted to geojson}
@@ -14,6 +19,8 @@ background}
 
 \item{static}{boolean to decide whether data is written to disk and self
 contained application is built}
+
+\item{path}{path of a TGVE instance, defaults to one in `tempdir()`}
 }
 \description{
 Explore an sf R object using TGVE.

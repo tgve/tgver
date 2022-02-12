@@ -92,7 +92,7 @@ Let us first view the raw data (no bundling), we can build an instance of the TG
 
 ```{r tgve1, out.width='100%'}
 library(tgver)
-p = "~/Downloads"
+p = getwd() # for reproducibilty this needs to be a persistent location
 tp = file.path(p, "tgve")
 unlink(tp, recursive = TRUE)
 # some random line width
@@ -100,15 +100,8 @@ unlink(tp, recursive = TRUE)
 run_tgve = function(layerName="line") {
   setup(p)
   sf = st_as_sf(sfc)
-  ps = explore_sf(sf, background = TRUE)
-  # data is at "http://127.0.0.1:8000/explore_sf"
-  base.url = "http://127.0.0.1:8000"
-  url = get_url(base.url, defaultURL = "http://127.0.0.1:8000/explore_sf",
-             hideChartGenerator="true",
-             viewport="{zoom:3,pitch:0,bearing:0}",
-             layerName=layerName)
-  knitr::include_url(url)
-  ps$kill()
+  p = explore_sf(sf, static = TRUE, path = tp)
+  knitr::include_url(file.path(p, "index.html"))
 }
 
 img_or_warning = function(img.url) {
@@ -149,7 +142,13 @@ if(!is.actions) {
 }
 ```
 
-Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions.
+Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. Also, if you like to clean up after running this Rmarkdown document, then:
+
+```{r, eval=FALSE}
+unlink(file.path(getwd(), "tgve"), recursive = TRUE)
+unlink(file.path(getwd(), "edge-tgve"), recursive = TRUE)
+```
+
 
 ## Dataset two
 The CDRC (Consumer Data Research Centre) provides "unique insight in to a diverse range of societal and economic challenges in collaboration with a wide range of consumer data providers"[@cdrc]. On the website researchers can find consumer datasets. One of these is IMD historical data for UK's Lower Super Output Areas (LSOA). The LSOA geography is a "large" boundary data and you can find out more about it and download different datasets here or elsewhere.
