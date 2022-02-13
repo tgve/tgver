@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive geospatial processing and visualization gwith TGVE • tgver</title>
+<title>Interactive geospatial processing and visualization with TGVE • tgver</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Interactive geospatial processing and visualization gwith TGVE">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Interactive geospatial processing and visualization with TGVE">
 <meta property="og:description" content="tgver">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -56,7 +56,7 @@
       <a href="../articles/dev-plan.html">Development plan</a>
     </li>
     <li>
-      <a href="../articles/r-and-js.html">Interactive geospatial processing and visualization gwith TGVE</a>
+      <a href="../articles/r-and-js.html">Interactive geospatial processing and visualization with TGVE</a>
     </li>
   </ul>
 </li>
@@ -84,7 +84,7 @@
       </header><script src="r-and-js_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Interactive geospatial processing and visualization gwith TGVE</h1>
+      <h1 data-toc-skip>Interactive geospatial processing and visualization with TGVE</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tgve/tgver/blob/HEAD/vignettes/r-and-js.Rmd" class="external-link"><code>vignettes/r-and-js.Rmd</code></a></small>
@@ -99,7 +99,7 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>One of the limitations of web browsers is inability to execute general purpose languages like R and Python. On the other hand, the limitation of Python and R (data science languages) is that they need a medium for generating graphics. The increasing number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) and other tasks in R/Python on operating systems, given a client-server architecture <span class="citation">(Berson 1996)</span>.</p>
-<p>The aim of this vignette is to show the way TGVE has been developed and showcase the difference between this approach and other approaches where R is used to generate HTML, CSS and/or JavaScript (JS) code to generate visualizations to run browsers. Although the front-end application is written in ReactJS, the <code>tgver</code> package bundles a production build of a web application that uses the <code>@tgve/tgvejs</code> npm package.</p>
+<p>The aim of this vignette is to show the way TGVE has been developed and showcase the difference between this approach and other approaches where R is used to generate HTML, CSS and/or JavaScript (JS) code to generate visualizations to run in browsers. Although the front-end application is written in ReactJS, the <code>tgver</code> package bundles a production build of a web application that uses the <a href="https://www.npmjs.com/package/@tgve/tgvejs" class="external-link"><code>@tgve/tgvejs</code></a> npm package.</p>
 </div>
 <div class="section level2">
 <h2 id="dataset-one">Dataset one<a class="anchor" aria-label="anchor" href="#dataset-one"></a>
@@ -243,9 +243,9 @@
 <h2 id="dataset-two">Dataset two<a class="anchor" aria-label="anchor" href="#dataset-two"></a>
 </h2>
 <p>The CDRC (Consumer Data Research Centre) provides “unique insight in to a diverse range of societal and economic challenges in collaboration with a wide range of consumer data providers”<span class="citation">(CDRC 2021)</span>. On the website researchers can find consumer datasets. One of these is IMD historical data for UK’s Lower Super Output Areas (LSOA). The LSOA geography is a “large” boundary data and you can find out more about it and download different datasets here or elsewhere.</p>
-<p>A typical scenario for a researcher, including senior data scientists to learn about how geographic data is processed in data science languages such as R and Python. Let us imagine our researcher is an R expert but has not been exposed to geographic data. They need to first learn about OGC standards such as Simple Features. They will then need to learn about packages like <code>sf</code> and underlying system requirements without mentioning examples.</p>
-<p>What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can do the rest.</p>
-<p>How? Our researcher needs to download an IMD dataset such as this one. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:</p>
+<p>A typical scenario for a researcher, including senior data scientists is to learn about how geographic data is processed in data science languages such as R and Python. Let us imagine our researcher is an R expert but has not been exposed to geographic data. They need to first learn about OGC standards such as Simple Features. They will then need to learn about packages like <code>sf</code> and underlying system requirements without mentioning examples.</p>
+<p>What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R, they can start exploring them using the TGVE. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can combine the two.</p>
+<p>We needs to download an IMD dataset such as <a href="https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv" class="external-link">this one</a>. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"cdrc"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span>
@@ -274,7 +274,7 @@
 
 <span class="co"># Finally, let TGVE serve it!</span>
 <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/explore_dir.html">explore_dir</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span></code></pre></div>
-<p>Now, the package (<code>tgver</code>) has a function called <code>explore_dir</code> which searches through at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the <code>plumber</code> package behind the scenes and serves them to the front TGVE which puts them together. A future version could as easily take a dictionary of the two column names and pass it to the front-end.</p>
+<p>Now, the package (<code>tgver</code>) has a function called <code>explore_dir</code> which searches through at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the <code>plumber</code> package behind the scenes and serves them to the front TGVE which puts them together.</p>
 <p>The result will be like the following image. <img src="https://user-images.githubusercontent.com/408568/148931326-4adad852-5bb6-466c-bf0a-0221da586376.png" alt="cdrc dataset imd" width="100%"></p>
 </div>
 <div class="section level2">
