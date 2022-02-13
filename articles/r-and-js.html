@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The power of R + JS • tgver</title>
+<title>Interactive geospatial processing and visualization gwith TGVE • tgver</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="The power of R + JS">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Interactive geospatial processing and visualization gwith TGVE">
 <meta property="og:description" content="tgver">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -56,7 +56,7 @@
       <a href="../articles/dev-plan.html">Development plan</a>
     </li>
     <li>
-      <a href="../articles/r-and-js.html">The power of R + JS</a>
+      <a href="../articles/r-and-js.html">Interactive geospatial processing and visualization gwith TGVE</a>
     </li>
   </ul>
 </li>
@@ -84,7 +84,7 @@
       </header><script src="r-and-js_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>The power of R + JS</h1>
+      <h1 data-toc-skip>Interactive geospatial processing and visualization gwith TGVE</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tgve/tgver/blob/HEAD/vignettes/r-and-js.Rmd" class="external-link"><code>vignettes/r-and-js.Rmd</code></a></small>
@@ -98,12 +98,13 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>One limitation of browsers is access to Operating System (OS) resources (such as the file system). On the other hand, the limitation of general purpose languages like Python and R (data science languages) is that they are not compiled for use in browsers. Rust can be compiled to WebAssembly <span class="citation">(MDN 2022)</span> and that means C/C++ and possibly R could also be compiled to WebAssembly. It is still true that Python and R run outside browsers including when driving Jupyter and Rmarkdown documents. The increasing power of browsers and number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) or in R/Python on operating systems.</p>
+<p>One of the limitations of web browsers is inability to execute general purpose languages like R and Python. On the other hand, the limitation of Python and R (data science languages) is that they need a medium for generating graphics. The increasing number of packages written in JS means data scientists and developers can choose to run some tasks in the browser (clients) and other tasks in R/Python on operating systems, given a client-server architecture <span class="citation">(Berson 1996)</span>.</p>
+<p>The aim of this vignette is to show the way TGVE has been developed and showcase the difference between this approach and other approaches where R is used to generate HTML, CSS and/or JavaScript (JS) code to generate visualizations to run browsers. Although the front-end application is written in ReactJS, the <code>tgver</code> package bundles a production build of a web application that uses the <code>@tgve/tgvejs</code> npm package.</p>
 </div>
 <div class="section level2">
 <h2 id="dataset-one">Dataset one<a class="anchor" aria-label="anchor" href="#dataset-one"></a>
 </h2>
-<p>To show how the TGVE brings the two (R and JavaScript) together, let us do some advanced processing in R and then view the result in the TGVE. For this purpose we will use these R packages: <code>edgebundle</code>, <code>igraph</code> and <code>ggplot2</code> first. The following is adapted from <a href="https://github.com/schochastics/edgebundle" class="external-link">here</a>.</p>
+<p>Let us do some processing in R and then view the result in the TGVE. For this purpose we will use these R packages: <code>edgebundle</code>, <code>igraph</code> and <code>ggplot2</code> first. The following is adapted from <a href="https://github.com/schochastics/edgebundle" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -150,14 +151,15 @@
 <span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span>
 <span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">x</span>,<span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">sfc</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></code></pre></div>
+<p>So far, we have done some pre-processing of an <code>igraph</code> object, created some lines, processed the lines using <code><a href="http://edgebundle.schochastics.net/reference/edge_bundle_path.html" class="external-link">edgebundle::edge_bundle_path</a></code> (please see the <code>edgebundle</code> package for details of the algorithm), and created an <code>sfc</code>object.</p>
 <div class="section level3">
 <h3 id="static-visualization">Static visualization<a class="anchor" aria-label="anchor" href="#static-visualization"></a>
 </h3>
-<p>First, let us have a look at the lines without bundling the edges using <code>plot</code>:</p>
+<p>First, let us have a look at the lines in our <code>sfc</code> object as they are using <code>plot</code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span></code></pre></div>
 <p><img src="r-and-js_files/figure-html/plot-no-bundling-1.png" width="90%"></p>
-<p>Using the <code><a href="http://edgebundle.schochastics.net/reference/edge_bundle_path.html" class="external-link">edgebundle::edge_bundle_path</a></code> function, please see the <code>edgebundle</code> package for details of the algorithm, and using <code>ggplot</code> let us plot the bundled paths:</p>
+<p>Secondly, let us have a look at the bundled paths using <code>ggplot</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pbundle</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,
@@ -184,7 +186,7 @@
 <span class="co">#&gt; The following object is masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     version</span>
-<span class="va">p</span> <span class="op">=</span> <span class="st">"~/Downloads"</span>
+<span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tp</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># some random line width</span>
@@ -200,7 +202,7 @@
              viewport<span class="op">=</span><span class="st">"{zoom:3,pitch:0,bearing:0}"</span>,
              layerName<span class="op">=</span><span class="va">layerName</span><span class="op">)</span>
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
-  <span class="va">ps</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span>
+  <span class="co"># ps$kill()</span>
 <span class="op">}</span>
 
 <span class="va">img_or_warning</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img.url</span><span class="op">)</span> <span class="op">{</span>
@@ -215,7 +217,7 @@
 <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
   <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png"</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p><img src="https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png" width="100%"> As of version <code>1.3.5</code> release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a <code>line</code> layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering “features” such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.</p>
+<p><img src="https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png" width="100%"> As of version <code>1.4.0</code> release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a <code>line</code> layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering “features” such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.</p>
 <p><img src="https://user-images.githubusercontent.com/408568/148212057-b67b08a4-9342-42bb-95c2-557505d92b77.png" alt="filtered bundled flights" width="100%"> The TGVE basic “click to filter” of lines from an origin-destination data.</p>
 <p>Notice, that as the package is hosted on <code>GitHub</code> and rely on actions to run the package checks, we have checks to decide whether this Rmd renders the TGVE instance on your local machine or not. If you are reading this Rmd on GitHub, chances are you cannot see the TGVE instance. You may have to open the output of the rendered Rmd on a browser tab to see the TGVE instances.</p>
 <p>Let us see how the bundled data looks on the TGVE, we need to use the <code>path</code> layer for now, as the TGVE can still do with more advanced layer detection in future:</p>
@@ -245,7 +247,7 @@
 <p>What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can do the rest.</p>
 <p>How? Our researcher needs to download an IMD dataset such as this one. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dir</span> <span class="op">=</span> <span class="st">"~/Downloads/cdrc"</span>
+<code class="sourceCode R"><span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"cdrc"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span>
 
 <span class="co"># download the csv data which is behind authorization from cdrc</span>
@@ -278,7 +280,7 @@
 <div class="section level2">
 <h2 id="remote-tgve-instance">Remote TGVE instance<a class="anchor" aria-label="anchor" href="#remote-tgve-instance"></a>
 </h2>
-<p>The TGVE version <code>1.3.5</code> and above accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.</p>
+<p>The TGVE accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.</p>
 <p>Check the following instance being customized with data served from a GitHub repository:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
@@ -308,11 +310,11 @@
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references">
+<div id="ref-berson1996client">
+<p>Berson, Alex. 1996. <em>Client/Server Architecture</em>. McGraw-Hill, Inc.</p>
+</div>
 <div id="ref-cdrc">
 <p>CDRC. 2021. “Consumer Data Research Center.” <a href="https://www.cdrc.ac.uk/" class="external-link">https://www.cdrc.ac.uk/</a>.</p>
-</div>
-<div id="ref-mozillarust">
-<p>MDN. 2022. “Compiling from Rust to Webassembly.” <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm" class="external-link">https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm</a>.</p>
 </div>
 </div>
 </div>
