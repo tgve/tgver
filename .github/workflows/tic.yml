@@ -135,13 +135,13 @@ jobs:
         # testing on dev branch for now
         # do not use --force for now
         if: github.ref == 'refs/heads/dev'
-          run: |
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git checkout -b auto-zip
-            git add inst/tgve.zip
-            git -m 'Update inst/tgve.zip'
-            git push origin dev
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b auto-zip
+          git add inst/tgve.zip
+          git -m 'Update inst/tgve.zip'
+          git push origin dev
 
       - name: "[Stage] Codecov"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
