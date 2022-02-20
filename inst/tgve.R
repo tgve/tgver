@@ -1,45 +1,59 @@
-#' For the first version of the app, we want to avoid building JS as
-#' done in geoplumber R package. Therefore we bundle a clean instance of
-#' TGVE using `app` and use it.
+#' TGVE.R script will check out and build the package tgve/app and create a zip
+#' file from the contents of the build folder. This zip file is then copied to
+#' inst/tgve.zip in order to let this package use the app.
 #'
-#' We can do some grep in the instance before we run the application to add the
-#' API values, i.e. we do some grep based builds without npm toolchains.
-#' To make this easier we could also replace these values in the main entry,
-#' as special placeholders to be consumed in the R package/elsewhere.
+#' Here we host tgve locally and tgver.* is the placeholder for API variables.
 #'
-#' Create a clean build from https://github.com/tgve/app
-#' With special `tgver.*` placeholer for all API variables
-#'
+#' In order to replicate by hand the steps done in this script:
+#' git clone https://github.com/tgve/app
+#' cd app
+#' yarn
 #' yarn run build
 #'
 #' Copy the build into the inst/tgve folder
 #' From R package directory
 #'
 #' mkdir inst/tgve
-#' zip -r path/app/build. inst/tgve.zip
+#' zip -r path/to/app/build inst/tgve.zip
 
 #'######### UPDATE VERSION/build ###############
-#' in order to update bundled version
-file.remove("./inst/tgve.zip")
-build.dir = "~/code/tgve/app"
-#' Then copy files back
-#' rename CRA build to tgve
-file.rename(file.path(build.dir, "build"),
-            file.path(build.dir, "tgve"))
-#' if you do not cd into the directory
-#' zip command will preserve parent dir structure back to / (root)
-#' therefore need to cd into build location and out after zip
-ow = setwd(build.dir)
-zip("~/code/tgve/tgver/inst/tgve.zip",
-    list.files("tgve", full.names = TRUE, recursive = TRUE))
-# undo
-file.rename(file.path(build.dir, "tgve"),
-            file.path(build.dir, "build"))
-setwd(ow)
-# get TGVE version
+#' Step 1: setup environment
+currentdir = getwd()
+td = tempdir()
+build.dir = file.path(td,"app")
+
+# Step 2: clone repo
+system(paste("git clone https://github.com/tgve/app", build.dir))
+
+# Step 3: get TGVE version to avoid not necessary build
 # checkout package for local/build
 version = jsonlite::parse_json(
   readLines(file.path(build.dir, "package.json")))$dependencies['@tgve/tgvejs'][[1]]
 version = sub(".", "", version)
 names(version) <- "version"
+# not implemented for now
+# devtools::install_github("tgve/tgver")
+# tgver::version == version
+# stop here if not
+
+# Step 4: build app
+setwd(build.dir)
+system("yarn; yarn run build-local")
+
+# Step 5: replace zip/copy in build
+current.zip = file.path(currentdir, "inst", "tgve.zip")
+if (file.exists(current.zip)) file.remove(current.zip)
+#' Then copies files back and renames build to tgve:
+file.rename(file.path(build.dir, "build"),
+            file.path(build.dir, "tgve"))
+#' if you do not cd into the directory
+#' zip command will preserve parent dir structure back to / (root)
+#' therefore need to cd into build location and out after zip
+zip(current.zip,
+    list.files("tgve", full.names = TRUE, recursive = TRUE))
+setwd(currentdir)
+# print("Contents of inst/ directory: ")
+# print(list.files("inst"))
+
+# Step 6 (final): update version
 usethis::use_data(version, overwrite = TRUE)

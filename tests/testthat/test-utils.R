@@ -2,6 +2,13 @@ test_that("tempInstance works", {
   t = tempInstance()
   expect_true(dir.exists(t))
   expect_true(length(list.files(t, pattern = "html")) == 1)
+  # TODO check version against
+  # version = jsonlite::parse_json(
+  #   readLines(file.path(build.dir, "package.json")))$dependencies['@tgve/tgvejs'][[1]]
+  # version = sub(".", "", version)
+  # names(version) <- "version"
+  # How do we get the build version? It is not there by default
+  # clues for future https://stackoverflow.com/a/58421941/11101153
 })
 
 test_that("is_valid_url works", {
