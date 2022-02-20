@@ -70,12 +70,12 @@ jobs:
       # set date/week for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
       # - cache R packages daily
-      - name: "[Cache] Prepare daily timestamp for cache"
+      - name: "[Cache] [Linux & macOS] Prepare daily timestamp for cache"
         if: runner.os != 'Windows'
         id: date
         run: echo "::set-output name=date::$(date '+%d-%m')"
 
-      - name: "[Cache] Cache R packages"
+      - name: "[Cache] [Linux & macOS] Cache R packages"
         if: runner.os != 'Windows'
         uses: pat-s/always-upload-cache@v2.0.0
         with:
@@ -111,7 +111,7 @@ jobs:
         run: Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
       # macOS devel needs its own stage because we need to work with an option to suppress the usage of binaries
-      - name: "[Stage] Prepare & Install (macOS-devel)"
+      - name: "[Stage] [macOS] Prepare & Install""
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         run: |
           brew install pkg-config
@@ -119,18 +119,18 @@ jobs:
           echo -e 'options(Ncpus = 4, pkgType = "source", repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
           Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: "[Stage] Build App"
+      - name: "[Stage] [macOS] Build App"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         run: Rscript -e "source('inst/tgve.R')"
 
       - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
 
-      - name: "[Stage] After Success"
+      - name: "[Stage] [macOS] After Success"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         run: Rscript -e "tic::after_success()"
 
-      - name: Push new tgve.zip
+      - name: "[Stage] [macOS] Push new tgve.zip""
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         # testing on dev branch for now
         # do not use --force for now
@@ -142,7 +142,7 @@ jobs:
           git commit -m 'Update inst/tgve.zip'
           git push origin dev
 
-      - name: "[Stage] Codecov"
+      - name: "[Stage] [macOS] Codecov"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         run: Rscript -e "covr::codecov()"
 
