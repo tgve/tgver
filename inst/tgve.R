@@ -57,5 +57,5 @@ if (tgver::version != version) {
     # Step 6 (final): update version
     usethis::use_data(version, overwrite = TRUE)
 } else {
-    print("The tgvejs version has not changed, will not replace inst/tgve.zip")
+    print("tgvejs version has not changed, will not replace inst/tgve.zip")
 }
