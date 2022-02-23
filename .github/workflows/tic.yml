@@ -139,9 +139,10 @@ jobs:
           git pull origin dev
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add inst/tgve.zip
-          git commit -m 'Update inst/tgve.zip'
-          git push origin dev
+	  git checkout --orphan zip-branch
+          git --work-tree build add --all
+          git --work-tree build commit -m 'Deploy new tgve.zip'
+          git push origin HEAD:zip-branch --force
 
       - name: "[Stage] [macOS] Codecov"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
