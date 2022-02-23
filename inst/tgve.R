@@ -34,29 +34,26 @@ names(version) <- "version"
 # not implemented for now
 devtools::install_github("tgve/tgver")
 ###### compare the values ####
-if (tgver::version == version) {
-  # stop here if TRUE
-  stop("Version has not been incremented. New build has not been generated")
+if (tgver::version != version) {
+    # IF versions are different, continue to Step 4: build app
+    setwd(build.dir)
+    system("yarn; yarn run build-local")
+
+    # Step 5: replace zip/copy in build
+    current.zip = file.path(currentdir, "inst", "tgve.zip")
+    if (file.exists(current.zip)) file.remove(current.zip)
+    #' Then copies files back and renames build to tgve:
+    file.rename(file.path(build.dir, "build"),
+                file.path(build.dir, "tgve"))
+    #' if you do not cd into the directory
+    #' zip command will preserve parent dir structure back to / (root)
+    #' therefore need to cd into build location and out after zip
+    zip(current.zip,
+        list.files("tgve", full.names = TRUE, recursive = TRUE))
+    setwd(currentdir)
+    # print("Contents of inst/ directory: ")
+    # print(list.files("inst"))
+
+    # Step 6 (final): update version
+    usethis::use_data(version, overwrite = TRUE)
 }
-
-# Step 4: build app
-setwd(build.dir)
-system("yarn; yarn run build-local")
-
-# Step 5: replace zip/copy in build
-current.zip = file.path(currentdir, "inst", "tgve.zip")
-if (file.exists(current.zip)) file.remove(current.zip)
-#' Then copies files back and renames build to tgve:
-file.rename(file.path(build.dir, "build"),
-            file.path(build.dir, "tgve"))
-#' if you do not cd into the directory
-#' zip command will preserve parent dir structure back to / (root)
-#' therefore need to cd into build location and out after zip
-zip(current.zip,
-    list.files("tgve", full.names = TRUE, recursive = TRUE))
-setwd(currentdir)
-# print("Contents of inst/ directory: ")
-# print(list.files("inst"))
-
-# Step 6 (final): update version
-usethis::use_data(version, overwrite = TRUE)
