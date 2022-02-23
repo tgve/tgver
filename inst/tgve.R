@@ -32,9 +32,12 @@ version = jsonlite::parse_json(
 version = sub(".", "", version)
 names(version) <- "version"
 # not implemented for now
-# devtools::install_github("tgve/tgver")
-# tgver::version == version
-# stop here if not
+devtools::install_github("tgve/tgver")
+###### compare the values ####
+if (tgver::version == version) {
+  # stop here if TRUE
+  stop("Version has not been incremented. New build has not been generated")
+}
 
 # Step 4: build app
 setwd(build.dir)
