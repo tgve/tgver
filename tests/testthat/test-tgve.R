@@ -11,5 +11,5 @@ test_that("static tgve works", {
                     url = "notvalidurl"))
   expect_message(tgve(remote = TRUE,
                       # even just tgve(remote = TRUE)
-                      url = "https://tgve.github.io/app"))
+                      url = "https://tgve.github.io/app/"))
 })

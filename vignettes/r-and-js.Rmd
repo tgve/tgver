@@ -116,10 +116,10 @@ run_tgve = function(layerName="line") {
 
 img_or_warning = function(img.url) {
   if(!curl::has_internet()) {
-  warning("Rmd was rendered with no connection!")
-} else {
-  knitr::include_graphics(img.url, error = FALSE)
-}
+    warning("Rmd was rendered with no connection!")
+  } else {
+    paste0("<img src='", img.url, "' />")
+  }
 }
 if(!is.actions) {
   run_tgve()
