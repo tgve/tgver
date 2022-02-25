@@ -207,17 +207,18 @@
 
 <span class="va">img_or_warning</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img.url</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu">curl</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/curl/man/nslookup.html" class="external-link">has_internet</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Rmd was rendered with no connection!"</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="va">img.url</span>, error <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="op">}</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Rmd was rendered with no connection!"</span><span class="op">)</span>
+  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;img src='"</span>, <span class="va">img.url</span>, <span class="st">"' /&gt;"</span><span class="op">)</span>
+  <span class="op">}</span>
 <span class="op">}</span>
 <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">is.actions</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">run_tgve</span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
   <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<p><img src="https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png" width="100%"> As of version <code>1.4.0</code> release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a <code>line</code> layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering “features” such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.</p>
+<span class="op">}</span>
+<span class="co">#&gt; [1] "&lt;img src='https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png' /&gt;"</span></code></pre></div>
+<p>As of version <code>1.4.0</code> release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a <code>line</code> layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering “features” such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.</p>
 <p><img src="https://user-images.githubusercontent.com/408568/148212057-b67b08a4-9342-42bb-95c2-557505d92b77.png" alt="filtered bundled flights" width="100%"> The TGVE basic “click to filter” of lines from an origin-destination data.</p>
 <p>Notice, that as the package is hosted on <code>GitHub</code> and rely on actions to run the package checks, we have checks to decide whether this Rmd renders the TGVE instance on your local machine or not. If you are reading this Rmd on GitHub, chances are you cannot see the TGVE instance. You may have to open the output of the rendered Rmd on a browser tab to see the TGVE instances.</p>
 <p>Let us see how the bundled data looks on the TGVE, we need to use the <code>path</code> layer for now, as the TGVE can still do with more advanced layer detection in future:</p>
@@ -234,8 +235,8 @@
   <span class="fu">run_tgve</span><span class="op">(</span>layerName <span class="op">=</span> <span class="st">"path"</span><span class="op">)</span>
 <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
   <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<p><img src="https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png" width="100%"></p>
+<span class="op">}</span>
+<span class="co">#&gt; [1] "&lt;img src='https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png' /&gt;"</span></code></pre></div>
 <p>Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions.</p>
 </div>
 </div>
