@@ -16,7 +16,7 @@ Authors@R: c(
 Maintainer: Layik Hama <l.hama@leeds.ac.uk>
 Description: Turing Geovisualization Engine R package for geospatial visualization and analysis.
 Language: EN-GB
-License: file LICENSE
+License: MIT + file LICENSE
 URL: https://github.com/tgve/tgver
 BugReports: https://github.com/tgve/tgver/issues
 Encoding: UTF-8
