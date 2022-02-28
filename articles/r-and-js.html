@@ -285,11 +285,11 @@
 <p>Check the following instance being customized with data served from a GitHub repository:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app?"</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/?"</span>,
          <span class="st">"defaultURL=https://raw.githubusercontent.com"</span>,
          <span class="st">"/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<iframe src="https://tgve.github.io/app?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
+<iframe src="https://tgve.github.io/app/?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We can, of course, pass the data (bundled or not) as a json (geojson) using the <code>data</code> variable of the TGVE. This is how you could do this in this code sample:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
