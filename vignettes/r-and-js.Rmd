@@ -207,7 +207,7 @@ Check the following instance being customized with data served from a GitHub rep
 
 ```{r, out.width='100%'}
 knitr::include_url(
-  paste0("https://tgve.github.io/app?",
+  paste0("https://tgve.github.io/app/?",
          "defaultURL=https://raw.githubusercontent.com",
          "/tgve/example-data/main/casualties_100.geojson&layerName=heatmap")
 )
