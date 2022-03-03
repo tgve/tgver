@@ -13,7 +13,7 @@ explore_dir(path, background = FALSE)
 }
 \value{
 no value returned, depending on `background` either a or not
-blocking `plumber` instance is started. A message is displayed with
+blocking `plumber::pr` instance is started. A message is displayed with
 instance details.
 }
 \description{

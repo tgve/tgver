@@ -9,7 +9,7 @@
 #' @param path character of a data directory.
 #' @param background logical value whether to run instance in `callr`.
 #' @return no value returned, depending on `background` either a or not
-#' blocking `plumber` instance is started. A message is displayed with
+#' blocking `plumber::pr` instance is started. A message is displayed with
 #' instance details.
 #'
 #' @export

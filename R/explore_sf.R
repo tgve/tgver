@@ -4,6 +4,9 @@
 #' @param sf a valid sf object that can be converted to geojson
 #' @param background Boolean to decide whether plumber
 #' should run in the background
+#' @return depending on `background` either a or not
+#' blocking `plumber::pr` object is started or returned. In the case of a
+#' `backgruond` FALSE value a message is displayed with object details.
 #'
 #' @examples
 #' \dontrun{

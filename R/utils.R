@@ -147,7 +147,7 @@ is_valid_url = function(string) {
 #' @param base character URL defaults to `http://127.0.0.1:8000`
 #' @param ... any or all of the TGVE API variables to replace/add values to.
 #'
-#' @return character URL
+#' @return character URL generated from `base` and `tgver::`
 #'
 #' @examples {
 #' url = get_url(dark="false")

@@ -12,6 +12,11 @@ explore_sf(sf = NULL, background = FALSE)
 \item{background}{Boolean to decide whether plumber
 should run in the background}
 }
+\value{
+depending on `background` either a or not
+blocking `plumber::pr` object is started or returned. In the case of a
+`backgruond` FALSE value a message is displayed with object details.
+}
 \description{
 Explore an sf R object using TGVE npm package.
 }
