@@ -21,8 +21,8 @@ blocking `plumber::pr` object is started or returned. In the case of a
 Explore an sf R object using TGVE npm package.
 }
 \examples{
-\dontrun{
-js <- c(
+{
+gj = c(
 '[
       {"type":"Point","coordinates":[0,0]},
       {"type":"LineString","coordinates":[[-1,-1],[1,1]]},
@@ -38,9 +38,8 @@ js <- c(
   }
     ]'
 )
-sf = geojsonsf::geojson_sf( js )
+sf = geojsonsf::geojson_sf(gj)
 ps = tgver::explore_sf(sf, background = TRUE)
-expect_true(inherits(ps, "r_process"))
 ps$kill()
 }
 }

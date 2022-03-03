@@ -10,13 +10,28 @@
 #' instance details.
 #'
 #' @export
-#' @examples
-#'
-#' \dontrun{
-#' fp = "test.geojson"
-#' write(js, fp)
+#' @examples {
+#' fp = file.path(tempdir(), "test.geojson")
+#' gj = c(
+#' '[
+#'       {"type":"Point","coordinates":[0,0]},
+#'       {"type":"LineString","coordinates":[[-1,-1],[1,1]]},
+#'         {
+#'       "type": "FeatureCollection",
+#'       "features": [
+#'       {
+#'         "type": "Feature",
+#'         "properties": {"id":1},
+#'         "geometry": {"type": "Point", "coordinates": [100.0, 0.0]}
+#'       }
+#'     ]
+#'   }
+#'     ]'
+#' )
+#' write(gj, fp)
 #' ps = tgver::explore_file(fp, background = TRUE)
 #' ps$kill()
+#' unlink(fp, recursive = TRUE)
 #' }
 explore_file = function(file.uri, background = FALSE) {
   stopifnotonecharacter(file.uri,

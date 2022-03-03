@@ -24,8 +24,7 @@ It will also look at their column names and try to find matching columns.
 If there is one file, it passes it to `explore_file` function.
 }
 \examples{
-
-\dontrun{
+{
 p = file.path(tempdir(), "data")
 dir.create(p)
 gURL = paste0("https://raw.githubusercontent.com/saferactive/",

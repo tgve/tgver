@@ -13,9 +13,7 @@
 #' instance details.
 #'
 #' @export
-#' @examples
-#'
-#' \dontrun{
+#' @examples {
 #' p = file.path(tempdir(), "data")
 #' dir.create(p)
 #' gURL = paste0("https://raw.githubusercontent.com/saferactive/",

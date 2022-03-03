@@ -21,11 +21,27 @@ instance details.
 Current version can only read geojson/csv files using the given `file.uri`.
 }
 \examples{
-
-\dontrun{
-fp = "test.geojson"
-write(js, fp)
+{
+fp = file.path(tempdir(), "test.geojson")
+gj = c(
+'[
+      {"type":"Point","coordinates":[0,0]},
+      {"type":"LineString","coordinates":[[-1,-1],[1,1]]},
+        {
+      "type": "FeatureCollection",
+      "features": [
+      {
+        "type": "Feature",
+        "properties": {"id":1},
+        "geometry": {"type": "Point", "coordinates": [100.0, 0.0]}
+      }
+    ]
+  }
+    ]'
+)
+write(gj, fp)
 ps = tgver::explore_file(fp, background = TRUE)
 ps$kill()
+unlink(fp, recursive = TRUE)
 }
 }
