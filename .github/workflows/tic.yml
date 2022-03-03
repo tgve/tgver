@@ -130,17 +130,18 @@ jobs:
         run: Rscript -e "tic::after_success()"
 
       - name: "[Stage] [macOS] [No PR] Push new tgve.zip"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release' && github.event_name != 'pull_request'
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release' && github.ref == 'refs/heads/master'
         run: |
-          git pull origin ${GITHUB_REF##*/}
+          git pull origin master
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
+          git add data/version.rda
+          git add inst/tgve.zip
           git commit -m "Deploy new tgve.zip" --allow-empty
           git push
 
       - name: "[Stage] [macOS] Codecov"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release' && github.ref == 'refs/heads/master'
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         run: Rscript -e "covr::codecov()"
 
       - name: "[Stage] Upload R CMD check artifacts"
