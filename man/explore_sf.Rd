@@ -12,11 +12,34 @@ explore_sf(sf = NULL, background = FALSE)
 \item{background}{Boolean to decide whether plumber
 should run in the background}
 }
+\value{
+depending on `background` either a or not
+blocking `plumber::pr` object is started or returned. In the case of a
+`backgruond` FALSE value a message is displayed with object details.
+}
 \description{
 Explore an sf R object using TGVE npm package.
 }
 \examples{
-\dontrun{
-explore_sf()
+{
+gj = c(
+'[
+      {"type":"Point","coordinates":[0,0]},
+      {"type":"LineString","coordinates":[[-1,-1],[1,1]]},
+        {
+      "type": "FeatureCollection",
+      "features": [
+      {
+        "type": "Feature",
+        "properties": {"id":1},
+        "geometry": {"type": "Point", "coordinates": [100.0, 0.0]}
+      }
+    ]
+  }
+    ]'
+)
+sf = geojsonsf::geojson_sf(gj)
+ps = tgver::explore_sf(sf, background = TRUE)
+ps$kill()
 }
 }

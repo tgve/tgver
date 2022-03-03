@@ -15,4 +15,5 @@ apis = c(tooltipColumns="tgver.tooltipColumns",
          viewport="tgver.viewport",
          hideChartGenerator="tgver.hideChartGenerator",
          hideCharts="tgver.hideCharts")
+############### internal so no docs needed ##############
 usethis::use_data(apis, internal = TRUE, overwrite = TRUE)

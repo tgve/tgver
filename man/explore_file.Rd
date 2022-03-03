@@ -12,6 +12,36 @@ explore_file(file.uri, background = FALSE)
 \item{background}{Boolean to run the process in the background,
 defaults to `FALSE`}
 }
+\value{
+no value returned, depending on `background` either a or not
+blocking `plumber` instance is started. A message is displayed with
+instance details.
+}
 \description{
 Current version can only read geojson/csv files using the given `file.uri`.
+}
+\examples{
+{
+fp = file.path(tempdir(), "test.geojson")
+gj = c(
+'[
+      {"type":"Point","coordinates":[0,0]},
+      {"type":"LineString","coordinates":[[-1,-1],[1,1]]},
+        {
+      "type": "FeatureCollection",
+      "features": [
+      {
+        "type": "Feature",
+        "properties": {"id":1},
+        "geometry": {"type": "Point", "coordinates": [100.0, 0.0]}
+      }
+    ]
+  }
+    ]'
+)
+write(gj, fp)
+ps = tgver::explore_file(fp, background = TRUE)
+ps$kill()
+unlink(fp, recursive = TRUE)
+}
 }

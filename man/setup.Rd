@@ -11,6 +11,9 @@ setup(path = NULL, create = TRUE)
 
 \item{create}{Boolean to create new directory at path, defaults to `TRUE`.}
 }
+\value{
+no value returned
+}
 \description{
 This function initializes an instance of TGVE for permanent use compared with
 what \link[tgver]{tgve_server} which relies on a `tempdir` based instance.

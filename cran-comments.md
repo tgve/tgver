@@ -17,3 +17,14 @@
 
 Check:
 0 errors v | 0 warnings v | 0 notes v
+
+## Second submission checks addressed
+3rd March 2022
+
+* All exported functions have now got \value in their `.Rd`s.
+* No commented code in examples
+* Removed dontrun and found examples that can run and should not be longer than < 5 secs
+* instead of TGVE in LICENSE now states tgver authors which are all listed in the Authors@R object.
+
+Check:
+0 errors v | 0 warnings v | 0 notes v

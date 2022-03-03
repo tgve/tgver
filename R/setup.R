@@ -7,6 +7,8 @@
 #' @param path Character URI to copy tgve instance in.
 #' @param create Boolean to create new directory at path, defaults to `TRUE`.
 #'
+#' @return no value returned
+#'
 #' @examples {
 #' p = file.path(tempdir(), "tgve")
 #' setup(p)
