@@ -21,9 +21,6 @@
 #'
 #' @export
 #' @examples {
-#' # this will run the underlying `plumber` instance and block
-#' # the R process.
-#' # tgve_server()
 #' # This will run in the background using `callr`
 #' ps = tgve_server(background = TRUE)
 #' Sys.sleep(2)
