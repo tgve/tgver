@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -80,12 +80,38 @@
 <dd><p>Boolean to decide whether plumber
 should run in the background</p></dd>
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>depending on `background` either a or not
+blocking `plumber::pr` object is started or returned. In the case of a
+`backgruond` FALSE value a message is displayed with object details.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">explore_sf</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="op">{</span></span>
+<span class="r-in"><span class="va">gj</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in"><span class="st">'[</span>
+<span class="r-in">      {"type":"Point","coordinates":[0,0]},</span>
+<span class="r-in">      {"type":"LineString","coordinates":[[-1,-1],[1,1]]},</span>
+<span class="r-in">        {</span>
+<span class="r-in">      "type": "FeatureCollection",</span>
+<span class="r-in">      "features": [</span>
+<span class="r-in">      {</span>
+<span class="r-in">        "type": "Feature",</span>
+<span class="r-in">        "properties": {"id":1},</span>
+<span class="r-in">        "geometry": {"type": "Point", "coordinates": [100.0, 0.0]}</span>
+<span class="r-in">      }</span>
+<span class="r-in">    ]</span>
+<span class="r-in">  }</span>
+<span class="r-in">    ]'</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span class="va">sf</span> <span class="op">=</span> <span class="fu">geojsonsf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geojsonsf/man/geojson_sf.html" class="external-link">geojson_sf</a></span><span class="op">(</span><span class="va">gj</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">ps</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu">explore_sf</span><span class="op">(</span><span class="va">sf</span>, background <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">ps</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Running plumber at: http://127.0.0.1/8000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
     </div>
   </div>

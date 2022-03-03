@@ -32,7 +32,7 @@ TGVE version into a temporary directory."><!-- mathjax --><script src="https://c
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -100,19 +100,24 @@ defaults to `TRUE`.</p></dd>
 <dd><p>whether to start the server, defaults to `TRUE`. If
 not, then the created server will be returned.</p></dd>
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>the valude returned depends on: (1) `run`, if it is FALSE then
+an instance of `plumber::pr`, (2) if `run` is true and `background` is TRUE
+the `plumber::pr` instance is started and its process is returned, and
+(3) if `run` is TRUE and `background` is FALSE then a message is displayed
+showing the blocking `plumber::pr` instance's `path`, `port` and `host`.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="op">{</span></span>
-<span class="r-in"><span class="co"># this will run the underlying `plumber` instance and block</span></span>
-<span class="r-in"><span class="co"># the R process.</span></span>
-<span class="r-in"><span class="co"># tgve_server()</span></span>
 <span class="r-in"><span class="co"># This will run in the background using `callr`</span></span>
 <span class="r-in"><span class="va">ps</span> <span class="op">=</span> <span class="fu">tgve_server</span><span class="op">(</span>background <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">ps</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attempting to serve TGVE instance from: /tmp/RtmpKmk9Ab/tgve</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attempting to serve TGVE instance from: /tmp/Rtmp35ogoc/tgve</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running plumber at: http://127.0.0.1/8000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
