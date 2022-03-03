@@ -5,8 +5,28 @@
 #' @param background Boolean to decide whether plumber
 #' should run in the background
 #'
-#' @examples \dontrun{
-#' explore_sf()
+#' @examples
+#' \dontrun{
+#' js <- c(
+#' '[
+#'       {"type":"Point","coordinates":[0,0]},
+#'       {"type":"LineString","coordinates":[[-1,-1],[1,1]]},
+#'         {
+#'       "type": "FeatureCollection",
+#'       "features": [
+#'       {
+#'         "type": "Feature",
+#'         "properties": {"id":1},
+#'         "geometry": {"type": "Point", "coordinates": [100.0, 0.0]}
+#'       }
+#'     ]
+#'   }
+#'     ]'
+#' )
+#' sf = geojsonsf::geojson_sf( js )
+#' ps = tgver::explore_sf(sf, background = TRUE)
+#' expect_true(inherits(ps, "r_process"))
+#' ps$kill()
 #' }
 #' @export
 explore_sf = function(sf = NULL, background = FALSE) {

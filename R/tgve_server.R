@@ -13,6 +13,11 @@
 #' defaults to `TRUE`.
 #' @param run whether to start the server, defaults to `TRUE`. If
 #' not, then the created server will be returned.
+#' @return the valude returned depends on: (1) `run`, if it is FALSE then
+#' an instance of `plumber::pr`, (2) if `run` is true and `background` is TRUE
+#' the `plumber::pr` instance is started and its process is returned, and
+#' (3) if `run` is TRUE and `background` is FALSE then a message is displayed
+#' showing the blocking `plumber::pr` instance's `path`, `port` and `host`.
 #'
 #' @export
 #' @examples {

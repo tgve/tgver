@@ -12,6 +12,20 @@ explore_file(file.uri, background = FALSE)
 \item{background}{Boolean to run the process in the background,
 defaults to `FALSE`}
 }
+\value{
+no value returned, depending on `background` either a or not
+blocking `plumber` instance is started. A message is displayed with
+instance details.
+}
 \description{
 Current version can only read geojson/csv files using the given `file.uri`.
+}
+\examples{
+
+\dontrun{
+fp = "test.geojson"
+write(js, fp)
+ps = tgver::explore_file(fp, background = TRUE)
+ps$kill()
+}
 }

@@ -17,6 +17,25 @@ Explore an sf R object using TGVE npm package.
 }
 \examples{
 \dontrun{
-explore_sf()
+js <- c(
+'[
+      {"type":"Point","coordinates":[0,0]},
+      {"type":"LineString","coordinates":[[-1,-1],[1,1]]},
+        {
+      "type": "FeatureCollection",
+      "features": [
+      {
+        "type": "Feature",
+        "properties": {"id":1},
+        "geometry": {"type": "Point", "coordinates": [100.0, 0.0]}
+      }
+    ]
+  }
+    ]'
+)
+sf = geojsonsf::geojson_sf( js )
+ps = tgver::explore_sf(sf, background = TRUE)
+expect_true(inherits(ps, "r_process"))
+ps$kill()
 }
 }

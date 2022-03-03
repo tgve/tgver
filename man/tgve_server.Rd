@@ -26,6 +26,13 @@ defaults to `TRUE`.}
 \item{run}{whether to start the server, defaults to `TRUE`. If
 not, then the created server will be returned.}
 }
+\value{
+the valude returned depends on: (1) `run`, if it is FALSE then
+an instance of `plumber::pr`, (2) if `run` is true and `background` is TRUE
+the `plumber::pr` instance is started and its process is returned, and
+(3) if `run` is TRUE and `background` is FALSE then a message is displayed
+showing the blocking `plumber::pr` instance's `path`, `port` and `host`.
+}
 \description{
 The function accepts a `path` to get a directory containing an instance of
 TGVE, by default this is done via `TEMP_DIR_ENV` env variable. If neither

@@ -36,6 +36,8 @@ list_api_files = function(path = NULL) {
 #' Function to explore available API variables, their types and examples of
 #' using them in the TGVE
 #'
+#' @return no object is returned
+#'
 #' @examples {
 #' help()
 #' }
