@@ -129,11 +129,8 @@ jobs:
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         run: Rscript -e "tic::after_success()"
 
-      - name: "[Stage] [macOS] Push new tgve.zip"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
-        # testing on dev branch for now
-        # do not use --force for now
-        # if: github.ref == 'refs/heads/dev'
+      - name: "[Stage] [macOS] [No PR] Push new tgve.zip"
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release' && github.ref != 'refs/heads/merge'
         run: |
           git pull origin ${GITHUB_REF##*/}
           git config user.name "github-actions[bot]"
@@ -143,7 +140,7 @@ jobs:
           git push
 
       - name: "[Stage] [macOS] Codecov"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release' && github.ref == 'refs/heads/master'
         run: Rscript -e "covr::codecov()"
 
       - name: "[Stage] Upload R CMD check artifacts"
