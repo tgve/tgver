@@ -34,7 +34,7 @@ names(version) <- "version"
 # not implemented for now
 devtools::install_github("tgve/tgver")
 ###### compare the values ####
-if (tgver::version != version) {
+if (!identical(tgver::version, version)) {
     # IF versions are different, continue to Step 4: build app
     setwd(build.dir)
     system("yarn; yarn run build-local")
