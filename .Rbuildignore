@@ -8,3 +8,5 @@
 ^README.Rmd$
 lastMiKTeXException
 lastMiKTeXException/
+^CRAN-RELEASE$
+^cran-comments\.md$

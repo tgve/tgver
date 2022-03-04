@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://app.codecov.io/gh/tgve/tgver)
 
 This is the R package for the TGVE front end `npm` package
-[`tgve`](https://www.npmjs.com/package/eatlas). The R package is
+[`tgve`](https://www.npmjs.com/package/@tgve/tgvejs). The R package is
 developed to facilitate interactive geospatial analysis and
 visualization in R, use R’s echo-system to drive advanced data
 processing, and facilitate deployment of geospatial web applications in

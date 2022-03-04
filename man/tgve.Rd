@@ -35,7 +35,7 @@ If a path of an instance is provided it opens it, otherwise creates an
 instance from a `tempdir`.
 }
 \examples{
-\dontrun{
+\donttest{
 tgve()
 # just get the path of the HTML
 p = tgve(browse = FALSE)

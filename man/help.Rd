@@ -7,6 +7,9 @@ using them in the TGVE}
 \usage{
 help()
 }
+\value{
+no object is returned
+}
 \description{
 Function to explore available API variables, their types and examples of
 using them in the TGVE

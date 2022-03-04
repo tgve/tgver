@@ -6,10 +6,26 @@
 #' It will also look at their column names and try to find matching columns.
 #' If there is one file, it passes it to `explore_file` function.
 #'
-#' @param path character of a data directory
-#' @param background logical value whether to run instance in `callr`
+#' @param path character of a data directory.
+#' @param background logical value whether to run instance in `callr`.
+#' @return no value returned, depending on `background` either a or not
+#' blocking `plumber::pr` instance is started. A message is displayed with
+#' instance details.
 #'
 #' @export
+#' @examples {
+#' p = file.path(tempdir(), "data")
+#' dir.create(p)
+#' gURL = paste0("https://raw.githubusercontent.com/saferactive/",
+#' "tgve/main/pf-only-name.geojson")
+#' dURL = "https://raw.githubusercontent.com/saferactive/tgve/main/ksi-pf.csv"
+#' download.file(gURL, destfile = file.path(p, "pf.geojson"))
+#' download.file(dURL, destfile = file.path(p, "data.csv"))
+#'
+#' ps = explore_dir(p, background = TRUE)
+#' ps$kill()
+#' unlink(p, recursive = TRUE)
+#' }
 explore_dir = function(path, background = FALSE) {
   dir_check(path)
 

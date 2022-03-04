@@ -12,7 +12,7 @@ get_url(base = "http://127.0.0.1:8000", ...)
 \item{...}{any or all of the TGVE API variables to replace/add values to.}
 }
 \value{
-character URL
+character URL generated from `base` and `tgver::`
 }
 \description{
 The function can generate a URL based on a base URL and as many as TGVE API

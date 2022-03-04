@@ -7,9 +7,14 @@
 explore_dir(path, background = FALSE)
 }
 \arguments{
-\item{path}{character of a data directory}
+\item{path}{character of a data directory.}
 
-\item{background}{logical value whether to run instance in `callr`}
+\item{background}{logical value whether to run instance in `callr`.}
+}
+\value{
+no value returned, depending on `background` either a or not
+blocking `plumber::pr` instance is started. A message is displayed with
+instance details.
 }
 \description{
 Current version only tries to:
@@ -17,4 +22,19 @@ Find two files, one .csv and the other .geojson and
 pass them to TGVE as `defaultURL` and `geographyURL` respectively.
 It will also look at their column names and try to find matching columns.
 If there is one file, it passes it to `explore_file` function.
+}
+\examples{
+{
+p = file.path(tempdir(), "data")
+dir.create(p)
+gURL = paste0("https://raw.githubusercontent.com/saferactive/",
+"tgve/main/pf-only-name.geojson")
+dURL = "https://raw.githubusercontent.com/saferactive/tgve/main/ksi-pf.csv"
+download.file(gURL, destfile = file.path(p, "pf.geojson"))
+download.file(dURL, destfile = file.path(p, "data.csv"))
+
+ps = explore_dir(p, background = TRUE)
+ps$kill()
+unlink(p, recursive = TRUE)
+}
 }
