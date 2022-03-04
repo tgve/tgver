@@ -15,6 +15,20 @@
 #'
 #' mkdir inst/tgve
 #' zip -r path/to/app/build inst/tgve.zip
+#'
+#' ###################### github workflows note
+#' This script is used by .github/workflows/tic.yml
+#' It is (as of Mar 2022) used only on master breanch. The rational for this is:
+#'
+#' 1. when inst/tgve.R is used it needs to be aware of what branch is being
+#' built against for the version switch below to be valid. This can only happen
+#' if the build is done on master branch as the script below uses
+#' devtools::install_github to install the package from master branch on gh.
+#'
+#' 2. if master branch's tgver::version is incremented successfully but
+#' tgve/app is not, then why built and commit? likewise, if app is incremented,
+#' then only master should build and commit.
+#'
 
 #'######### UPDATE VERSION/build ###############
 #' Step 1: setup environment
