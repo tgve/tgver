@@ -118,8 +118,8 @@ jobs:
           echo -e 'options(Ncpus = 4, pkgType = "source", repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
           Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: "[Stage] [macOS] Build App"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
+      - name: "[Stage] [macOS] [master] Build App"
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'  && github.ref == 'refs/heads/master'
         run: Rscript -e "source('inst/tgve.R')"
 
       - name: "[Stage] Script"
@@ -129,7 +129,7 @@ jobs:
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         run: Rscript -e "tic::after_success()"
 
-      - name: "[Stage] [macOS] [No PR] Push new tgve.zip"
+      - name: "[Stage] [macOS] [master] Push new tgve.zip"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release' && github.ref == 'refs/heads/master'
         run: |
           git pull origin master
