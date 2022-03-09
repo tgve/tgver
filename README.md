@@ -21,7 +21,7 @@ You can use the latest from GitHub using `devtools::install_github("tgve/tgver")
 
 ## Use
 
-Overall, as of this pre-CRAN release, the package takes advantage of how
+Overall, the package takes advantage of how
 TGVE can be used (see
 [npm package](https://github.com/tgve/tgvejs) for documentation) and
 provides options to R users.
