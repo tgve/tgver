@@ -186,7 +186,7 @@
 <span class="co">#&gt; The following object is masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     version</span>
-<span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># for reproducibilty this needs to be a persistent location</span>
 <span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tp</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># some random line width</span>
@@ -194,15 +194,8 @@
 <span class="va">run_tgve</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">layerName</span><span class="op">=</span><span class="st">"line"</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
   <span class="va">sf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span>
-  <span class="va">ps</span> <span class="op">=</span> <span class="fu"><a href="../reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">sf</span>, background <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="co"># data is at "http://127.0.0.1:8000/explore_sf"</span>
-  <span class="va">base.url</span> <span class="op">=</span> <span class="st">"http://127.0.0.1:8000"</span>
-  <span class="va">url</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_url.html">get_url</a></span><span class="op">(</span><span class="va">base.url</span>, defaultURL <span class="op">=</span> <span class="st">"http://127.0.0.1:8000/explore_sf"</span>,
-             hideChartGenerator<span class="op">=</span><span class="st">"true"</span>,
-             viewport<span class="op">=</span><span class="st">"{zoom:3,pitch:0,bearing:0}"</span>,
-             layerName<span class="op">=</span><span class="va">layerName</span><span class="op">)</span>
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
-  <span class="co"># ps$kill()</span>
+  <span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="../reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">sf</span>, static <span class="op">=</span> <span class="cn">TRUE</span>, path <span class="op">=</span> <span class="va">tp</span><span class="op">)</span>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"index.html"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">img_or_warning</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img.url</span><span class="op">)</span> <span class="op">{</span>
@@ -237,7 +230,10 @@
   <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png"</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; [1] "&lt;img src='https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png' /&gt;"</span></code></pre></div>
-<p>Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. The package can overcome this when the prepared data can be accessed by runners like GitHub actions.</p>
+<p>Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. Also, if you like to clean up after running this Rmarkdown document, then:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"tgve"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"edge-tgve"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -247,7 +243,7 @@
 <p>A typical scenario for a researcher, including senior data scientists is to learn about how geographic data is processed in data science languages such as R and Python. Let us imagine our researcher is an R expert but has not been exposed to geographic data. They need to first learn about OGC standards such as Simple Features. They will then need to learn about packages like <code>sf</code> and underlying system requirements without mentioning examples.</p>
 <p>What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R, they can start exploring them using the TGVE. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can combine the two.</p>
 <p>We needs to download an IMD dataset such as <a href="https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv" class="external-link">this one</a>. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"cdrc"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span>
 
@@ -283,7 +279,7 @@
 </h2>
 <p>The TGVE accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.</p>
 <p>Check the following instance being customized with data served from a GitHub repository:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/?"</span>,
          <span class="st">"defaultURL=https://raw.githubusercontent.com"</span>,
@@ -292,7 +288,7 @@
 <iframe src="https://tgve.github.io/app/?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We can, of course, pass the data (bundled or not) as a json (geojson) using the <code>data</code> variable of the TGVE. This is how you could do this in this code sample:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># same URL as the instance above</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>

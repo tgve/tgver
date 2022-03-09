@@ -69,7 +69,12 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">explore_sf</span><span class="op">(</span>sf <span class="op">=</span> <span class="cn">NULL</span>, background <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">explore_sf</span><span class="op">(</span>
+  sf <span class="op">=</span> <span class="cn">NULL</span>,
+  background <span class="op">=</span> <span class="cn">FALSE</span>,
+  static <span class="op">=</span> <span class="cn">FALSE</span>,
+  path <span class="op">=</span> <span class="fu"><a href="tempInstance.html">tempInstance</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,7 +82,12 @@
     <dl><dt>sf</dt>
 <dd><p>a valid sf object that can be converted to geojson</p></dd>
 <dt>background</dt>
-<dd><p>Boolean to decide whether plumber
+<dd><p>Boolean to decide whether plumber</p></dd>
+<dt>static</dt>
+<dd><p>boolean to decide whether data is written to disk and self
+contained application is built</p></dd>
+<dt>path</dt>
+<dd><p>path of a TGVE instance, defaults to one in `tempdir()`
 should run in the background</p></dd>
 </dl></div>
     <div id="value">
