@@ -106,19 +106,22 @@
 <div class="section level3">
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h3>
-<p>As the package is not on CRAN yet, get it from GitHub using <code>devtools</code></p>
+<p>Install <code>tgver</code> from cran using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></code></pre></div>
+<p>You can also get the latest development from GitHub using <code>devtools</code></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tgve/tgver"</span><span class="op">)</span></code></pre></div>
 <p>The package comes with the latest version of TGVE and should give you the version used in the package:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tgver</span><span class="fu">::</span><span class="va"><a href="../reference/version.html">version</a></span>
 <span class="co">#&gt; version </span>
-<span class="co">#&gt; "1.4.0"</span></code></pre></div>
+<span class="co">#&gt; "1.4.2"</span></code></pre></div>
 <p>That means, there is no need to do anything to run a clean instance of the TGVE ready to import data to using:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/tgve_server.html">tgve_server</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>The application can be served from a <code>plumber</code> instance which is pointed at the location of the TGVE instance initialized, or directly opening the HTML file in browsers. This also means we can embed the application in an Rmd file, using either of the two methods, when building the Rmd (thanks to <code>knitr</code>):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># open a static tgve</span>
 <span class="co"># tgver::tgve()</span>
 <span class="co">#</span>
@@ -131,7 +134,7 @@
 </iframe>
 <p>The above instance pulls the instance and the data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a <code>html_vignette</code>). Thanks to the <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code> function, it is safe to build within R packages offline, with the downside of the standard browser no connection error displayed. A good cause for embedding an instance of the TGVE in this R package would be the case of being offline/mobile.</p>
 <p>On your local machine, and given the Rmarkdown output is set to <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html" class="external-link">rmarkdown::html_vignette</a></code>, then you could do:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># setup a local instance</span>
 <span class="co"># tempdir() will disappear inside an Rmd</span>
 <span class="va">p</span> <span class="op">=</span> <span class="st">"~/Downloads"</span>
@@ -171,7 +174,7 @@
 <h3 id="remote-instance">Remote instance<a class="anchor" aria-label="anchor" href="#remote-instance"></a>
 </h3>
 <p>The simplest way to use the TGVE is using an instance running at a local/remote server, using the URL “query parameter” based API variables provided. Therefore, we can simply run an instance such as the <a href="https://tgve.github.io/app/" class="external-link"><code>app</code></a> instance as follows without doing anything else:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tgve = "https://tgve.github.io/app/?"</span>
 <span class="co"># defaultURL = "https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson"</span>
 <span class="co"># url = paste0(tgve, "defaultURL=", defaultURL)</span>
