@@ -1,11 +1,13 @@
 #' Function to replace patterns in given files.
 #'
-#'@param files where pattern to be replaced.
-#'@param pattern the pattern to replace using `gsub`.
-#'@param replacement the string to replace pattern with using `gsub`.
+#'@param files character vector of full paths where pattern to be replaced.
+#'@param pattern character pattern to replace using `gsub`.
+#'@param replacement character to replace pattern with using `gsub`.
 file_replace = function(files = NULL, pattern, replacement) {
   if(any(!file.exists(files)))
     stop("a given file path does not exist")
+  if(!isSingleString(pattern) | !isSingleString(replacement))
+    stop("'pattern' and 'replacement' must be single character values.")
   for(fname in files){
     content = readLines(fname, warn = FALSE)
     # g = grep(pattern, content)

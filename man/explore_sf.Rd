@@ -4,12 +4,22 @@
 \alias{explore_sf}
 \title{Explore an sf R object using TGVE npm package.}
 \usage{
-explore_sf(sf = NULL, background = FALSE)
+explore_sf(
+  sf = NULL,
+  background = FALSE,
+  static = FALSE,
+  path = tempInstance()
+)
 }
 \arguments{
 \item{sf}{a valid sf object that can be converted to geojson}
 
-\item{background}{Boolean to decide whether plumber
+\item{background}{Boolean to decide whether plumber}
+
+\item{static}{boolean to decide whether data is written to disk and self
+contained application is built}
+
+\item{path}{path of a TGVE instance, defaults to one in `tempdir()`
 should run in the background}
 }
 \value{
