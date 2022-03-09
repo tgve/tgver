@@ -2,6 +2,8 @@ test_that("tempInstance works", {
   t = tempInstance()
   expect_true(dir.exists(t))
   expect_true(length(list.files(t, pattern = "html")) == 1)
+  expect_true(length(list.files(t, pattern = "original")) == 1)
+  expect_true(length(list.files(t, pattern = "index")) == 2)
   # TODO check version against
   # version = jsonlite::parse_json(
   #   readLines(file.path(build.dir, "package.json")))$dependencies['@tgve/tgvejs'][[1]]
