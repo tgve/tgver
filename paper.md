@@ -25,7 +25,11 @@ bibliography: paper.bib
 
 # Summary
 
-**tgver** citations go [@citation]
+The Turing Geovisualisation Engine (TGVE) is an open source, web-based, interactive visual analytics tool for geospatial data analysis, built using R and React. The R package **tgver** is developed to be used with the TGVE front end npm package [`tgvejs`](https://www.npmjs.com/package/@tgve/tgvejs). The R package aims to facilitate interactive geospatial analysis and visualization in R, use R’s echo-system to drive advanced data processing, and facilitate deployment of geospatial web applications in production.
 
-# References 
+The package is needed because data scientists and researchers who would want to generate geovisualization would need learn various concepts and R packages to generate, for instnace, a choropleth map. Using the **tgver** package all they need is a `.geojson` geography file and a `csv` data file (currently the npm package can only parse those two formats). They can do this either in Rmarkdown notes books or indeed in Jupyter notebooks. The functions defined in the package fascilitates the aims mentioned above.
+
+Finally, the **tgver** takes a different approach of bringing JavaSCript (JS) applications into R but specifically bringin modern libraries like React into R. Some R packages (such as Shiny [@beeley2013web]) rely on a coupled method of using R and JS. There are other mapping packages which drive JS from R. The **tgver** uses a production built output from a React application and relies on RESTful client-server communication using the `plumber` [@plumber] R package. This decoupling and publishing an `npm` package and an R package separately, we believe, is the appropriate way of working with modern
+
+# References
 
