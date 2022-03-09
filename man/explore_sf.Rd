@@ -2,7 +2,7 @@
 % Please edit documentation in R/explore_sf.R
 \name{explore_sf}
 \alias{explore_sf}
-\title{Explore an sf R object using TGVE.}
+\title{Explore an sf R object using TGVE npm package.}
 \usage{
 explore_sf(
   sf = NULL,
@@ -14,13 +14,13 @@ explore_sf(
 \arguments{
 \item{sf}{a valid sf object that can be converted to geojson}
 
-\item{background}{boolean to decide whether plumber should run in the
-background}
+\item{background}{Boolean to decide whether plumber}
 
 \item{static}{boolean to decide whether data is written to disk and self
 contained application is built}
 
-\item{path}{path of a TGVE instance, defaults to one in `tempdir()`}
+\item{path}{path of a TGVE instance, defaults to one in `tempdir()`
+should run in the background}
 }
 \value{
 depending on `background` either a or not
@@ -28,7 +28,7 @@ blocking `plumber::pr` object is started or returned. In the case of a
 `backgruond` FALSE value a message is displayed with object details.
 }
 \description{
-Explore an sf R object using TGVE.
+Explore an sf R object using TGVE npm package.
 }
 \examples{
 {
