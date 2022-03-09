@@ -10,13 +10,13 @@ production.
 
 ## Install
 
-`tgver` is not yet available on CRAN. For now please use
-devtools:
+Install `tgver` from CRAN
 
-``` r
-# install.packages("devtools")
-devtools::install_github("tgve/tgver")
+```r
+install.packages("devtools")
 ```
+
+You can use the latest from GitHub using `devtools::install_github("tgve/tgver")`
 
 ## Use
 

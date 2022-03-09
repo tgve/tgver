@@ -21,8 +21,14 @@ The Turing Geovisualisation Engine (TGVE) is a web-based, interactive visual ana
 The package's main aims are outlined in the README on the package's GitHub space. As the package grows, these aims may also grow and expand as we research better ways of interactive geospatial data analysis and visualization.
 
 ## Usage
-As the package is not on CRAN yet, get it from GitHub using `devtools`
+Install `tgver` from cran using:
+
 ```{r install, eval=FALSE}
+install.packages("devtools")
+```
+
+You can also get the latest development from GitHub using `devtools`
+```{r install_gh, eval=FALSE}
 devtools::install_github("tgve/tgver")
 ```
 
