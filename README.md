@@ -14,7 +14,7 @@ production.
 Install `tgver` from CRAN
 
 ```r
-install.packages("devtools")
+install.packages("tgver")
 ```
 
 You can use the latest from GitHub using `devtools::install_github("tgve/tgver")`
