@@ -19,7 +19,7 @@ affiliations:
    index: 1
  - name: School of Geography and Leeds Institute for Data Analytics (LIDA), University of Leeds
    index: 2
-date: 9 March 2022
+date: 18 March 2022
 bibliography: paper.bib
 ---
 
@@ -31,7 +31,7 @@ The Turing Geovisualisation Engine (TGVE) is an open source, web-based, interact
 
 The package is needed because data scientists and researchers who want to rapidly perfrom spatiotemporal querying of a dataset would need to learn various concepts and R packages that might operate very differently to their usual data analysis and processing workflows. Using the **tgver** package they still need to learn how the TGVE works, but in a typical scenario when a data scientist has a `.geojson` geography file and a `csv` data file and would want to generate geospatial visualizations, they can bypass some of the workflows required. The TGVE front-end npm package can process these two files, search for a matching column between them and generate visualizations based on the data in either or both of the data sources. If the `.geojson` or the `csv` file contains the geograph, in the case of the csv `latitude` and `longitude` columns, the TGVE can process it as well. Users can also do this either in Rmarkdown notebooks or indeed in Jupyter notebooks. This is one of the main features of the TGVE and has been driven by the work in the **tgver** R package. If the data sources are hosted remotely and are available for processing, the TGVE can take the URLs (Unified Resource Locator) as URL parameters. 
 
-For example UK's Local Authority District boundaries can be found at this URL: https://raw.githubusercontent.com/saferactive/tgve/main/las-only-code.geojson. And school ranking data published by the UK government processed can be found at this URL: https://raw.githubusercontent.com/tgve/example-data/main/schools/data.csv. And an instance of the TGVE is availabel at: https://tgve.github.io/app/. We can then construct a URL as follows and see the data sources being pulled and processed by the TGVE using some of the API variables of the TGVE like `defaultURL`, `geographyURL` etc.:
+For example let us demonstrate how we can use the TGVE to combine a `.geojson` file which contains some geography (boundaries) and a `.cvs` file that contains some data about those geographies with a matching column name. This can be done depending on where the files are and whether we use the R package. An instance of the TGVE front-end is available at: https://tgve.github.io/app/. We can construct a URL as follows and see the data sources being pulled and processed by the TGVE using some of the API variables of the TGVE like `defaultURL`, `geographyURL` etc.:
 
 ```r
 # using knitr R package
@@ -45,9 +45,9 @@ knitr::include_url(
 ```
 
 ![](https://pbs.twimg.com/media/FNZvMolX0AclK4l?format=jpg)
-*Figure 1: A screenshot from the above URL renderd on Firefox v97.0 on an Ubuntu 20.04. The figure shows school rankings from the `csv` data source using the `.geojson` geography file. The data has been subset further with rankings showing "Outstanding" school rankings only.*
+*Figure 1: A screenshot from the above URL renderd on Firefox v97.0 on an Ubuntu 20.04. The figure shows school rankings from the `csv` data source using the `.geojson` geography file. The data has been subset further with (using TGVE's filtering user interface) rankings showing "Outstanding" school rankings only.*
 
-A screenshot of the above link is shown in Figure 1. Likewise if the data is not available remotely and we are working with local dataset, such as an `sf` object, then a TGVE based workflow would be like the following using the R package:
+A screenshot of the above URL is shown in Figure 1 and the `knitr::include_url` function can be used in Rmarkdowns if the output of the document is set to `output: html_document`. The **tgver** package enables interactive R based workflow of the same scenario using geospatial R packages and objects. For instance if we are working with local dataset, such as an `sf`[@pebesma2018sf] object, then a TGVE based workflow would be like the following using the **tgver** R package:
 
 ```r
 require(weathercan)
@@ -64,6 +64,9 @@ tgver::explore_sf(w.sf)
 ```
 
 Finally, the **tgver** takes a different approach of bringing JavaSCript (JS) applications into R but specifically bringing modern libraries like React into R. Some R packages (such as Shiny [@beeley2013web]) rely on a coupled method of using R and JS. There are other mapping packages which drive JS from R. The **tgver** uses a production built output from a React application and relies on RESTful client-server communication using the `plumber` [@plumber] R package. 
+
+## Acknowledgement
+This work was supported by Towards Turing 2.0 under the EPSRC Grant EP/W037211/1 & The Alan Turing Institute.
 
 # References
 
