@@ -66,7 +66,7 @@ tgver::explore_sf(w.sf)
 #> Running plumber API at http://127.0.0.1:8000
 ```
 
-Finally, the **tgver** takes a different approach of bringing JavaSCript (JS) applications into R but specifically bringing modern libraries like React into R. Some R packages (such as Shiny [@beeley2013web]) rely on a coupled method of using R and JS. There are other mapping packages which drive JS from R. The **tgver** uses a production built output from a React application and relies on RESTful [@restful] client-server communication using the `plumber` [@plumber] R package.
+Finally, the **tgver** takes a different approach of bringing JavaScript (JS) applications into R but specifically bringing modern libraries like React into R. Some R packages (such as Shiny [@beeley2013web]) rely on a coupled method of using R and JS. There are other mapping packages which drive JS from R. The **tgver** uses a production built output from a React application and relies on RESTful [@restful] client-server communication using the `plumber` [@plumber] R package.
 
 ## Acknowledgement
 This work was supported by Towards Turing 2.0 under the EPSRC Grant EP/W037211/1 & The Alan Turing Institute.
