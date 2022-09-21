@@ -9,7 +9,7 @@
 #' }
 #' @docType data
 #' @keywords version
-#' @name accidents_sample
+#' @name version
 #' @aliases tgvejsVersion
 #' @format A character vector
 NULL

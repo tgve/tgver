@@ -1,4 +1,6 @@
 # tgver 0.3.0
+* Latest stable release of tgvejs package (1.5.0) bundled
+* Improvements and minor changes
 
 # tgver 0.2.0
 
