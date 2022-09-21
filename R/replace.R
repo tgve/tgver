@@ -25,7 +25,7 @@ list_api_files = function(path = NULL) {
     stop("valid tgve instance path is required.")
   # main.*.chunk.js*
   files = list.files(file.path(path, "static/js"),
-                     pattern = "^main*",
+                     pattern = "^main.*\\.js$",
                      full.names = TRUE)
   if(length(files) == 0)
     stop("could not find ^main* files in path.")
