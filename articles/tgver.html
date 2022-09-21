@@ -108,49 +108,49 @@
 </h3>
 <p>Install <code>tgver</code> from cran using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span></code></pre></div>
 <p>You can also get the latest development from GitHub using <code>devtools</code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tgve/tgver"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tgve/tgver"</span><span class="op">)</span></span></code></pre></div>
 <p>The package comes with the latest version of TGVE and should give you the version used in the package:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tgver</span><span class="fu">::</span><span class="va"><a href="../reference/version.html">version</a></span>
-<span class="co">#&gt; version </span>
-<span class="co">#&gt; "1.4.5"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tgver</span><span class="fu">::</span><span class="va"><a href="../reference/version.html">version</a></span></span>
+<span><span class="co">#&gt; version </span></span>
+<span><span class="co">#&gt; "1.4.6"</span></span></code></pre></div>
 <p>That means, there is no need to do anything to run a clean instance of the TGVE ready to import data to using:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/tgve_server.html">tgve_server</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/tgve_server.html">tgve_server</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The application can be served from a <code>plumber</code> instance which is pointed at the location of the TGVE instance initialized, or directly opening the HTML file in browsers. This also means we can embed the application in an Rmd file, using either of the two methods, when building the Rmd (thanks to <code>knitr</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># open a static tgve</span>
-<span class="co"># tgver::tgve()</span>
-<span class="co">#</span>
-<span class="co"># or start a tgve instance before embedding it</span>
-<span class="co"># tgver::tgve_server()</span>
-<span class="co"># knitr::include_url("http://127.0.0.1:8000")</span>
-<span class="co"># or use the public one</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># open a static tgve</span></span>
+<span><span class="co"># tgver::tgve()</span></span>
+<span><span class="co">#</span></span>
+<span><span class="co"># or start a tgve instance before embedding it</span></span>
+<span><span class="co"># tgver::tgve_server()</span></span>
+<span><span class="co"># knitr::include_url("http://127.0.0.1:8000")</span></span>
+<span><span class="co"># or use the public one</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/"</span><span class="op">)</span></span></code></pre></div>
 <iframe src="https://tgve.github.io/app/" width="100%" height="400px" data-external="1">
 </iframe>
 <p>The above instance pulls the instance and the data from a GitHub repository, which means it should load every time the Rmd output is viewed (provided it is a <code>html_vignette</code>). Thanks to the <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code> function, it is safe to build within R packages offline, with the downside of the standard browser no connection error displayed. A good cause for embedding an instance of the TGVE in this R package would be the case of being offline/mobile.</p>
 <p>On your local machine, and given the Rmarkdown output is set to <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html" class="external-link">rmarkdown::html_vignette</a></code>, then you could do:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># setup a local instance</span>
-<span class="co"># tempdir() will disappear inside an Rmd</span>
-<span class="va">p</span> <span class="op">=</span> <span class="st">"~/Downloads"</span>
-<span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
-<span class="co"># now the instance is at</span>
-<span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
-<span class="co"># we just need to pass the data/csv URL</span>
-<span class="co"># using `defaultURL` API</span>
-<span class="va">url</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/get_url.html">get_url</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tp</span>, <span class="st">"index.html"</span><span class="op">)</span>, defaultURL <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/tgve/example-data/main/utlas.geojson'</span>,
-                   column <span class="op">=</span> <span class="st">"long"</span>,
-                   hideChartGenerator<span class="op">=</span><span class="st">"true"</span>,
-                   <span class="co"># In future R should assemble the json</span>
-                   viewport<span class="op">=</span><span class="st">"{zoom:5.5,pitch:0,bearing:0}"</span><span class="op">)</span>
-<span class="co"># now we have the app's main url</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
-<span class="co"># unlink(tp, recursive = TRUE)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># setup a local instance</span></span>
+<span><span class="co"># tempdir() will disappear inside an Rmd</span></span>
+<span><span class="va">p</span> <span class="op">=</span> <span class="st">"~/Downloads"</span></span>
+<span><span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="co"># now the instance is at</span></span>
+<span><span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span></span>
+<span><span class="co"># we just need to pass the data/csv URL</span></span>
+<span><span class="co"># using `defaultURL` API</span></span>
+<span><span class="va">url</span> <span class="op">=</span> <span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/get_url.html">get_url</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tp</span>, <span class="st">"index.html"</span><span class="op">)</span>, defaultURL <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/tgve/example-data/main/utlas.geojson'</span>,</span>
+<span>                   column <span class="op">=</span> <span class="st">"long"</span>,</span>
+<span>                   hideChartGenerator<span class="op">=</span><span class="st">"true"</span>,</span>
+<span>                   <span class="co"># In future R should assemble the json</span></span>
+<span>                   viewport<span class="op">=</span><span class="st">"{zoom:5.5,pitch:0,bearing:0}"</span><span class="op">)</span></span>
+<span><span class="co"># now we have the app's main url</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="co"># unlink(tp, recursive = TRUE)</span></span></code></pre></div>
 <p>If this Vignette is served either from CRAN or GitHub, the application at path in above chunk (<code>tp</code>) will <em>not</em> be available. So you must run it locally to see the application, the screenshot below was taken from such a run. Embedding the full instance in a HTML file is an open issue on the repository and we welcome your contributions if you can.</p>
 <p>Also, please note that the “webview” within Rstudio Deb package version <code>1.4.1717</code> could fail to load even remote URLs using <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code>, please click the “open in browser” to see the rendering from <code>knitr</code>.</p>
 <p><img src="https://user-images.githubusercontent.com/408568/142702067-003e98d8-a0a0-4e23-85ad-b875434da518.png" width="100%"></p>
@@ -175,12 +175,12 @@
 </h3>
 <p>The simplest way to use the TGVE is using an instance running at a local/remote server, using the URL “query parameter” based API variables provided. Therefore, we can simply run an instance such as the <a href="https://tgve.github.io/app/" class="external-link"><code>app</code></a> instance as follows without doing anything else:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># tgve = "https://tgve.github.io/app/?"</span>
-<span class="co"># defaultURL = "https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson"</span>
-<span class="co"># url = paste0(tgve, "defaultURL=", defaultURL)</span>
-<span class="co"># knitr::include_url(url)</span>
-<span class="co"># or simply</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># tgve = "https://tgve.github.io/app/?"</span></span>
+<span><span class="co"># defaultURL = "https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson"</span></span>
+<span><span class="co"># url = paste0(tgve, "defaultURL=", defaultURL)</span></span>
+<span><span class="co"># knitr::include_url(url)</span></span>
+<span><span class="co"># or simply</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span></span></code></pre></div>
 <iframe src="https://tgve.github.io/app/?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We grab the remote instance, but instead of its internal values, the URL parameters takes precedence. That means the value given as <code>defaultURL</code> is parsed by the TGVE. We can as easily use this in R’s built in “view” or “browse” commands, too.</p>
@@ -205,7 +205,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

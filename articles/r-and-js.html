@@ -106,69 +106,69 @@
 </h2>
 <p>Let us do some processing in R and then view the result in the TGVE. For this purpose we will use these R packages: <code>edgebundle</code>, <code>igraph</code> and <code>ggplot2</code> first. The following is adapted from <a href="https://github.com/schochastics/edgebundle" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'igraph'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     decompose, spectrum</span>
-<span class="co">#&gt; The following object is masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     union</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://edgebundle.schochastics.net/" class="external-link">edgebundle</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com" class="external-link">ggraph</a></span><span class="op">)</span>
-
-<span class="co"># this environment variable would return true if run on</span>
-<span class="co"># github actions therefore, we can stop running TGVE if so.</span>
-<span class="co"># See GitHub docs: https://docs.github.com/en/actions/learn-github-actions/environment-variables</span>
-<span class="va">is.actions</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"GITHUB_ACTIONS"</span><span class="op">)</span> <span class="op">!=</span> <span class="st">""</span>
-
-<span class="va">g</span> <span class="op">=</span> <span class="va">us_flights</span>
-<span class="va">xy</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">longitude</span>, <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span>
-<span class="va">verts</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">longitude</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span>
-
-<span class="va">states</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/map_data.html" class="external-link">map_data</a></span><span class="op">(</span><span class="st">"state"</span><span class="op">)</span>
-
-<span class="va">pbundle</span> <span class="op">=</span> <span class="fu"><a href="http://edgebundle.schochastics.net/reference/edge_bundle_path.html" class="external-link">edge_bundle_path</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">xy</span>, max_distortion <span class="op">=</span> <span class="fl">12</span>, weight_fac <span class="op">=</span> <span class="fl">2</span>, segments <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
-<span class="co"># caching the heavy processing</span>
-<span class="co"># saveRDS(pbundle, "vignettes/pbundle.Rds")</span>
-<span class="co"># pbundle = readRDS("pbundle.Rds")</span>
-
-<span class="co"># edge list</span>
-<span class="va">el</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_edgelist.html" class="external-link">get.edgelist</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">el</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"from"</span>, <span class="st">"to"</span><span class="op">)</span>
-
-<span class="co"># get names of airports in verts</span>
-<span class="va">verts.with.names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">longitude</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">latitude</span>, <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">verts.with.names</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"name"</span><span class="op">)</span>
-<span class="co"># intermediate</span>
-<span class="va">from</span> <span class="op">=</span> <span class="va">verts.with.names</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">el</span><span class="op">[</span>,<span class="st">"from"</span><span class="op">]</span>, <span class="va">verts.with.names</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span>
-<span class="va">to</span> <span class="op">=</span> <span class="va">verts.with.names</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">el</span><span class="op">[</span>,<span class="st">"to"</span><span class="op">]</span>, <span class="va">verts.with.names</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span>
-<span class="co"># create matrix for sf</span>
-<span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-<span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span>
-<span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">x</span>,<span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">sfc</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'igraph'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     decompose, spectrum</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     union</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://edgebundle.schochastics.net/" class="external-link">edgebundle</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com" class="external-link">ggraph</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># this environment variable would return true if run on</span></span>
+<span><span class="co"># github actions therefore, we can stop running TGVE if so.</span></span>
+<span><span class="co"># See GitHub docs: https://docs.github.com/en/actions/learn-github-actions/environment-variables</span></span>
+<span><span class="va">is.actions</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"GITHUB_ACTIONS"</span><span class="op">)</span> <span class="op">!=</span> <span class="st">""</span></span>
+<span></span>
+<span><span class="va">g</span> <span class="op">=</span> <span class="va">us_flights</span></span>
+<span><span class="va">xy</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">longitude</span>, <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span></span>
+<span><span class="va">verts</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">longitude</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">states</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/map_data.html" class="external-link">map_data</a></span><span class="op">(</span><span class="st">"state"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pbundle</span> <span class="op">=</span> <span class="fu"><a href="http://edgebundle.schochastics.net/reference/edge_bundle_path.html" class="external-link">edge_bundle_path</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">xy</span>, max_distortion <span class="op">=</span> <span class="fl">12</span>, weight_fac <span class="op">=</span> <span class="fl">2</span>, segments <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
+<span><span class="co"># caching the heavy processing</span></span>
+<span><span class="co"># saveRDS(pbundle, "vignettes/pbundle.Rds")</span></span>
+<span><span class="co"># pbundle = readRDS("pbundle.Rds")</span></span>
+<span></span>
+<span><span class="co"># edge list</span></span>
+<span><span class="va">el</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_edgelist.html" class="external-link">get.edgelist</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">el</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"from"</span>, <span class="st">"to"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get names of airports in verts</span></span>
+<span><span class="va">verts.with.names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">longitude</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">latitude</span>, <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">verts.with.names</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"name"</span><span class="op">)</span></span>
+<span><span class="co"># intermediate</span></span>
+<span><span class="va">from</span> <span class="op">=</span> <span class="va">verts.with.names</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">el</span><span class="op">[</span>,<span class="st">"from"</span><span class="op">]</span>, <span class="va">verts.with.names</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">to</span> <span class="op">=</span> <span class="va">verts.with.names</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">el</span><span class="op">[</span>,<span class="st">"to"</span><span class="op">]</span>, <span class="va">verts.with.names</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># create matrix for sf</span></span>
+<span><span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span></span>
+<span><span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">m</span><span class="op">[</span><span class="va">x</span>,<span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">sfc</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span></code></pre></div>
 <p>So far, we have done some pre-processing of an <code>igraph</code> object, created some lines, processed the lines using <code><a href="http://edgebundle.schochastics.net/reference/edge_bundle_path.html" class="external-link">edgebundle::edge_bundle_path</a></code> (please see the <code>edgebundle</code> package for details of the algorithm), and created an <code>sfc</code>object.</p>
 <div class="section level3">
 <h3 id="static-visualization">Static visualization<a class="anchor" aria-label="anchor" href="#static-visualization"></a>
 </h3>
 <p>First, let us have a look at the lines in our <code>sfc</code> object as they are using <code>plot</code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span></span></code></pre></div>
 <p><img src="r-and-js_files/figure-html/plot-no-bundling-1.png" width="90%"></p>
 <p>Secondly, let us have a look at the bundled paths using <code>ggplot</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pbundle</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,
-            col <span class="op">=</span> <span class="st">"orange"</span>, size <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pbundle</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,
-            col <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Edge-Path Bundling"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span>background <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pbundle</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
+<span>            col <span class="op">=</span> <span class="st">"orange"</span>, size <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pbundle</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
+<span>            col <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Edge-Path Bundling"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span>background <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="r-and-js_files/figure-html/ggplot-no-bundle-1.png" width="90%"></p>
 </div>
 <div class="section level3">
@@ -177,63 +177,63 @@
 <p>Using the TGVE we can embed an instance of the TGVE in the output of a HTML rendered RMarkdown file. Please see the documentations of <code>knitr</code> package for details of embedding HTML.</p>
 <p>Let us first view the raw data (no bundling), we can build an instance of the TGVE using <code><a href="../reference/setup.html">tgver::setup</a></code>. The package relies on passing API variables using a URL to the TGVE instance:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tgve/tgver" class="external-link">tgver</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'tgver'</span>
-<span class="co">#&gt; The following object is masked from 'package:utils':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     help</span>
-<span class="co">#&gt; The following object is masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     version</span>
-<span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># for reproducibilty this needs to be a persistent location</span>
-<span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tp</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co"># some random line width</span>
-<span class="co"># df = data.frame(lw=runif(length(sfc), min=1, max=5))</span>
-<span class="va">run_tgve</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">layerName</span><span class="op">=</span><span class="st">"line"</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
-  <span class="va">sf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span>
-  <span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="../reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">sf</span>, static <span class="op">=</span> <span class="cn">TRUE</span>, path <span class="op">=</span> <span class="va">tp</span><span class="op">)</span>
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"index.html"</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">img_or_warning</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img.url</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu">curl</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/curl/man/nslookup.html" class="external-link">has_internet</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Rmd was rendered with no connection!"</span><span class="op">)</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;img src='"</span>, <span class="va">img.url</span>, <span class="st">"' /&gt;"</span><span class="op">)</span>
-  <span class="op">}</span>
-<span class="op">}</span>
-<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">is.actions</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">run_tgve</span><span class="op">(</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png"</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; [1] "&lt;img src='https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png' /&gt;"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tgve/tgver" class="external-link">tgver</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'tgver'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:utils':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     help</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     version</span></span>
+<span><span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># for reproducibilty this needs to be a persistent location</span></span>
+<span><span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tp</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># some random line width</span></span>
+<span><span class="co"># df = data.frame(lw=runif(length(sfc), min=1, max=5))</span></span>
+<span><span class="va">run_tgve</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">layerName</span><span class="op">=</span><span class="st">"line"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span>  <span class="va">sf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">sfc</span><span class="op">)</span></span>
+<span>  <span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="../reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">sf</span>, static <span class="op">=</span> <span class="cn">TRUE</span>, path <span class="op">=</span> <span class="va">tp</span><span class="op">)</span></span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"index.html"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">img_or_warning</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img.url</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu">curl</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/curl/man/nslookup.html" class="external-link">has_internet</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Rmd was rendered with no connection!"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;img src='"</span>, <span class="va">img.url</span>, <span class="st">"' /&gt;"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">is.actions</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">run_tgve</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; [1] "&lt;img src='https://user-images.githubusercontent.com/408568/144712831-7d2aec72-0af4-4ca9-b2e0-2316d7533753.png' /&gt;"</span></span></code></pre></div>
 <p>As of version <code>1.4.0</code> release of the npm package, the TGVE has a simple filter built in for lines. This is designed to only work with a <code>line</code> layer where clicking on a line would filter out all other lines that are not originating from the source of the line clicked. In future versions, this could be a much richer set of functionalists for filtering “features” such as paths, boundaries etc. Indeed, the column filters built into the TGVE could also be improved and become more sophisticated.</p>
 <p><img src="https://user-images.githubusercontent.com/408568/148212057-b67b08a4-9342-42bb-95c2-557505d92b77.png" alt="filtered bundled flights" width="100%"> The TGVE basic “click to filter” of lines from an origin-destination data.</p>
 <p>Notice, that as the package is hosted on <code>GitHub</code> and rely on actions to run the package checks, we have checks to decide whether this Rmd renders the TGVE instance on your local machine or not. If you are reading this Rmd on GitHub, chances are you cannot see the TGVE instance. You may have to open the output of the rendered Rmd on a browser tab to see the TGVE instances.</p>
 <p>Let us see how the bundled data looks on the TGVE, we need to use the <code>path</code> layer for now, as the TGVE can still do with more advanced layer detection in future:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># convert the pbundle into sf</span>
-<span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pbundle</span><span class="op">$</span><span class="va">group</span><span class="op">)</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">pbundle</span><span class="op">[</span><span class="va">pbundle</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="va">x</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">sfc</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span>
-<span class="co"># plot(sfc)</span>
-<span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"edge-tgve"</span><span class="op">)</span>
-<span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tp</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">is.actions</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">run_tgve</span><span class="op">(</span>layerName <span class="op">=</span> <span class="st">"path"</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png"</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; [1] "&lt;img src='https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png' /&gt;"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># convert the pbundle into sf</span></span>
+<span><span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pbundle</span><span class="op">$</span><span class="va">group</span><span class="op">)</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">pbundle</span><span class="op">[</span><span class="va">pbundle</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="va">x</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">sfc</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
+<span><span class="co"># plot(sfc)</span></span>
+<span><span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"edge-tgve"</span><span class="op">)</span></span>
+<span><span class="va">tp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">p</span>, <span class="st">"tgve"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tp</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">is.actions</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">run_tgve</span><span class="op">(</span>layerName <span class="op">=</span> <span class="st">"path"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu">img_or_warning</span><span class="op">(</span><span class="st">"https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; [1] "&lt;img src='https://user-images.githubusercontent.com/408568/144713110-245cf94e-826d-4525-bc48-ac7c97220c71.png' /&gt;"</span></span></code></pre></div>
 <p>Notice again, if you are reading this vignette on GitHub, you will not see the interactive result but a screenshot of the final result. Also, if you like to clean up after running this Rmarkdown document, then:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"tgve"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"edge-tgve"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"tgve"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"edge-tgve"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -244,33 +244,33 @@
 <p>What the TGVE does for our researcher in question is, whilst they are learning about these data structures and how they are processed in R, they can start exploring them using the TGVE. Provided they can find the right geography for the dataset in question, and having made sure that there is a matching geography column name between the dataset and the geography data file, the TGVE can combine the two.</p>
 <p>We needs to download an IMD dataset such as <a href="https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv" class="external-link">this one</a>. They would then need to be aware that this is only greater London with some ~5k LSOA areas. Once they can filter the large LSOA file from source down to those in the CSV file as follows:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"cdrc"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span>
-
-<span class="co"># download the csv data which is behind authorization from cdrc</span>
-<span class="co"># https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv</span>
-<span class="co"># via https://data.cdrc.ac.uk/dataset/index-multiple-deprivation-imd</span>
-<span class="co"># renamed data.csv</span>
-<span class="va">csv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"data.csv"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># download the geography (a .geojson file for our purposes using sf)</span>
-<span class="co"># from here https://github.com/gausie/LSOA-2011-GeoJSON</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-<span class="va">geo</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gausie/LSOA-2011-GeoJSON/master/lsoa.geojson"</span><span class="op">)</span>
-
-<span class="co"># filter it to those in the CSV file</span>
-<span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">csv</span><span class="op">$</span><span class="va">ls11cd</span>, <span class="va">geo</span><span class="op">$</span><span class="va">LSOA11CD</span><span class="op">)</span>
-<span class="co"># notice the different column names for the same geography codes</span>
-<span class="va">geo</span> <span class="op">=</span> <span class="va">geo</span><span class="op">[</span><span class="va">m</span>, <span class="op">]</span>
-<span class="co"># rename column as TGVE package is young</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="st">"ls11cd"</span> <span class="co"># same as column one in CSV</span>
-
-<span class="co"># make sure both files are in the ~/Downloads/cdrc directory</span>
-<span class="co"># named lsoa.geojson</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html" class="external-link">st_write</a></span><span class="op">(</span><span class="va">geo</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"lsoa.geojson"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Finally, let TGVE serve it!</span>
-<span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/explore_dir.html">explore_dir</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"cdrc"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># download the csv data which is behind authorization from cdrc</span></span>
+<span><span class="co"># https://data.cdrc.ac.uk/system/files/c1_english_imd_2019_rebased_for_london.csv</span></span>
+<span><span class="co"># via https://data.cdrc.ac.uk/dataset/index-multiple-deprivation-imd</span></span>
+<span><span class="co"># renamed data.csv</span></span>
+<span><span class="va">csv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"data.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># download the geography (a .geojson file for our purposes using sf)</span></span>
+<span><span class="co"># from here https://github.com/gausie/LSOA-2011-GeoJSON</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="va">geo</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gausie/LSOA-2011-GeoJSON/master/lsoa.geojson"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># filter it to those in the CSV file</span></span>
+<span><span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">csv</span><span class="op">$</span><span class="va">ls11cd</span>, <span class="va">geo</span><span class="op">$</span><span class="va">LSOA11CD</span><span class="op">)</span></span>
+<span><span class="co"># notice the different column names for the same geography codes</span></span>
+<span><span class="va">geo</span> <span class="op">=</span> <span class="va">geo</span><span class="op">[</span><span class="va">m</span>, <span class="op">]</span></span>
+<span><span class="co"># rename column as TGVE package is young</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="st">"ls11cd"</span> <span class="co"># same as column one in CSV</span></span>
+<span></span>
+<span><span class="co"># make sure both files are in the ~/Downloads/cdrc directory</span></span>
+<span><span class="co"># named lsoa.geojson</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html" class="external-link">st_write</a></span><span class="op">(</span><span class="va">geo</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"lsoa.geojson"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Finally, let TGVE serve it!</span></span>
+<span><span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="../reference/explore_dir.html">explore_dir</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span></span></code></pre></div>
 <p>Now, the package (<code>tgver</code>) has a function called <code>explore_dir</code> which searches through at a directory for two files: a CSV and a GeoJSON file. It reads them, generates the API using the <code>plumber</code> package behind the scenes and serves them to the front TGVE which puts them together.</p>
 <p>The result will be like the following image. <img src="https://user-images.githubusercontent.com/408568/148931326-4adad852-5bb6-466c-bf0a-0221da586376.png" alt="cdrc dataset imd" width="100%"></p>
 </div>
@@ -280,23 +280,23 @@
 <p>The TGVE accepts data source URLs to be passed as URL parameters. This means, data scientists can do their processing in R, once they have uploaded (or are able to serve locally) data, they can pass such sources to the TGVE.</p>
 <p>Check the following instance being customized with data served from a GitHub repository:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/?"</span>,
-         <span class="st">"defaultURL=https://raw.githubusercontent.com"</span>,
-         <span class="st">"/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://tgve.github.io/app/?"</span>,</span>
+<span>         <span class="st">"defaultURL=https://raw.githubusercontent.com"</span>,</span>
+<span>         <span class="st">"/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <iframe src="https://tgve.github.io/app/?defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/casualties_100.geojson&amp;layerName=heatmap" width="100%" height="400px" data-external="1">
 </iframe>
 <p>We can, of course, pass the data (bundled or not) as a json (geojson) using the <code>data</code> variable of the TGVE. This is how you could do this in this code sample:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># same URL as the instance above</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>
-    <span class="co"># use the 1data1 parameter</span>
-    <span class="st">"https://tgve.github.io/app?data="</span>,
-    <span class="va">gj</span> <span class="co"># see above</span>
-  <span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># same URL as the instance above</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>    <span class="co"># use the 1data1 parameter</span></span>
+<span>    <span class="st">"https://tgve.github.io/app?data="</span>,</span>
+<span>    <span class="va">gj</span> <span class="co"># see above</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
@@ -334,7 +334,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

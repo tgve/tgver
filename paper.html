@@ -64,38 +64,37 @@
 
 
 <div id="summary" class="section level1">
-
 <p>The Turing Geovisualisation Engine (TGVE) is an open source, web-based, interactive visual analytics tool for geospatial data analysis, built using R and React. The R package <strong>tgver</strong> is developed to be used with the TGVE front end npm package <a href="https://www.npmjs.com/package/@tgve/tgvejs" class="external-link"><code>tgvejs</code></a>. The R package which has just been published on CRAN (The Comprehensive R Archive Network) aims to facilitate interactive geospatial analysis and visualization in R, use R’s ecosystem to drive advanced geospatial data processing, and facilitate deployment of geospatial web applications in production. A design principle in the TGVE is to bring the reproducibility of data science workflows to Graphic User Interfaces (GUI). The approach is to use web standards to allow R users to use the TGVE’s API (Application Programming Interface) to generate visualizations that can be reproduced.</p>
 <div class="section level2">
 <h2 id="statement-of-need">Statement of need<a class="anchor" aria-label="anchor" href="#statement-of-need"></a></h2>
 <p>The package is needed because data scientists and researchers who want to rapidly perform spatiotemporal querying of a data set would need to learn various concepts and R packages that might operate very differently to their usual data analysis and processing workflows. Using the <strong>tgver</strong> package they still need to learn how the TGVE works, but in a typical scenario when a data scientist has a <code>.geojson</code> geography data file and a <code>csv</code> data file and want to generate geospatial visualizations, they can bypass some of the workflows required. The TGVE front-end npm package can process these two files, search for a matching column between them and generate visualizations based on the data in either or both of the data sources. If the <code>.geojson</code> or the <code>csv</code> file contains the geography, in the case of the csv <code>latitude</code> and <code>longitude</code> columns, the TGVE can process it as well. Users can also do this either in Rmarkdown notebooks or indeed in Jupyter notebooks. This is one of the main features of the TGVE and has been driven by the work in the <strong>tgver</strong> R package. If the data sources are hosted remotely and are available for processing, the TGVE can take the URLs (Unified Resource Locator) as URL parameters.</p>
 <p>For example let us demonstrate how we can use the TGVE to combine a <code>.geojson</code> file which contains some geography (boundaries) and a <code>.cvs</code> file that contains some data about those geographies with a matching column name. Also, we would want to embed the outcome in an Rmarkdown (or a Jupyter notebook). This can be done depending on where the data sources are and whether we use the R package. An instance of the TGVE front-end is available at: <a href="https://tgve.github.io/app/" class="external-link uri">https://tgve.github.io/app/</a>. We can construct a URL as follows and see a <code>.geojson</code> file and a <code>.csv</code> file being pulled and processed by the TGVE front-end using some of the API variables like <code>defaultURL</code>, <code>geographyURL</code> etc.:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># using knitr R package</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span>
-   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>
-   <span class="st">"https://tgve.github.io/app/?"</span>,
-   <span class="st">"defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/schools/data.csv&amp;"</span>,
-   <span class="st">"geographyURL=https://raw.githubusercontent.com/saferactive/tgve/main/las-only-code.geojson&amp;"</span>,
-   <span class="st">"geographyColumn=la_code&amp;"</span>,
-   <span class="st">"column=ranking_count"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># using knitr R package</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">include_url</a></span><span class="op">(</span></span>
+<span>   <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>   <span class="st">"https://tgve.github.io/app/?"</span>,</span>
+<span>   <span class="st">"defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/schools/data.csv&amp;"</span>,</span>
+<span>   <span class="st">"geographyURL=https://raw.githubusercontent.com/saferactive/tgve/main/las-only-code.geojson&amp;"</span>,</span>
+<span>   <span class="st">"geographyColumn=la_code&amp;"</span>,</span>
+<span>   <span class="st">"column=ranking_count"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="https://pbs.twimg.com/media/FNZvMolX0AclK4l?format=jpg"><em>Figure 1: A screenshot from the above URL rendered on Firefox v97.0 on an Ubuntu 20.04. The figure shows school rankings [@edubase] from the <code>csv</code> data source using the <code>.geojson</code> geography file (UK’s Local Authority District boundaries). The data has been subset further with (using TGVE’s filtering user interface) rankings showing “Outstanding” school rankings only.</em></p>
 <p>A screenshot of the above URL is shown in Figure 1 and the <code><a href="https://rdrr.io/pkg/knitr/man/include_url.html" class="external-link">knitr::include_url</a></code> function can be used in Rmarkdowns if the output of the document is set to <code>output: html_document</code>. The <strong>tgver</strong> package enables interactive R based workflow of the same scenario using geospatial R packages and objects. For instance if we are working with local data set, such as an <code>sf</code>[@pebesma2018sf] object, then a TGVE based workflow would be like the following using the <strong>tgver</strong> R package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">weathercan</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SymbolixAU/geojsonsf" class="external-link">geojsonsf</a></span><span class="op">)</span>
-<span class="co"># get some weather stations</span>
-<span class="va">w</span> <span class="op">=</span> <span class="va">w</span> <span class="op">=</span> <span class="fu">weathercan</span><span class="fu">::</span><span class="fu">stations</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>,<span class="op">]</span>
-<span class="co"># clean up the data</span>
-<span class="va">w</span> <span class="op">=</span> <span class="va">w</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">lon</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co"># turn the points into an sf object</span>
-<span class="va">w.sf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">w</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lon"</span>, <span class="st">"lat"</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># explore it in TGVE</span>
-<span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">w.sf</span><span class="op">)</span>
-<span class="co">#&gt; Serving data from http://127.0.0.1:8000/explore_sf</span>
-<span class="co">#&gt; Browsing http://127.0.0.1:8000?defaultURL=http://127.0.0.1:8000/explore_sf</span>
-<span class="co">#&gt; Running plumber API at http://127.0.0.1:8000</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">weathercan</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SymbolixAU/geojsonsf" class="external-link">geojsonsf</a></span><span class="op">)</span></span>
+<span><span class="co"># get some weather stations</span></span>
+<span><span class="va">w</span> <span class="op">=</span> <span class="va">w</span> <span class="op">=</span> <span class="fu">weathercan</span><span class="fu">::</span><span class="fu">stations</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>,<span class="op">]</span></span>
+<span><span class="co"># clean up the data</span></span>
+<span><span class="va">w</span> <span class="op">=</span> <span class="va">w</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">lon</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co"># turn the points into an sf object</span></span>
+<span><span class="va">w.sf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">w</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lon"</span>, <span class="st">"lat"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># explore it in TGVE</span></span>
+<span><span class="fu">tgver</span><span class="fu">::</span><span class="fu"><a href="reference/explore_sf.html">explore_sf</a></span><span class="op">(</span><span class="va">w.sf</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Serving data from http://127.0.0.1:8000/explore_sf</span></span>
+<span><span class="co">#&gt; Browsing http://127.0.0.1:8000?defaultURL=http://127.0.0.1:8000/explore_sf</span></span>
+<span><span class="co">#&gt; Running plumber API at http://127.0.0.1:8000</span></span></code></pre></div>
 <p>Finally, the <strong>tgver</strong> takes a different approach of bringing JavaScript (JS) applications into R but specifically bringing modern libraries like React into R. Some R packages (such as Shiny [@beeley2013web]) rely on a coupled method of using R and JS. There are other mapping packages which drive JS from R. The <strong>tgver</strong> uses a production built output from a React application and relies on RESTful [@restful] client-server communication using the <code>plumber</code> [@plumber] R package.</p>
 </div>
 <div class="section level2">
@@ -103,9 +102,7 @@
 <p>This work was supported by Towards Turing 2.0 under the EPSRC Grant EP/W037211/1 &amp; The Alan Turing Institute.</p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
-</div>
+<div class="section level1"><h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1></div>
 
 
   </div>
@@ -123,7 +120,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

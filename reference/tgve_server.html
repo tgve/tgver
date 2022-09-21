@@ -75,34 +75,45 @@ TGVE version into a temporary directory.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tgve_server</span><span class="op">(</span>
-  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"TEMP_path_ENV"</span><span class="op">)</span>,
-  port <span class="op">=</span> <span class="fl">8000</span>,
-  host <span class="op">=</span> <span class="st">"127.0.0.1"</span>,
-  background <span class="op">=</span> <span class="cn">FALSE</span>,
-  run <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tgve_server</span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"TEMP_path_ENV"</span><span class="op">)</span>,</span>
+<span>  port <span class="op">=</span> <span class="fl">8000</span>,</span>
+<span>  host <span class="op">=</span> <span class="st">"127.0.0.1"</span>,</span>
+<span>  background <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  run <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>location of TGVE path to be served by plumber.</p></dd>
+
+
 <dt>port</dt>
 <dd><p>to serve from.</p></dd>
+
+
 <dt>host</dt>
 <dd><p>host to pass to plumber default `http://127.0.0.1`
 to `FALSE`.</p></dd>
+
+
 <dt>background</dt>
 <dd><p>run the R process in the background using `callr`,
 defaults to `TRUE`.</p></dd>
+
+
 <dt>run</dt>
 <dd><p>whether to start the server, defaults to `TRUE`. If
 not, then the created server will be returned.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>the valude returned depends on: (1) `run`, if it is FALSE then
+    
+
+<p>the valude returned depends on: (1) `run`, if it is FALSE then
 an instance of `plumber::pr`, (2) if `run` is true and `background` is TRUE
 the `plumber::pr` instance is started and its process is returned, and
 (3) if `run` is TRUE and `background` is FALSE then a message is displayed
@@ -111,13 +122,13 @@ showing the blocking `plumber::pr` instance's `path`, `port` and `host`.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="op">{</span></span>
-<span class="r-in"><span class="co"># This will run in the background using `callr`</span></span>
-<span class="r-in"><span class="va">ps</span> <span class="op">=</span> <span class="fu">tgve_server</span><span class="op">(</span>background <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ps</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attempting to serve TGVE instance from: /tmp/Rtmprgzbz3/tgve</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># This will run in the background using `callr`</span></span></span>
+<span class="r-in"><span><span class="va">ps</span> <span class="op">=</span> <span class="fu">tgve_server</span><span class="op">(</span>background <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ps</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attempting to serve TGVE instance from: /tmp/RtmpikefuC/tgve</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running plumber at: http://127.0.0.1/8000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
@@ -134,7 +145,7 @@ showing the blocking `plumber::pr` instance's `path`, `port` and `host`.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
