@@ -155,8 +155,9 @@ is_valid_url = function(string) {
 #' @examples {
 #' url = get_url(dark="false")
 #' url == "http://127.0.0.1:8000?dark=false"
+#' url
 #' url = get_url()
-#' url == "http://127.0.0.1:8000"
+#' url
 #' }
 #'
 #' @export
