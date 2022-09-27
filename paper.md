@@ -73,14 +73,23 @@ tgver::explore_sf(w.sf)
 The package can also work with a remote instance of the front-end TGVE. This can be useful when embedding TGVE in an Rmarkdown (or a Jupyter notebook). An instance of the TGVE front-end is available at: https://tgve.github.io/app/. We can construct a URL as follows and see a `.geojson` file and a `.csv` file being pulled and processed by the TGVE front-end using its API variables:
 
 ```r
+# tgver can use a local instance if no `base` is provided
+base = "https://tgve.github.io/app/"
+# data source
+defaultURL = "https://raw.githubusercontent.com/tgve/example-data/main/schools/data.csv"
+# separate geography source
+geographyURL = "https://raw.githubusercontent.com/saferactive/tgve/main/las-only-code.geojson"
+# tgver makes sure the variables are valid
+# TGVE API values. See help for `tgver::get_url`
+url = tgver::get_url(
+  base = base,
+  defaultURL = defaultURL,
+  geographyURL= geographyURL,
+  geographyColumn = "la_code", # optional
+  column = "ranking_count"
+)
 # using knitr R package
-knitr::include_url(
-   paste0(
-   "https://tgve.github.io/app/?",
-   "defaultURL=https://raw.githubusercontent.com/tgve/example-data/main/schools/data.csv&",
-   "geographyURL=https://raw.githubusercontent.com/saferactive/tgve/main/las-only-code.geojson&",
-   "geographyColumn=la_code&",
-   "column=ranking_count"))
+knitr::include_url(url)
 ```
 
 ![](https://pbs.twimg.com/media/FNZvMolX0AclK4l?format=jpg)
