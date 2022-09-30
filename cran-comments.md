@@ -28,3 +28,8 @@ Check:
 
 Check:
 0 errors v | 0 warnings v | 0 notes v
+
+## Third submission checks addressed
+30th Sep 2022
+* Note arises due to paper* files in the package. `.Rbuildignore` has been modified to exclude the files.
+
