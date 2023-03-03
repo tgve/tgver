@@ -1,6 +1,7 @@
 [![tic](https://github.com/tgve/tgver/actions/workflows/tic.yml/badge.svg)](https://github.com/tgve/tgver/actions/workflows/tic.yml)
 [![codecov](https://codecov.io/gh/tgve/tgver/branch/master/graph/badge.svg?token=WAR82Q7597)](https://app.codecov.io/gh/tgve/tgver)
 [![CRAN status](https://www.r-pkg.org/badges/version/tgver)](https://CRAN.R-project.org/package=tgver)
+ [![](https://cranlogs.r-pkg.org/badges/tgver)](https://cran.r-project.org/package=tgver)
 
 This is the R package for the TGVE front end `npm` package
 [`tgve`](https://www.npmjs.com/package/@tgve/tgvejs). The R package is
